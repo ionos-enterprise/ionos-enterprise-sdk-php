@@ -38,7 +38,7 @@ use \ArrayAccess;
  * VolumeProperties Class Doc Comment
  *
  * @category    Class
- * @description 
+ * @description
  * @package     Swagger\Client
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
@@ -47,7 +47,7 @@ use \ArrayAccess;
 class VolumeProperties implements ArrayAccess
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization 
+      * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $swaggerTypes = array(
@@ -71,19 +71,20 @@ class VolumeProperties implements ArrayAccess
         'disc_scsi_hot_unplug' => 'bool',
         'device_number' => 'int'
     );
-  
+
     static function swaggerTypes() {
         return self::$swaggerTypes;
     }
 
-    /** 
+    /**
       * Array of attributes where the key is the local name, and the value is the original name
-      * @var string[] 
+      * @var string[]
       */
     static $attributeMap = array(
         'name' => 'name',
         'type' => 'type',
         'size' => 'size',
+        'availability_zone' => 'availabilityZone',
         'image' => 'image',
         'image_password' => 'imagePassword',
         'ssh_keys' => 'sshKeys',
@@ -101,7 +102,7 @@ class VolumeProperties implements ArrayAccess
         'disc_scsi_hot_unplug' => 'discScsiHotUnplug',
         'device_number' => 'deviceNumber'
     );
-  
+
     static function attributeMap() {
         return self::$attributeMap;
     }
@@ -114,6 +115,7 @@ class VolumeProperties implements ArrayAccess
         'name' => 'setName',
         'type' => 'setType',
         'size' => 'setSize',
+        'availability_zone' => 'setAvailabilityZone',
         'image' => 'setImage',
         'image_password' => 'setImagePassword',
         'ssh_keys' => 'setSshKeys',
@@ -131,7 +133,7 @@ class VolumeProperties implements ArrayAccess
         'disc_scsi_hot_unplug' => 'setDiscScsiHotUnplug',
         'device_number' => 'setDeviceNumber'
     );
-  
+
     static function setters() {
         return self::$setters;
     }
@@ -144,6 +146,7 @@ class VolumeProperties implements ArrayAccess
         'name' => 'getName',
         'type' => 'getType',
         'size' => 'getSize',
+        'availability_zone' => 'getAvailabilityZone',
         'image' => 'getImage',
         'image_password' => 'getImagePassword',
         'ssh_keys' => 'getSshKeys',
@@ -161,126 +164,126 @@ class VolumeProperties implements ArrayAccess
         'disc_scsi_hot_unplug' => 'getDiscScsiHotUnplug',
         'device_number' => 'getDeviceNumber'
     );
-  
+
     static function getters() {
         return self::$getters;
     }
 
-    
+
     /**
       * $name A name of that resource
       * @var string
       */
     protected $name;
-    
+
     /**
       * $type Hardware type of the volume. Default is HDD
       * @var string
       */
     protected $type;
-    
+
     /**
       * $size The size of the volume in GB
       * @var double
       */
     protected $size;
-    
+
     /**
       * $image Image or snapshot ID to be used as template for this volume
       * @var string
       */
     protected $image;
-    
+
     /**
       * $image_password Initial password to be set for installed OS. Works with Profitbricks public images only. Not modifiable, forbidden in update requests
       * @var string
       */
     protected $image_password;
-    
+
     /**
       * $ssh_keys Array of SSH keys
       * @var string[]
       */
     protected $ssh_keys;
-    
+
     /**
       * $bus The bus type of the volume. Default is VIRTIO
       * @var string
       */
     protected $bus;
-    
+
     /**
       * $licence_type OS type of this volume
       * @var string
       */
     protected $licence_type;
-    
+
     /**
       * $cpu_hot_plug Is capable of CPU hot plug (no reboot required)
       * @var bool
       */
     protected $cpu_hot_plug;
-    
+
     /**
       * $cpu_hot_unplug Is capable of CPU hot unplug (no reboot required)
       * @var bool
       */
     protected $cpu_hot_unplug;
-    
+
     /**
       * $ram_hot_plug Is capable of memory hot plug (no reboot required)
       * @var bool
       */
     protected $ram_hot_plug;
-    
+
     /**
       * $ram_hot_unplug Is capable of memory hot unplug (no reboot required)
       * @var bool
       */
     protected $ram_hot_unplug;
-    
+
     /**
       * $nic_hot_plug Is capable of nic hot plug (no reboot required)
       * @var bool
       */
     protected $nic_hot_plug;
-    
+
     /**
       * $nic_hot_unplug Is capable of nic hot unplug (no reboot required)
       * @var bool
       */
     protected $nic_hot_unplug;
-    
+
     /**
       * $disc_virtio_hot_plug Is capable of Virt-IO drive hot plug (no reboot required)
       * @var bool
       */
     protected $disc_virtio_hot_plug;
-    
+
     /**
       * $disc_virtio_hot_unplug Is capable of Virt-IO drive hot unplug (no reboot required)
       * @var bool
       */
     protected $disc_virtio_hot_unplug;
-    
+
     /**
       * $disc_scsi_hot_plug Is capable of SCSI drive hot plug (no reboot required)
       * @var bool
       */
     protected $disc_scsi_hot_plug;
-    
+
     /**
       * $disc_scsi_hot_unplug Is capable of SCSI drive hot unplug (no reboot required)
       * @var bool
       */
     protected $disc_scsi_hot_unplug;
-    
+
     /**
       * $device_number The LUN ID of the storage volume. Null for volumes not mounted to any VM
       * @var int
       */
     protected $device_number;
-    
+
 
     /**
      * Constructor
@@ -288,7 +291,7 @@ class VolumeProperties implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        
+
         if ($data != null) {
             $this->name = $data["name"];
             $this->type = $data["type"];
@@ -311,7 +314,7 @@ class VolumeProperties implements ArrayAccess
             $this->device_number = $data["device_number"];
         }
     }
-    
+
     /**
      * Gets name
      * @return string
@@ -320,7 +323,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->name;
     }
-  
+
     /**
      * Sets name
      * @param string $name A name of that resource
@@ -328,11 +331,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setName($name)
     {
-        
+
         $this->name = $name;
         return $this;
     }
-    
+
     /**
      * Gets type
      * @return string
@@ -341,7 +344,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->type;
     }
-  
+
     /**
      * Sets type
      * @param string $type Hardware type of the volume. Default is HDD
@@ -356,7 +359,7 @@ class VolumeProperties implements ArrayAccess
         $this->type = $type;
         return $this;
     }
-    
+
     /**
      * Gets size
      * @return double
@@ -365,7 +368,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->size;
     }
-  
+
     /**
      * Sets size
      * @param double $size The size of the volume in GB
@@ -373,11 +376,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setSize($size)
     {
-        
+
         $this->size = $size;
         return $this;
     }
-    
+
     /**
      * Gets image
      * @return string
@@ -386,7 +389,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->image;
     }
-  
+
     /**
      * Sets image
      * @param string $image Image or snapshot ID to be used as template for this volume
@@ -394,11 +397,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setImage($image)
     {
-        
+
         $this->image = $image;
         return $this;
     }
-    
+
     /**
      * Gets image_password
      * @return string
@@ -407,7 +410,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->image_password;
     }
-  
+
     /**
      * Sets image_password
      * @param string $image_password Initial password to be set for installed OS. Works with Profitbricks public images only. Not modifiable, forbidden in update requests
@@ -415,11 +418,32 @@ class VolumeProperties implements ArrayAccess
      */
     public function setImagePassword($image_password)
     {
-        
+
         $this->image_password = $image_password;
         return $this;
     }
-    
+
+    /**
+     * Gets availability_zone
+     * @return string
+     */
+    public function getAvailabilityZone()
+    {
+        return $this->availability_zone;
+    }
+
+    /**
+     * Sets availability_zone
+     * @param string $availability_zone With the new storage volume parameter, availabilityZone, it is possible to direct a storage volume to be created in one of three zones per data center
+     * @return $this
+     */
+    public function setAvailabilityZone($availability_zone)
+    {
+
+        $this->availability_zone = $availability_zone;
+        return $this;
+    }
+
     /**
      * Gets ssh_keys
      * @return string[]
@@ -428,7 +452,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->ssh_keys;
     }
-  
+
     /**
      * Sets ssh_keys
      * @param string[] $ssh_keys Array of SSH keys
@@ -436,11 +460,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setSshKeys($ssh_keys)
     {
-        
+
         $this->ssh_keys = $ssh_keys;
         return $this;
     }
-    
+
     /**
      * Gets bus
      * @return string
@@ -449,7 +473,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->bus;
     }
-  
+
     /**
      * Sets bus
      * @param string $bus The bus type of the volume. Default is VIRTIO
@@ -464,7 +488,7 @@ class VolumeProperties implements ArrayAccess
         $this->bus = $bus;
         return $this;
     }
-    
+
     /**
      * Gets licence_type
      * @return string
@@ -473,7 +497,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->licence_type;
     }
-  
+
     /**
      * Sets licence_type
      * @param string $licence_type OS type of this volume
@@ -488,7 +512,7 @@ class VolumeProperties implements ArrayAccess
         $this->licence_type = $licence_type;
         return $this;
     }
-    
+
     /**
      * Gets cpu_hot_plug
      * @return bool
@@ -497,7 +521,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->cpu_hot_plug;
     }
-  
+
     /**
      * Sets cpu_hot_plug
      * @param bool $cpu_hot_plug Is capable of CPU hot plug (no reboot required)
@@ -505,11 +529,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setCpuHotPlug($cpu_hot_plug)
     {
-        
+
         $this->cpu_hot_plug = $cpu_hot_plug;
         return $this;
     }
-    
+
     /**
      * Gets cpu_hot_unplug
      * @return bool
@@ -518,7 +542,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->cpu_hot_unplug;
     }
-  
+
     /**
      * Sets cpu_hot_unplug
      * @param bool $cpu_hot_unplug Is capable of CPU hot unplug (no reboot required)
@@ -526,11 +550,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setCpuHotUnplug($cpu_hot_unplug)
     {
-        
+
         $this->cpu_hot_unplug = $cpu_hot_unplug;
         return $this;
     }
-    
+
     /**
      * Gets ram_hot_plug
      * @return bool
@@ -539,7 +563,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->ram_hot_plug;
     }
-  
+
     /**
      * Sets ram_hot_plug
      * @param bool $ram_hot_plug Is capable of memory hot plug (no reboot required)
@@ -547,11 +571,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setRamHotPlug($ram_hot_plug)
     {
-        
+
         $this->ram_hot_plug = $ram_hot_plug;
         return $this;
     }
-    
+
     /**
      * Gets ram_hot_unplug
      * @return bool
@@ -560,7 +584,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->ram_hot_unplug;
     }
-  
+
     /**
      * Sets ram_hot_unplug
      * @param bool $ram_hot_unplug Is capable of memory hot unplug (no reboot required)
@@ -568,11 +592,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setRamHotUnplug($ram_hot_unplug)
     {
-        
+
         $this->ram_hot_unplug = $ram_hot_unplug;
         return $this;
     }
-    
+
     /**
      * Gets nic_hot_plug
      * @return bool
@@ -581,7 +605,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->nic_hot_plug;
     }
-  
+
     /**
      * Sets nic_hot_plug
      * @param bool $nic_hot_plug Is capable of nic hot plug (no reboot required)
@@ -589,11 +613,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setNicHotPlug($nic_hot_plug)
     {
-        
+
         $this->nic_hot_plug = $nic_hot_plug;
         return $this;
     }
-    
+
     /**
      * Gets nic_hot_unplug
      * @return bool
@@ -602,7 +626,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->nic_hot_unplug;
     }
-  
+
     /**
      * Sets nic_hot_unplug
      * @param bool $nic_hot_unplug Is capable of nic hot unplug (no reboot required)
@@ -610,11 +634,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setNicHotUnplug($nic_hot_unplug)
     {
-        
+
         $this->nic_hot_unplug = $nic_hot_unplug;
         return $this;
     }
-    
+
     /**
      * Gets disc_virtio_hot_plug
      * @return bool
@@ -623,7 +647,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->disc_virtio_hot_plug;
     }
-  
+
     /**
      * Sets disc_virtio_hot_plug
      * @param bool $disc_virtio_hot_plug Is capable of Virt-IO drive hot plug (no reboot required)
@@ -631,11 +655,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setDiscVirtioHotPlug($disc_virtio_hot_plug)
     {
-        
+
         $this->disc_virtio_hot_plug = $disc_virtio_hot_plug;
         return $this;
     }
-    
+
     /**
      * Gets disc_virtio_hot_unplug
      * @return bool
@@ -644,7 +668,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->disc_virtio_hot_unplug;
     }
-  
+
     /**
      * Sets disc_virtio_hot_unplug
      * @param bool $disc_virtio_hot_unplug Is capable of Virt-IO drive hot unplug (no reboot required)
@@ -652,11 +676,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setDiscVirtioHotUnplug($disc_virtio_hot_unplug)
     {
-        
+
         $this->disc_virtio_hot_unplug = $disc_virtio_hot_unplug;
         return $this;
     }
-    
+
     /**
      * Gets disc_scsi_hot_plug
      * @return bool
@@ -665,7 +689,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->disc_scsi_hot_plug;
     }
-  
+
     /**
      * Sets disc_scsi_hot_plug
      * @param bool $disc_scsi_hot_plug Is capable of SCSI drive hot plug (no reboot required)
@@ -673,11 +697,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setDiscScsiHotPlug($disc_scsi_hot_plug)
     {
-        
+
         $this->disc_scsi_hot_plug = $disc_scsi_hot_plug;
         return $this;
     }
-    
+
     /**
      * Gets disc_scsi_hot_unplug
      * @return bool
@@ -686,7 +710,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->disc_scsi_hot_unplug;
     }
-  
+
     /**
      * Sets disc_scsi_hot_unplug
      * @param bool $disc_scsi_hot_unplug Is capable of SCSI drive hot unplug (no reboot required)
@@ -694,11 +718,11 @@ class VolumeProperties implements ArrayAccess
      */
     public function setDiscScsiHotUnplug($disc_scsi_hot_unplug)
     {
-        
+
         $this->disc_scsi_hot_unplug = $disc_scsi_hot_unplug;
         return $this;
     }
-    
+
     /**
      * Gets device_number
      * @return int
@@ -707,7 +731,7 @@ class VolumeProperties implements ArrayAccess
     {
         return $this->device_number;
     }
-  
+
     /**
      * Sets device_number
      * @param int $device_number The LUN ID of the storage volume. Null for volumes not mounted to any VM
@@ -715,34 +739,34 @@ class VolumeProperties implements ArrayAccess
      */
     public function setDeviceNumber($device_number)
     {
-        
+
         $this->device_number = $device_number;
         return $this;
     }
-    
+
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-  
+
     /**
      * Gets offset.
-     * @param  integer $offset Offset 
-     * @return mixed 
+     * @param  integer $offset Offset
+     * @return mixed
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-  
+
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @param  mixed   $value  Value to be set
      * @return void
      */
@@ -750,17 +774,17 @@ class VolumeProperties implements ArrayAccess
     {
         $this->$offset = $value;
     }
-  
+
     /**
      * Unsets offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-  
+
     /**
      * Gets the string presentation of the object
      * @return string

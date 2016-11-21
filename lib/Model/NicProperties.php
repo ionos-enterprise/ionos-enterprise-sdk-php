@@ -38,7 +38,7 @@ use \ArrayAccess;
  * NicProperties Class Doc Comment
  *
  * @category    Class
- * @description 
+ * @description
  * @package     Swagger\Client
  * @author      http://github.com/swagger-api/swagger-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
@@ -47,7 +47,7 @@ use \ArrayAccess;
 class NicProperties implements ArrayAccess
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization 
+      * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $swaggerTypes = array(
@@ -58,14 +58,14 @@ class NicProperties implements ArrayAccess
         'lan' => 'int',
         'firewall_active' => 'bool'
     );
-  
+
     static function swaggerTypes() {
         return self::$swaggerTypes;
     }
 
-    /** 
+    /**
       * Array of attributes where the key is the local name, and the value is the original name
-      * @var string[] 
+      * @var string[]
       */
     static $attributeMap = array(
         'name' => 'name',
@@ -73,9 +73,10 @@ class NicProperties implements ArrayAccess
         'ips' => 'ips',
         'dhcp' => 'dhcp',
         'lan' => 'lan',
-        'firewall_active' => 'firewallActive'
+        'firewall_active' => 'firewallActive',
+        'nat' => 'nat',
     );
-  
+
     static function attributeMap() {
         return self::$attributeMap;
     }
@@ -90,9 +91,10 @@ class NicProperties implements ArrayAccess
         'ips' => 'setIps',
         'dhcp' => 'setDhcp',
         'lan' => 'setLan',
-        'firewall_active' => 'setFirewallActive'
+        'firewall_active' => 'setFirewallActive',
+        'nat' => 'setNat',
     );
-  
+
     static function setters() {
         return self::$setters;
     }
@@ -107,50 +109,51 @@ class NicProperties implements ArrayAccess
         'ips' => 'getIps',
         'dhcp' => 'getDhcp',
         'lan' => 'getLan',
-        'firewall_active' => 'getFirewallActive'
+        'firewall_active' => 'getFirewallActive',
+        'nat' => 'getNat',
     );
-  
+
     static function getters() {
         return self::$getters;
     }
 
-    
+
     /**
       * $name A name of that resource
       * @var string
       */
     protected $name;
-    
+
     /**
       * $mac The MAC address of the NIC
       * @var string
       */
     protected $mac;
-    
+
     /**
       * $ips Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
       * @var string[]
       */
     protected $ips;
-    
+
     /**
       * $dhcp Indicates if the nic will reserve an IP using DHCP
       * @var bool
       */
     protected $dhcp = false;
-    
+
     /**
       * $lan The LAN ID the NIC will sit on. If the LAN ID does not exist it will be implicitly created
       * @var int
       */
     protected $lan;
-    
+
     /**
       * $firewall_active Once you add a firewall rule this will reflect a true value. Can also be used to temporarily disable a firewall without losing defined rules.
       * @var bool
       */
     protected $firewall_active = false;
-    
+
 
     /**
      * Constructor
@@ -158,7 +161,7 @@ class NicProperties implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        
+
         if ($data != null) {
             $this->name = $data["name"];
             $this->mac = $data["mac"];
@@ -168,7 +171,7 @@ class NicProperties implements ArrayAccess
             $this->firewall_active = $data["firewall_active"];
         }
     }
-    
+
     /**
      * Gets name
      * @return string
@@ -177,7 +180,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->name;
     }
-  
+
     /**
      * Sets name
      * @param string $name A name of that resource
@@ -185,11 +188,11 @@ class NicProperties implements ArrayAccess
      */
     public function setName($name)
     {
-        
+
         $this->name = $name;
         return $this;
     }
-    
+
     /**
      * Gets mac
      * @return string
@@ -198,7 +201,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->mac;
     }
-  
+
     /**
      * Sets mac
      * @param string $mac The MAC address of the NIC
@@ -206,11 +209,11 @@ class NicProperties implements ArrayAccess
      */
     public function setMac($mac)
     {
-        
+
         $this->mac = $mac;
         return $this;
     }
-    
+
     /**
      * Gets ips
      * @return string[]
@@ -219,7 +222,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->ips;
     }
-  
+
     /**
      * Sets ips
      * @param string[] $ips Collection of IP addresses assigned to a nic. Explicitly assigned public IPs need to come from reserved IP blocks, Passing value null or empty array will assign an IP address automatically.
@@ -227,11 +230,11 @@ class NicProperties implements ArrayAccess
      */
     public function setIps($ips)
     {
-        
+
         $this->ips = $ips;
         return $this;
     }
-    
+
     /**
      * Gets dhcp
      * @return bool
@@ -240,7 +243,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->dhcp;
     }
-  
+
     /**
      * Sets dhcp
      * @param bool $dhcp Indicates if the nic will reserve an IP using DHCP
@@ -248,11 +251,11 @@ class NicProperties implements ArrayAccess
      */
     public function setDhcp($dhcp)
     {
-        
+
         $this->dhcp = $dhcp;
         return $this;
     }
-    
+
     /**
      * Gets lan
      * @return int
@@ -261,7 +264,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->lan;
     }
-  
+
     /**
      * Sets lan
      * @param int $lan The LAN ID the NIC will sit on. If the LAN ID does not exist it will be implicitly created
@@ -269,11 +272,11 @@ class NicProperties implements ArrayAccess
      */
     public function setLan($lan)
     {
-        
+
         $this->lan = $lan;
         return $this;
     }
-    
+
     /**
      * Gets firewall_active
      * @return bool
@@ -282,7 +285,7 @@ class NicProperties implements ArrayAccess
     {
         return $this->firewall_active;
     }
-  
+
     /**
      * Sets firewall_active
      * @param bool $firewall_active Once you add a firewall rule this will reflect a true value. Can also be used to temporarily disable a firewall without losing defined rules.
@@ -290,34 +293,55 @@ class NicProperties implements ArrayAccess
      */
     public function setFirewallActive($firewall_active)
     {
-        
+
         $this->firewall_active = $firewall_active;
         return $this;
     }
-    
+
+    /**
+     * Gets nat
+     * @return bool
+     */
+    public function getNat()
+    {
+        return $this->nat;
+    }
+
+    /**
+     * Sets nat
+     * @param bool $nat Setting the nat parameter to true allows a NIC that is part of an internal or private LAN to access the public internet
+     * @return $this
+     */
+    public function setNat($nat)
+    {
+
+        $this->nat = $nat;
+        return $this;
+    }
+
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-  
+
     /**
      * Gets offset.
-     * @param  integer $offset Offset 
-     * @return mixed 
+     * @param  integer $offset Offset
+     * @return mixed
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-  
+
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @param  mixed   $value  Value to be set
      * @return void
      */
@@ -325,17 +349,17 @@ class NicProperties implements ArrayAccess
     {
         $this->$offset = $value;
     }
-  
+
     /**
      * Unsets offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-  
+
     /**
      * Gets the string presentation of the object
      * @return string

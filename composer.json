@@ -1,6 +1,6 @@
 {
     "name": "profitbricks/profitbricks-sdk-php",
-    "version": "1.0.0",
+    "version": "3.0.0",
     "description": "Official PHP SDK for the ProfitBricks REST API",
     "keywords": ["profitbricks", "pb", "PHP SDK", "api", "cloud", "server"],
     "homepage": "https://github.com/profitbricks/profitbricks-sdk-php",
