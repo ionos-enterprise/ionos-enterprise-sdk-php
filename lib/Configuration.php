@@ -110,7 +110,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = "Swagger-Codegen/1.0.0/php";
+    protected $userAgent = "profitbricks-sdk-php/3.0.0";
 
     /**
      * Debug switch (default set to false)
