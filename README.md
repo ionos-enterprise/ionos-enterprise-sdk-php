@@ -47,7 +47,7 @@ Add your credentials for connecting to ProfitBricks:
 
 ```php
 $config = (new Swagger\Client\Configuration())
-  ->setHost('https://api.profitbricks.com/rest/v2')
+  ->setHost('https://api.profitbricks.com/cloudapi/v3/')
   ->setUsername('pb_username')
   ->setPassword('pb_password');
 $api = new Swagger\Client\ApiClient($config);
@@ -184,7 +184,7 @@ $datacenters = $datacenter_api->findAll();
 
 ```php
 $config = (new Swagger\Client\Configuration())
-  ->setHost('https://api.profitbricks.com/rest/v2')
+  ->setHost('https://api.profitbricks.com/cloudapi/v3/')
   ->setUsername('pb_username')
   ->setPassword('pb_password');
 $api = new Swagger\Client\ApiClient($config);
@@ -246,22 +246,22 @@ $datacenter_api->delete($id);
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The resource&#39;s unique identifier | [optional] 
-**type** | **string** | The type of object that has been created | [optional] 
-**href** | **string** | URL to the object\u2019s representation (absolute path) | [optional] 
-**items** | [**\Swagger\Client\Model\Server[]**](Server.md) | Array of items in that collection | [optional] 
+**id** | **string** | The resource&#39;s unique identifier | [optional]
+**type** | **string** | The type of object that has been created | [optional]
+**href** | **string** | URL to the object\u2019s representation (absolute path) | [optional]
+**items** | [**\Swagger\Client\Model\Server[]**](Server.md) | Array of items in that collection | [optional]
 
 # Server
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | The resource&#39;s unique identifier | [optional] 
-**type** | **string** | The type of object that has been created | [optional] 
-**href** | **string** | URL to the object\u2019s representation (absolute path) | [optional] 
-**metadata** | [**\Swagger\Client\Model\DatacenterElementMetadata**](DatacenterElementMetadata.md) | Backend managed resource metadata | [optional] 
-**properties** | [**\Swagger\Client\Model\ServerProperties**](ServerProperties.md) | Resource&#39;s properties | 
-**entities** | [**\Swagger\Client\Model\ServerEntities**](ServerEntities.md) | Attached children and references. May be included in create calls. Disallowed in update calls | [optional] 
+**id** | **string** | The resource&#39;s unique identifier | [optional]
+**type** | **string** | The type of object that has been created | [optional]
+**href** | **string** | URL to the object\u2019s representation (absolute path) | [optional]
+**metadata** | [**\Swagger\Client\Model\DatacenterElementMetadata**](DatacenterElementMetadata.md) | Backend managed resource metadata | [optional]
+**properties** | [**\Swagger\Client\Model\ServerProperties**](ServerProperties.md) | Resource&#39;s properties |
+**entities** | [**\Swagger\Client\Model\ServerEntities**](ServerEntities.md) | Attached children and references. May be included in create calls. Disallowed in update calls | [optional]
 
 
 ## ArrayAccess interface
