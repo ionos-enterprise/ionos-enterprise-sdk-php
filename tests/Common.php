@@ -5,14 +5,15 @@ require_once('autoload.php');
 trait CommonTestMethods {
 
   protected static $datacenter_api;
+  protected static $server_api_local;
   protected static $testDatacenter;
 
   static function spawnDatacenter() {
-    self::$datacenter_api = new Swagger\Client\Api\DataCenterApi(self::$api_client);
+    self::$datacenter_api = new ProfitBricks\Client\Api\DataCenterApi(self::$api_client);
 
-    $datacenter = new \Swagger\Client\Model\Datacenter();
+    $datacenter = new \ProfitBricks\Client\Model\Datacenter();
 
-    $props = new \Swagger\Client\Model\DatacenterProperties();
+    $props = new \ProfitBricks\Client\Model\DatacenterProperties();
     $props->setName("test-data-center");
     $props->setDescription("example description");
     $props->setLocation(self::$test_location);
@@ -37,7 +38,7 @@ trait CommonTestMethods {
     for ($i = 0; $i <= 300; $i++) {
       try {
         $value = $predicate(...$params);
-      } catch (Swagger\Client\ApiException $e) {
+      } catch (ProfitBricks\Client\ApiException $e) {
         if ($e->getCode() == 404) {
           if ($not_found_value) {
             return $not_found_value;
@@ -65,9 +66,12 @@ trait CommonTestMethods {
   }
 
   static function assertServerRunning($datacenter_id, $server_id) {
+     self::$server_api_local = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
+     sleep(5);
+
     return self::assertPredicate(
       function($datacenter_id, $server_id) {
-        $server = self::$server_api->findById($datacenter_id, $server_id);
+        $server = self::$server_api_local->findById($datacenter_id, $server_id);
         if ($server->getProperties()->getVmState() == 'RUNNING') {
           return $server;
         }
@@ -77,7 +81,7 @@ trait CommonTestMethods {
   }
 
   static function getTestImage($type) {
-    $image_api = new Swagger\Client\Api\ImageApi(self::$api_client);
+    $image_api = new ProfitBricks\Client\Api\ImageApi(self::$api_client);
     $images = $image_api->findAll(null, 5);
     $minImage = null;
 

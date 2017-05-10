@@ -1,6 +1,6 @@
 {
     "name": "profitbricks/profitbricks-sdk-php",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Official PHP SDK for the ProfitBricks REST API",
     "keywords": ["profitbricks", "pb", "PHP SDK", "api", "cloud", "server"],
     "homepage": "https://github.com/profitbricks/profitbricks-sdk-php",
@@ -21,6 +21,6 @@
         "phpunit/phpunit": "5.0.*"
     },
     "autoload": {
-        "psr-4": { "Swagger\\Client\\" : "lib/" }
+        "psr-4": { "ProfitBricks\\Client\\" : "lib/" }
     }
 }

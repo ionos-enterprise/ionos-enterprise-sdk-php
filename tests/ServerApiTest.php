@@ -15,19 +15,20 @@ class ServerApiTest extends BaseTest
   private static $testCdrom;
   private static $testVolume;
   private static $testServer;
+  private static $testServer_Composite;
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$server_api = new Swagger\Client\Api\ServerApi(self::$api_client);
-    self::$volume_api = new Swagger\Client\Api\VolumeApi(self::$api_client);
-    self::$attached_volume_api = new Swagger\Client\Api\AttachedVolumesApi(self::$api_client);
-    self::$cdrom_api = new Swagger\Client\Api\AttachedCDROMsApi(self::$api_client);
+    self::$server_api = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
+    self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
+    self::$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi(self::$api_client);
+    self::$cdrom_api = new ProfitBricks\Client\Api\AttachedCDROMsApi(self::$api_client);
   }
 
   public function testCreate() {
-    $server = new \Swagger\Client\Model\Server();
-    $props = new \Swagger\Client\Model\ServerProperties();
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
     $props->setName("jclouds-node")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
@@ -41,6 +42,41 @@ class ServerApiTest extends BaseTest
     });
 
     $this->assertEquals($result->getProperties()->getName(), "jclouds-node");
+  }
+  
+  public function testCreateComposite() {
+    $server_composite = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
+    $props->setName("composite-node")->setCores(1)->setRam(1024)->setCpuFamily('INTEL_XEON');
+    $server_composite->setProperties($props);
+    
+    $entities= new \ProfitBricks\Client\Model\ServerEntities();
+    $testImage = self::getTestImage('HDD');
+  
+    $volume = new ProfitBricks\Client\Model\Volume();
+    $v_props = new \ProfitBricks\Client\Model\VolumeProperties();
+    $v_props->setName("test-volume")
+        ->setSize(3)
+        ->setType('HDD')
+        ->setImage($testImage->getId())
+        ->setImagePassword("testpassword123")
+        ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
+    $volume->setProperties($v_props);
+    $attachedVolumes= new \ProfitBricks\Client\Model\Volumes();
+    $attachedVolumes->setItems(array($volume));
+    $entities->setVolumes($attachedVolumes);
+    $server_composite->setEntities($entities);
+    
+    self::$testServer_Composite = self::$server_api->create(self::$testDatacenter->getId(), $server_composite);
+    
+    $result = self::assertPredicate(function() {
+      $server_composite = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer_Composite->getId());
+      if ($server_composite->getMetadata()->getState() == 'AVAILABLE') {
+        return $server_composite;
+      }
+    });
+  
+    $this->assertEquals(sizeof($result->getEntities()->getVolumes()), 1);
   }
 
   public function testGet() {
@@ -59,11 +95,11 @@ class ServerApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $server = new \Swagger\Client\Model\Server();
-    $props = new \Swagger\Client\Model\ServerProperties();
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
     $props->setName("new-name")->setCores(2)->setRam(1024 * 2);
     $server->setProperties($props);
-
+  
     self::$server_api->partialUpdate(self::$testDatacenter->getId(), self::$testServer->getId(), $props);
     $result = self::assertPredicate(function() {
       $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
@@ -101,12 +137,12 @@ class ServerApiTest extends BaseTest
   public function testListVolumes() {
     $volumes = self::$volume_api->findAll(self::$testDatacenter->getId(), self::$testServer->getId());
     $this->assertNotEmpty($volumes);
-    $this->assertEmpty($volumes->getItems());
+    $this->assertNotEmpty($volumes->getItems());
   }
 
   public function testAttachVolume() {
-    $volume = new Swagger\Client\Model\Volume();
-    $props = new \Swagger\Client\Model\VolumeProperties();
+    $volume = new ProfitBricks\Client\Model\Volume();
+    $props = new \ProfitBricks\Client\Model\VolumeProperties();
     $props->setName("test-volume")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
     $volume->setProperties($props);
 
@@ -121,7 +157,7 @@ class ServerApiTest extends BaseTest
 
     $this->assertEquals(self::$testVolume->getProperties()->getSize(), 3);
 
-    $volume = new Swagger\Client\Model\Volume();
+    $volume = new ProfitBricks\Client\Model\Volume();
     $volume->setId(self::$testVolume->getId());
     self::$attached_volume_api->attachVolume(self::$testDatacenter->getId(), self::$testServer->getId(), $volume);
 
@@ -152,7 +188,7 @@ class ServerApiTest extends BaseTest
 
     $testImage = self::getTestImage('CDROM');
 
-    $image = new \Swagger\Client\Model\Image();
+    $image = new \ProfitBricks\Client\Model\Image();
     $image->setId($testImage->getId());
 
     self::$testCdrom = self::$cdrom_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $image);

@@ -18,15 +18,15 @@ class LoadBalancerApiTest extends BaseTest
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$loadbalancer_api = new Swagger\Client\Api\LoadBalancerApi(self::$api_client);
-    self::$loadbalancer_nic_api = new Swagger\Client\Api\LoadBalancerNicApi(self::$api_client);
-    self::$nic_api = new Swagger\Client\Api\NetworkInterfacesApi(self::$api_client);
-    self::$server_api = new Swagger\Client\Api\ServerApi(self::$api_client);
+    self::$loadbalancer_api = new ProfitBricks\Client\Api\LoadBalancerApi(self::$api_client);
+    self::$loadbalancer_nic_api = new ProfitBricks\Client\Api\LoadBalancerNicApi(self::$api_client);
+    self::$nic_api = new ProfitBricks\Client\Api\NetworkInterfacesApi(self::$api_client);
+    self::$server_api = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
   }
 
   public function testCreate() {
-    $balancer = new \Swagger\Client\Model\Loadbalancer();
-    $props = new \Swagger\Client\Model\LoadbalancerProperties();
+    $balancer = new \ProfitBricks\Client\Model\Loadbalancer();
+    $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
     $props->setName("jclouds-balancer")->setDhcp(false);
     $balancer->setProperties($props);
 
@@ -58,8 +58,8 @@ class LoadBalancerApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $balancer = new \Swagger\Client\Model\Loadbalancer();
-    $props = new \Swagger\Client\Model\LoadbalancerProperties();
+    $balancer = new \ProfitBricks\Client\Model\Loadbalancer();
+    $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
     $props->setName("new-name");
     $balancer->setProperties($props);
 
@@ -78,8 +78,8 @@ class LoadBalancerApiTest extends BaseTest
   }
 
   public function testCreateServer() {
-    $server = new \Swagger\Client\Model\Server();
-    $props = new \Swagger\Client\Model\ServerProperties();
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
     $props->setName("jclouds-node")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
@@ -96,8 +96,8 @@ class LoadBalancerApiTest extends BaseTest
   }
 
   public function testAssociateNic() {
-    $nic = new \Swagger\Client\Model\Nic();
-    $props = new \Swagger\Client\Model\NicProperties();
+    $nic = new \ProfitBricks\Client\Model\Nic();
+    $props = new \ProfitBricks\Client\Model\NicProperties();
     $props->setName("jclouds-nic")->setLan(1);
     $nic->setProperties($props);
 
@@ -112,7 +112,7 @@ class LoadBalancerApiTest extends BaseTest
 
     $this->assertEquals($result->getProperties()->getName(), "jclouds-nic");
 
-    $nic = new Swagger\Client\Model\Nic();
+    $nic = new ProfitBricks\Client\Model\Nic();
     $nic->setId(self::$testNic->getId());
     self::$loadbalancer_nic_api->attachNic(self::$testDatacenter->getId(), self::$testLoadBalancer->getId(), $nic);
 

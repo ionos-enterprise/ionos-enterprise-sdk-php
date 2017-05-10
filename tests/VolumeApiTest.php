@@ -16,15 +16,15 @@ class VolumeApiTest extends BaseTest
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$volume_api = new Swagger\Client\Api\VolumeApi(self::$api_client);
-    self::$snapshot_api = new Swagger\Client\Api\SnapshotApi(self::$api_client);
+    self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
+    self::$snapshot_api = new ProfitBricks\Client\Api\SnapshotApi(self::$api_client);
   }
 
   public function testCreate() {
     $testImage = self::getTestImage('HDD');
 
-    $volume = new Swagger\Client\Model\Volume();
-    $props = new \Swagger\Client\Model\VolumeProperties();
+    $volume = new ProfitBricks\Client\Model\Volume();
+    $props = new \ProfitBricks\Client\Model\VolumeProperties();
     $props->setName("test-volume")
       ->setSize(3)
       ->setType('HDD')
@@ -40,6 +40,28 @@ class VolumeApiTest extends BaseTest
     });
 
     $this->assertEquals($testVolume->getProperties()->getName(), "test-volume");
+  }
+  
+  public function testCreateFailure()  {
+    try {
+      $testImage = self::getTestImage('HDD');
+      $volume = new ProfitBricks\Client\Model\Volume();
+      $props = new \ProfitBricks\Client\Model\VolumeProperties();
+      $props->setName("test-volume")
+          ->setSize(3)
+          ->setType('HDD')
+          ->setImagePassword("testpassword123");
+      $volume->setProperties($props);
+      
+      self::$testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);
+      
+      $testVolume = self::assertPredicate(function () {
+        return self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
+      });
+      
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
   }
 
   public function testGet() {
@@ -58,7 +80,7 @@ class VolumeApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $props = new \Swagger\Client\Model\VolumeProperties();
+    $props = new \ProfitBricks\Client\Model\VolumeProperties();
     $props->setName("new-name")->setSize(3);
 
     self::$volume_api->partialUpdate(self::$testDatacenter->getId(), self::$testVolume->getId(), $props);

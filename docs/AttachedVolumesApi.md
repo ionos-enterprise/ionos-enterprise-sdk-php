@@ -1,4 +1,4 @@
-# Swagger\Client\AttachedVolumesApi
+# ProfitBricks\Client\AttachedVolumesApi
 
 All URIs are relative to *https://localhost*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **attachVolume**
-> \Swagger\Client\Model\Volume attachVolume($datacenter_id, $server_id, $volume, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Volume attachVolume($datacenter_id, $server_id, $volume, $pretty_print_query_parameter, $depth)
 
 Attach a volume
 
@@ -23,13 +23,13 @@ This will attach a pre-existing storage volume to the server. It is also possibl
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedVolumesApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedVolumesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
-$volume = new \Swagger\Client\Model\Volume(); // \Swagger\Client\Model\Volume | Volume to be attached (created and attached)
+$volume = new \ProfitBricks\Client\Model\Volume(); // \ProfitBricks\Client\Model\Volume | Volume to be attached (created and attached)
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -48,13 +48,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **server_id** | **string**|  | 
- **volume** | [**\Swagger\Client\Model\Volume**](\Swagger\Client\Model\Volume.md)| Volume to be attached (created and attached) | 
+ **volume** | [**\ProfitBricks\Client\Model\Volume**](\ProfitBricks\Client\Model\Volume.md)| Volume to be attached (created and attached) | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Volume**](Volume.md)
+[**\ProfitBricks\Client\Model\Volume**](Volume.md)
 
 ### Authorization
 
@@ -80,10 +80,10 @@ This will detach the volume from the server. This will not delete the volume fro
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedVolumesApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedVolumesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $volume_id = array('key' => "volume_id_example"); // map[string,string] | 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\AttachedVolumes findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\AttachedVolumes findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 List Attached Volumes
 
@@ -137,10 +137,10 @@ You can retrieve a list of volumes attached to the server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedVolumesApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedVolumesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\AttachedVolumes**](AttachedVolumes.md)
+[**\ProfitBricks\Client\Model\AttachedVolumes**](AttachedVolumes.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Volume findById($datacenter_id, $server_id, $volume_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Volume findById($datacenter_id, $server_id, $volume_id, $pretty_print_query_parameter, $depth)
 
 Retrieve an attached volume
 
@@ -192,10 +192,10 @@ This will retrieve the properties of an attached volume.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedVolumesApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedVolumesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $volume_id = array('key' => "volume_id_example"); // map[string,string] | 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Volume**](Volume.md)
+[**\ProfitBricks\Client\Model\Volume**](Volume.md)
 
 ### Authorization
 

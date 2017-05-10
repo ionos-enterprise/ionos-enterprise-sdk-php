@@ -16,13 +16,13 @@ class NicApiTest extends BaseTest
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$server_api = new Swagger\Client\Api\ServerApi(self::$api_client);
-    self::$nic_api = new Swagger\Client\Api\NetworkInterfacesApi(self::$api_client);
+    self::$server_api = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
+    self::$nic_api = new ProfitBricks\Client\Api\NetworkInterfacesApi(self::$api_client);
   }
 
   public function testCreateServer() {
-    $server = new \Swagger\Client\Model\Server();
-    $props = new \Swagger\Client\Model\ServerProperties();
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
     $props->setName("jclouds-node")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
@@ -39,8 +39,8 @@ class NicApiTest extends BaseTest
   }
 
   public function testCreateNic() {
-    $nic = new \Swagger\Client\Model\Nic();
-    $props = new \Swagger\Client\Model\NicProperties();
+    $nic = new \ProfitBricks\Client\Model\Nic();
+    $props = new \ProfitBricks\Client\Model\NicProperties();
     $props->setName("jclouds-nic")->setLan(1);
     $nic->setProperties($props);
 
@@ -72,8 +72,8 @@ class NicApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $nic = new \Swagger\Client\Model\Nic();
-    $props = new \Swagger\Client\Model\NicProperties();
+    $nic = new \ProfitBricks\Client\Model\Nic();
+    $props = new \ProfitBricks\Client\Model\NicProperties();
     $props->setName("new-name");
     $nic->setProperties($props);
 
