@@ -118,6 +118,10 @@ You can install the latest stable version using Composer.  Simply add the snippe
 }
 ```
 
+Run the command `composer install` to download dependencies
+
+Include `require_once(__DIR__.'/vendor/autoload.php');` in your php file to use the library.
+
 
 
 ### Authenticating
