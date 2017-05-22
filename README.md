@@ -108,7 +108,7 @@ Install the PHP language from: [PHP Installation](http://php.net/manual/en/insta
 
 ## Installation
 
-You can install the latest stable version using Composer.  Simply add the snippet below to your `composer.json` file:
+* You can install the latest stable version using Composer.  Simply add the snippet below to your `composer.json` file:
 
 ```
 {
@@ -118,9 +118,9 @@ You can install the latest stable version using Composer.  Simply add the snippe
 }
 ```
 
-Run the command `composer install` to download dependencies
+* Run the command `composer install` to download required dependencies.
 
-Include `require_once(__DIR__.'/vendor/autoload.php');` in your php file to use the library.
+* Include `require_once(__DIR__.'/vendor/autoload.php');` in your php file to use the library.
 
 
 
