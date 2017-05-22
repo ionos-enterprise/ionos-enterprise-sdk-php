@@ -131,7 +131,7 @@ $config = (new ProfitBricks\Client\Configuration())
       ->setHost('https://api.profitbricks.com/cloudapi/v3')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
-self::$api_client = new ProfitBricks\Client\ApiClient($config);
+$api_client = new ProfitBricks\Client\ApiClient($config);
 ```
 
 Set depth:
@@ -154,7 +154,7 @@ Virtual data centers (VDCs) are the foundation of the ProfitBricks platform. VDC
 
 Create an instace of the api class:
 
-         self::$datacenter_api = new ProfitBricks\Client\Api\DataCenterApi(self::$api_client);
+         $datacenter_api = new ProfitBricks\Client\Api\DataCenterApi($api_client);
 
 #### List Data Centers
 
@@ -163,7 +163,7 @@ This operation will list all currently provisioned VDCs that your account creden
 The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
 
 ```
-$datacenters = self::$datacenter_api->findAll();
+$datacenters = $datacenter_api->findAll();
 ```
 
 ---
@@ -180,7 +180,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$datacenter = self::$datacenter_api->findById($datacenter_id);
+$datacenter = $datacenter_api->findById($datacenter_id);
 ```
 
 ---
@@ -208,6 +208,7 @@ The following table outlines the locations currently supported:
 | us/las | United States | Las Vegas |
 | de/fra | Germany | Frankfurt |
 | de/fkb | Germany | Karlsruhe |
+| us/ewr | United States | Newark |
 
 **NOTES**:
 - The value for `$name` cannot contain the following characters: (@, /, , |, ‘’, ‘).
@@ -237,7 +238,7 @@ $entities->setServers($servers);
 ```
 $datacenter_composite->setProperties($props);
 $datacenter_composite->setEntities($entities);
-self::$testDatacenterComposite = self::$datacenter_api->create($datacenter_composite);
+$testDatacenterComposite = $datacenter_api->create($datacenter_composite);
 ```
 
 ---
@@ -260,7 +261,7 @@ $props = new \ProfitBricks\Client\Model\DatacenterProperties();
 $props->setName("new-name");
 $datacenter->setProperties($props);
 
-$updatedDatacenter = self::$datacenter_api->update($datacenter_id, $datacenter);
+$updatedDatacenter = $datacenter_api->update($datacenter_id, $datacenter);
 ```
 
 ---
@@ -278,7 +279,7 @@ The following table describes the available request arguments:
 | $datacenter_id | **yes** | string | The ID of the VDC that you want to delete. |
 
 ```
-self::$datacenter_api->delete($datacenter_id);
+$datacenter_api->delete($datacenter_id);
 ```
 
 ---
@@ -289,7 +290,7 @@ Locations are the physical ProfitBricks data centers where you can provision you
 
 Create an instace of the api class:
 
-        self::$location_api = new ProfitBricks\Client\Api\LocationApi(self::$api_client);
+        $location_api = new ProfitBricks\Client\Api\LocationApi($api_client);
 
 #### List Locations
 
@@ -298,7 +299,7 @@ This operation will return the list of currently available locations.
 The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
 
 ```
-$locations = self::$location_api->findAll();
+$locations = $location_api->findAll();
 ```
 
 ---
@@ -315,7 +316,7 @@ The following table describes the request arguments:
 
 ```
 $location_parts = explode("/", $location_id);
-$location = self::$location_api->findById($location_parts[0], $location_parts[1]);
+$location = $location_api->findById($location_parts[0], $location_parts[1]);
 ```
 
 ---
@@ -325,10 +326,10 @@ $location = self::$location_api->findById($location_parts[0], $location_parts[1]
 Create an instace of these api classes:
 
 ```
-self::$server_api = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
-self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
-self::$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi(self::$api_client);
-self::$cdrom_api = new ProfitBricks\Client\Api\AttachedCDROMsApi(self::$api_client);
+$server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
+$volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi($api_client);
+$cdrom_api = new ProfitBricks\Client\Api\AttachedCDROMsApi($api_client);
 
 ```
 
@@ -345,7 +346,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$servers = self::$server_api->findAll(self::$datacenter_id);
+$servers = $server_api->findAll($datacenter_id);
 ```
 
 ---
@@ -363,7 +364,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$server = self::$server_api->findById($datacenter_id,$server_id);
+$server = $server_api->findById($datacenter_id,$server_id);
 ```
 
 ---
@@ -417,7 +418,7 @@ $attachedVolumes->setItems(array($volume));
 $entities->setVolumes($attachedVolumes);
 $server_composite->setEntities($entities);
 
-self::$testServer_Composite = self::$server_api->create($datacenter_id, $server_composite);
+$testServer_Composite = $server_api->create($datacenter_id, $server_composite);
 ```
 
 ---
@@ -448,7 +449,7 @@ $props = new \ProfitBricks\Client\Model\ServerProperties();
 $props->setName("new-name")->setCores(2)->setRam(1024 * 2);
 $server->setProperties($props);
 
-self::$server_api->partialUpdate($datacenter_id, $server_id, $props);
+$server_api->partialUpdate($datacenter_id, $server_id, $props);
 ```
 
 **NOTE**: You can also use `update`, for that operation you will update all the properties.
@@ -469,7 +470,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `delete` method directly:
 
 ```
-self::$server_api->delete($datacenter_id, $server_id);
+$server_api->delete($datacenter_id, $server_id);
 ```
 
 ---
@@ -489,7 +490,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `findAll` method directly:
 
 ```
-$volumes = self::$volume_api->findAll($datacenter_id, $server_id);
+$volumes = $volume_api->findAll($datacenter_id, $server_id);
 ```
 
 ---
@@ -514,7 +515,7 @@ $props = new \ProfitBricks\Client\Model\VolumeProperties();
 $props->setName("test-volume")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
 $volume->setProperties($props);
 
-self::$attached_volume_api->attachVolume(self::$testDatacenter->getId(), self::$testServer->getId(), $volume);
+$attached_volume_api->attachVolume($testDatacenter->getId(), $testServer->getId(), $volume);
 ```
 
 ---
@@ -535,7 +536,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `findById` method directly.
 
 ```
-$testVolume = self::$attached_volume_api->findById($datacenter_id, $server_id, $volume_id);
+$testVolume = $attached_volume_api->findById($datacenter_id, $server_id, $volume_id);
 ```
 
 ---
@@ -557,7 +558,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
- self::$attached_volume_api->delete($datacenter_id, $server_id, $volume_id);
+ $attached_volume_api->delete($datacenter_id, $server_id, $volume_id);
 ```
 
 ---
@@ -577,7 +578,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `findAll` method directly.
 
 ```
-$cdroms = self::$cdrom_api->findAll($datacenter_id, $server_id);
+$cdroms = $cdrom_api->findAll($datacenter_id, $server_id);
 ```
 
 ---
@@ -597,7 +598,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `create` method directly.
 
 ```
-self::$testCdrom = self::$cdrom_api->create($datacenter_id, $server_id, $cdrom_id);
+$testCdrom = $cdrom_api->create($datacenter_id, $server_id, $cdrom_id);
 ```
 
 ---
@@ -618,7 +619,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `findById` method directly.
 
 ```
-$cdrom = self::$cdrom_api->findById($datacenter_id, $server_id, $cdrom_id);
+$cdrom = $cdrom_api->findById($datacenter_id, $server_id, $cdrom_id);
 ```
 
 ---
@@ -638,7 +639,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$cdrom_api->delete($datacenter_id, $server_id, $cdrom_id);
+$cdrom_api->delete($datacenter_id, $server_id, $cdrom_id);
 ```
 
 ---
@@ -657,7 +658,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `reboot` method directly.
 
 ```
-self::$server_api->reboot($datacenter_id, $server_id);
+$server_api->reboot($datacenter_id, $server_id);
 ```
 
 ---
@@ -676,7 +677,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `start` method directly.
 
 ```
-self::$server_api->start($datacenter_id), $server_id);
+$server_api->start($datacenter_id), $server_id);
 ```
 
 ---
@@ -695,7 +696,7 @@ The following table describes the request arguments:
 After retrieving a server, either by getting it by id, or as a create response object, you can call the `stop` method directly.
 
 ```
-self::$server_api->stop($datacenter_id, $server_id);
+$server_api->stop($datacenter_id, $server_id);
 ```
 
 ---
@@ -704,7 +705,7 @@ self::$server_api->stop($datacenter_id, $server_id);
 
 Create an instace of the api class:
 
-         self::$image_api = new ProfitBricks\Client\Api\ImageApi(self::$api_client);
+         $image_api = new ProfitBricks\Client\Api\ImageApi($api_client);
 
 #### List Images
 
@@ -713,7 +714,7 @@ Retrieve a list of images.
 The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
 
 ```
-$images = self::$image_api->findAll();
+$images = $image_api->findAll();
 ```
 
 ---
@@ -730,7 +731,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$image = self::$image_api->findById($image_id);
+$image = $image_api->findById($image_id);
 ```
 
 ---
@@ -739,8 +740,8 @@ $image = self::$image_api->findById($image_id);
 
 Create an instace of the api class:
 
-          self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
-    	  self::$snapshot_api = new ProfitBricks\Client\Api\SnapshotApi(self::$api_client);
+          $volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+    	  $snapshot_api = new ProfitBricks\Client\Api\SnapshotApi($api_client);
 
 #### List Volumes
 
@@ -754,7 +755,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$volumes = self::$volume_api->findAll($datacenter_id);
+$volumes = $volume_api->findAll($datacenter_id);
 ```
 
 ---
@@ -772,7 +773,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$volume = self::$volume_api->findById($datacenter_id, $volume_id);
+$volume = $volume_api->findById($datacenter_id, $volume_id);
 ```
 
 ---
@@ -828,7 +829,7 @@ $props->setName("test-volume")
   ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
 $volume->setProperties($props);
 
-self::$testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);
+$testVolume = $volume_api->create($testDatacenter->getId(), $volume);
 ```
 
 ---
@@ -858,7 +859,7 @@ The following table describes the request arguments:
 After retrieving a volume, either by getting it by id, or as a create response object, you can change its properties and call the `partialUpdate` method:
 
 ```
-self::$volume_api->partialUpdate($datacenter_id, $volume_id, $props);
+$volume_api->partialUpdate($datacenter_id, $volume_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -879,7 +880,7 @@ The following table describes the request arguments:
 After retrieving a volume, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$volume_api->delete($datacenter_id, $volume_id);
+$volume_api->delete($datacenter_id, $volume_id);
 ```
 
 ---
@@ -900,7 +901,7 @@ The following table describes the request arguments:
 After retrieving a volume, either by getting it by id, or as a create response object, you can call the `createSnapshot` method directly.
 
 ```
-self::$testSnapshot = self::$volume_api->createSnapshot($datacenter_id,$volume_id);
+$testSnapshot = $volume_api->createSnapshot($datacenter_id,$volume_id);
 ```
 
 ---
@@ -920,7 +921,7 @@ The following table describes the request arguments:
 After retrieving a volume, either by getting it by id, or as a create response object, you can call the `restoreSnapshot` method directly.
 
 ```
-self::$volume_api->restoreSnapshot($datacenter_id, $volume_id, $snapshot_id);
+$volume_api->restoreSnapshot($datacenter_id, $volume_id, $snapshot_id);
 ```
 
 ---
@@ -929,8 +930,8 @@ self::$volume_api->restoreSnapshot($datacenter_id, $volume_id, $snapshot_id);
 
 Create an instace of the api class:
 
-         self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
-    	 self::$snapshot_api = new ProfitBricks\Client\Api\SnapshotApi(self::$api_client);
+         $volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+    	 $snapshot_api = new ProfitBricks\Client\Api\SnapshotApi($api_client);
 
 #### List Snapshots
 
@@ -939,7 +940,7 @@ You can retrieve a list of all available snapshots.
 The optional `$depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
 
 ```
-$snapshots = self::$snapshot_api->findAll();
+$snapshots = $snapshot_api->findAll();
 ```
 
 ---
@@ -956,7 +957,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$snapshot = self::$snapshot_api->findById($snapshot_id);
+$snapshot = $snapshot_api->findById($snapshot_id);
 ```
 
 ---
@@ -990,7 +991,7 @@ After retrieving a snapshot, either by getting it by id, or as a create response
 $props = new \ProfitBricks\Client\Model\SnapshotProperties();
 $props->setName("new-name");
 
-self::$snapshot_api->partialUpdate($snapshot_id, $props);
+$snapshot_api->partialUpdate($snapshot_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -1010,7 +1011,7 @@ The following table describes the request arguments:
 After retrieving a snapshot, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$snapshot_api->delete(self::$testSnapshot->getId());
+$snapshot_api->delete($testSnapshot->getId());
 ```
 
 ---
@@ -1021,7 +1022,7 @@ The IP block operations assist with managing reserved /static public IP addresse
 
 Create an instace of the api class:
 
-         self::$ipblocks_api = new ProfitBricks\Client\Api\IPBlocksApi(self::$api_client);
+         $ipblocks_api = new ProfitBricks\Client\Api\IPBlocksApi($api_client);
 
 #### List IP Blocks
 
@@ -1031,7 +1032,7 @@ The optional `$depth` parameter defines the level, one being the least and five 
 
 
 ```
-$ipblocks = self::$ipblocks_api->findAll();
+$ipblocks = $ipblocks_api->findAll();
 ```
 
 #### Get an IP Block
@@ -1046,7 +1047,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$block = self::$ipblocks_api->findById($ipblock_id);
+$block = $ipblocks_api->findById($ipblock_id);
 ```
 
 ---
@@ -1079,7 +1080,7 @@ $props = new \ProfitBricks\Client\Model\IpBlockProperties();
 $props->setSize(2)->setLocation("us/las");
 $block->setProperties($props);
 
-self::$testIpBlock = self::$ipblocks_api->create($block);
+$testIpBlock = $ipblocks_api->create($block);
 ```
 
 ---
@@ -1097,7 +1098,7 @@ The following table describes the request arguments:
 After retrieving an IP block, either by getting it by id, or as a create response object, you can call the `Delete` method directly.
 
 ```
-self::$ipblocks_api->delete($ipblock_id);
+$ipblocks_api->delete($ipblock_id);
 ```
 
 ---
@@ -1116,7 +1117,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$lans = self::$lan_api->findAll(self::$testDatacenter->getId());
+$lans = $lan_api->findAll($testDatacenter->getId());
 ```
 
 ---
@@ -1140,7 +1141,7 @@ $props = new \ProfitBricks\Client\Model\LanProperties();
 $props->setName("jclouds-lan");
 $lan->setProperties($props);
 
-self::$testLan = self::$lan_api->create($datacenter_id, $lan);
+$testLan = $lan_api->create($datacenter_id, $lan);
 ```
 
 ---
@@ -1158,7 +1159,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$lan = self::$lan_api->findById($datacenter_id, $lan_id);
+$lan = $lan_api->findById($datacenter_id, $lan_id);
 ```
 
 ---
@@ -1184,7 +1185,7 @@ $props = new \ProfitBricks\Client\Model\LanProperties();
 $props->setName("new-name")->setPublic(false);
 $lan->setProperties($props);
 
-self::$lan_api->partialUpdate($datacenter_id, $lan_id, $props);
+$lan_api->partialUpdate($datacenter_id, $lan_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -1205,7 +1206,7 @@ The following table describes the request arguments:
 After retrieving a LAN, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$lan_api->delete($datacenter_id, $lan_id);
+$lan_api->delete($datacenter_id, $lan_id);
 ```
 
 ---
@@ -1214,7 +1215,7 @@ self::$lan_api->delete($datacenter_id, $lan_id);
 
 Create an instance of the api class:
 
-         self::$nic_api = new ProfitBricks\Client\Api\NetworkInterfacesApi(self::$api_client);
+         $nic_api = new ProfitBricks\Client\Api\NetworkInterfacesApi($api_client);
 
 #### List NICs
 
@@ -1229,7 +1230,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$nics = self::$nic_api->findAll(datacenter_id, $server_id);
+$nics = $nic_api->findAll(datacenter_id, $server_id);
 ```
 
 ---
@@ -1248,7 +1249,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$nic = self::$nic_api->findById($datacenter_id, $server_id, $nic_id);
+$nic = $nic_api->findById($datacenter_id, $server_id, $nic_id);
 ```
 
 ---
@@ -1277,7 +1278,7 @@ $props = new \ProfitBricks\Client\Model\NicProperties();
 $props->setName("jclouds-nic")->setLan(1);
 $nic->setProperties($props);
 
-self::$testNic = self::$nic_api->create($datacenter_id, $server_id, $nic);
+$testNic = $nic_api->create($datacenter_id, $server_id, $nic);
 ```
 
 ---
@@ -1311,7 +1312,7 @@ $props = new \ProfitBricks\Client\Model\NicProperties();
 $props->setName("new-name");
 $nic->setProperties($props);
 
-self::$nic_api->partialUpdate($datacenter_id, $server_id, $nic_id, $props);
+$nic_api->partialUpdate($datacenter_id, $server_id, $nic_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -1333,7 +1334,7 @@ The following table describes the request arguments:
 After retrieving a NIC, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$nic_api->delete($datacenter_id, $server_id, $nic_id);
+$nic_api->delete($datacenter_id, $server_id, $nic_id);
 ```
 
 ---
@@ -1342,7 +1343,7 @@ self::$nic_api->delete($datacenter_id, $server_id, $nic_id);
 
 Create an instace of the api class:
 
-         self::$firewall_api = new ProfitBricks\Client\Api\FirewallRuleApi(self::$api_client);
+         $firewall_api = new ProfitBricks\Client\Api\FirewallRuleApi($api_client);
 
 #### List Firewall Rules
 
@@ -1358,7 +1359,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$rules = self::$firewall_api->findAll($datacenter_id, $server_id, $nic_id);
+$rules = $firewall_api->findAll($datacenter_id, $server_id, $nic_id);
 ```
 
 ---
@@ -1378,7 +1379,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$rule = self::$firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);```
+$rule = $firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);```
 
 ---
 
@@ -1409,7 +1410,7 @@ $props = new \ProfitBricks\Client\Model\FirewallruleProperties();
 $props->setName("jclouds-firewall")->setProtocol("TCP")->setPortRangeStart(1)->setPortRangeEnd(600);
 $rule->setProperties($props);
 
-self::$testRule = self::$firewall_api->create($datacenter_id, $server_id, $nic_id, $rule);
+$testRule = $firewall_api->create($datacenter_id, $server_id, $nic_id, $rule);
 ```
 
 ---
@@ -1443,7 +1444,7 @@ $props = new \ProfitBricks\Client\Model\FirewallruleProperties();
 $props->setName("new-name");
 $rule->setProperties($props);
 
-self::$firewall_api->partialUpdate($datacenter_id, $server_id, $nic_id, $firewall_rule_id, $props);
+$firewall_api->partialUpdate($datacenter_id, $server_id, $nic_id, $firewall_rule_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -1464,7 +1465,7 @@ Removes the specific firewall rule.
 After retrieving a firewall rule, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
- self::$firewall_api->delete($datacenter_id, $server_id, $nic_id, $firewall_rule_id);
+ $firewall_api->delete($datacenter_id, $server_id, $nic_id, $firewall_rule_id);
 ```
 
 ---
@@ -1476,9 +1477,9 @@ After retrieving a firewall rule, either by getting it by id, or as a create res
 Create an instace of the api class:
 
 ```
-self::$loadbalancer_api = new ProfitBricks\Client\Api\LoadBalancerApi(self::$api_client);
+$loadbalancer_api = new ProfitBricks\Client\Api\LoadBalancerApi($api_client);
 
-self::$loadbalancer_nic_api = new ProfitBricks\Client\Api\LoadBalancerNicApi(self::$api_client);
+$loadbalancer_nic_api = new ProfitBricks\Client\Api\LoadBalancerNicApi($api_client);
 ```
 
 #### List Load Balancers
@@ -1493,7 +1494,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$balancers = self::$loadbalancer_api->findAll($datacenter_id);
+$balancers = $loadbalancer_api->findAll($datacenter_id);
 ```
 
 ---
@@ -1511,7 +1512,7 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$balancer = self::$loadbalancer_api->findById($datacenter_id, $loadbalancer_id);
+$balancer = $loadbalancer_api->findById($datacenter_id, $loadbalancer_id);
 ```
 
 ---
@@ -1536,7 +1537,7 @@ $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
 $props->setName("jclouds-balancer")->setDhcp(false);
 $balancer->setProperties($props);
 
-self::$testLoadBalancer = self::$loadbalancer_api->create($datacenter_id, $balancer);
+$testLoadBalancer = $loadbalancer_api->create($datacenter_id, $balancer);
 ```
 
 ---
@@ -1563,7 +1564,7 @@ $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
 $props->setName("new-name");
 $balancer->setProperties($props);
 
-self::$loadbalancer_api->partialUpdate($datacenter_id, $loadbalancer_id, $props);
+$loadbalancer_api->partialUpdate($datacenter_id, $loadbalancer_id, $props);
 ```
 
 **NOTE**: You can also use `update()`, for that operation you will update all the properties.
@@ -1584,7 +1585,7 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$loadbalancer_api->delete($datacenter_id, $loadbalancer_id);
+$loadbalancer_api->delete($datacenter_id, $loadbalancer_id);
 ```
 
 ---
@@ -1604,7 +1605,7 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `listNics` method directly.
 
 ```
-$nics = self::$loadbalancer_nic_api->listNics($datacenter_id, $loadbalancer_id);
+$nics = $loadbalancer_nic_api->listNics($datacenter_id, $loadbalancer_id);
 ```
 
 ---
@@ -1625,7 +1626,7 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `getMember` method directly.
 
 ```
-$testNic = self::$loadbalancer_nic_api->getMember($datacenter_id, $loadbalancer_id, $nic_id);
+$testNic = $loadbalancer_nic_api->getMember($datacenter_id, $loadbalancer_id, $nic_id);
 ```
 
 ---
@@ -1647,7 +1648,7 @@ After retrieving a load balancer, either by getting it by id, or as a create res
 ```
 $nic = new ProfitBricks\Client\Model\Nic();
 $nic->setId($nic_id);
-self::$loadbalancer_nic_api->attachNic($datacenter_id, $loadbalancer_id, $nic);
+$loadbalancer_nic_api->attachNic($datacenter_id, $loadbalancer_id, $nic);
 ```
 
 ---
@@ -1667,7 +1668,7 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-self::$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id); 
+$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id); 
 ```
 
 ---
@@ -1685,7 +1686,7 @@ Create an instace of the api class:
 Retrieve a list of requests.
 
 ```
-$requests = self::$reqiest_api->findAll();
+$requests = $reqiest_api->findAll();
 ```
 
 ---
@@ -1701,7 +1702,7 @@ The following table describes the request arguments:
 | $request_id | **yes** | string | The ID of the request. |
 
 ```
-$request = self::$reqiest_api->findById($request_id);
+$request = $reqiest_api->findById($request_id);
 ```
 
 ---
@@ -1717,7 +1718,7 @@ The following table describes the request arguments:
 | $request_id | **yes** | string | The ID of the request. |
 
 ```
-$request = self::$reqiest_api->getStatus($request_id);
+$request = $reqiest_api->getStatus($request_id);
 ```
 
 ## Examples

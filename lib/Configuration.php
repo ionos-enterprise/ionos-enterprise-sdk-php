@@ -5,13 +5,12 @@
  *
  * @category Class
  * @package  ProfitBricks\Client
- * @author   http://github.com/ProfitBricks-api/ProfitBricks-codegen
+
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
- * @link     https://github.com/ProfitBricks-api/ProfitBricks-codegen
+ 
  */
 
 /**
- *  Copyright 2016 SmartBear Software
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -34,9 +33,7 @@ namespace ProfitBricks\Client;
  *
  * @category Class
  * @package  ProfitBricks\Client
- * @author   http://github.com/ProfitBricks-api/ProfitBricks-codegen
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
- * @link     https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
 class Configuration
 {
