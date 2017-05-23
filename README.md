@@ -38,8 +38,6 @@ Version: profitbricks-sdk-php **3.0.1**
   * [Images](#images)
     * [List Images](#list-images)
     * [Get an Image](#get-an-image)
-    * [Update an Image](#update-an-image)
-    * [Delete an Image](#delete-an-image)
   * [Volumes](#volumes)
     * [List Volumes](#list-volumes)
     * [Get a Volume](#get-a-volume)
@@ -89,7 +87,7 @@ Version: profitbricks-sdk-php **3.0.1**
     * [List Requests](#list-requests)
     * [Get a Request](#get-a-request)
     * [Get a Request Status](#get-a-request-status)
-* [Examples](#examples)
+* [Example](#example)
 * [Support](#support)
 * [Testing](#testing)
 * [Contributing](#contributing)
@@ -1383,7 +1381,8 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$rule = $firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);```
+$rule = $firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);
+```
 
 ---
 
@@ -1683,7 +1682,7 @@ Each call to the ProfitBricks Cloud API is assigned a request ID. These operatio
 
 Create an instace of the api class:
 
-         RequestApi reqApi = new RequestApi(Configuration);
+         $reqiest_api = new ProfitBricks\Client\Api\RequestApi($api_client);
 
 #### List Requests
 
@@ -1723,126 +1722,6 @@ The following table describes the request arguments:
 
 ```
 $request = $reqiest_api->getStatus($request_id);
-```
-
-## Examples
-
-Here are a few examples on how to use the module.
-
-
-## How To: Create Data Center
-
-ProfitBricks introduces the concept of Data Centers. These are logically separated from one another and allow you to have a self-contained environment for all servers, volumes, networking, snapshots, and so forth. The goal is to give you the same experience as you would have if you were running your own physical data center.
-
-The following code example shows you how to programmatically create a data center:
-
-```php
-$datacenter = new \ProfitBricks\Client\Model\Datacenter();
-
-$props = new \ProfitBricks\Client\Model\DatacenterProperties();
-$props->setName("test-data-center");
-$props->setDescription("example description");
-$props->setLocation('us/lasdev');
-$datacenter->setProperties($props);
-
-$testDatacenter = $datacenter_api->create($datacenter);
-```
-
-## How To: Delete Data Center
-
-You will want to exercise a bit of caution here. Removing a data center will destroy all objects contained within that data center -- servers, volumes, snapshots, and so on.
-
-The code to remove a data center is as follows. This example assumes you want to remove previously data center:
-
-```php
-$id = $testDatacenter->getId();
-$datacenter_api->delete($id);
-```
-
-## How To: Create Server
-
-The server create method has a list of required parameters followed by a hash of optional parameters. The optional parameters are specified within the "options" hash and the variable names match the [REST API](https://devops.profitbricks.com/api/rest/) parameters.
-
-The following example shows you how to create a new server in the data center created above:
-
-```php
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("jclouds-node")->setCores(1)->setRam(1024);
-$server->setProperties($props);
-
-$testServer = $server_api->create($testDatacenter->getId(), $server);
-```
-
-## How To: List Available Images
-
-A list of disk and ISO images are available from ProfitBricks for immediate use. These can be easily viewed and selected. The following shows you how to get a list of images. This list represents both CDROM images and HDD images.
-
-```php
-$images = $image_api->findAll();
-```
-
-This will return an [ArrayAccess interface](#ArrayAccess) object
-
-## How To: Create Storage Volume
-
-ProfitBricks allows for the creation of multiple storage volumes that can be attached and detached as needed. It is useful to attach an image when creating a storage volume. The storage size is in gigabytes.
-
-```php
-$volume = new ProfitBricks\Client\Model\Volume();
-$props = new \ProfitBricks\Client\Model\VolumeProperties();
-$props->setName("test-volume")->setSize(3)->setType('HDD')->setImage('image-id')->setImagePassword("testpassword123");
-$volume->setProperties($props);
-
-$testVolume = $volume_api->create($testDatacenter->getId(), $volume);
-```
-
-## How To: Update Cores and Memory
-
-ProfitBricks allows users to dynamically update cores, memory, and disk independently of each other. This removes the restriction of needing to upgrade to the next size available size to receive an increase in memory. You can now simply increase the instances memory keeping your costs in-line with your resource needs.
-
-Note: The memory parameter value must be a multiple of 256, e.g. 256, 512, 768, 1024, and so forth.
-
-The following code illustrates how you can update cores and memory:
-
-```php
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("new-name")->setCores(2)->setRam(2048);
-$server->setProperties($props);
-
-$server_api->partialUpdate($testDatacenter->getId(), $testServer->getId(), $props);
-```
-
-## How To: Attach or Detach Storage Volume
-
-ProfitBricks allows for the creation of multiple storage volumes. You can detach and reattach these on the fly. This allows for various scenarios such as re-attaching a failed OS disk to another server for possible recovery or moving a volume to another location and spinning it up.
-
-The following illustrates how you would attach and detach a volume and CDROM to/from a server:
-
-```php
-$volume = new ProfitBricks\Client\Model\Volume();
-$volume->setId('volume-id');
-$attached_volume_api->attachVolume($testDatacenter->getId(), $testServer->getId(), $volume);
-
-$image = new \ProfitBricks\Client\Model\Image();
-$image->setId('image-id');
-$testCdrom = $attached_cdrom_api->create($testDatacenter->getId(), $testServer->getId(), $image);
-
-$attached_volume_api->delete($testDatacenter->getId(), $testServer->getId(), $testVolume->getId());
-$cdrom_api->delete($testDatacenter->getId(), $testServer->getId(), $testCdrom->getId());
-```
-
-## How To: List Servers, Volumes, and Data Centers
-
-Go SDK provides standard functions for retrieving a list of volumes, servers, and datacenters.
-
-The following code illustrates how to pull these three list types:
-
-```php
-$volumes = $volume_api->findAll($testDatacenter->getId());
-$servers = $server_api->findAll($testDatacenter->getId());
-$datacenters = $datacenter_api->findAll();
 ```
 
 ## Example
@@ -1919,4 +1798,3 @@ You can find a full list of tests inside the `tests` folder.You can run tests us
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
-  
