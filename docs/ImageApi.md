@@ -1,4 +1,4 @@
-# Swagger\Client\ImageApi
+# ProfitBricks\Client\ImageApi
 
 All URIs are relative to *https://localhost*
 
@@ -24,10 +24,10 @@ Deletes the specified image. This operation is permitted on private image only.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ImageApi();
+$api_instance = new ProfitBricks\Client\Api\ImageApi();
 $image_id = array('key' => "image_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Images findAll($pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Images findAll($pretty_print_query_parameter, $depth)
 
 List Images 
 
@@ -77,10 +77,10 @@ Retrieve a list of images within the datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ImageApi();
+$api_instance = new ProfitBricks\Client\Api\ImageApi();
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Images**](Images.md)
+[**\ProfitBricks\Client\Model\Images**](Images.md)
 
 ### Authorization
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Image findById($image_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Image findById($image_id, $pretty_print_query_parameter, $depth)
 
 Retrieve an Image
 
@@ -128,10 +128,10 @@ Retrieves the attributes of a given image.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ImageApi();
+$api_instance = new ProfitBricks\Client\Api\ImageApi();
 $image_id = array('key' => "image_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Image**](Image.md)
+[**\ProfitBricks\Client\Model\Image**](Image.md)
 
 ### Authorization
 
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **partialUpdate**
-> \Swagger\Client\Model\Image partialUpdate($image_id, $image, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Image partialUpdate($image_id, $image, $pretty_print_query_parameter, $depth)
 
 Partially modify an Image
 
@@ -181,12 +181,12 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ImageApi();
+$api_instance = new ProfitBricks\Client\Api\ImageApi();
 $image_id = array('key' => "image_id_example"); // map[string,string] | 
-$image = new \Swagger\Client\Model\ImageProperties(); // \Swagger\Client\Model\ImageProperties | Modified Image
+$image = new \ProfitBricks\Client\Model\ImageProperties(); // \ProfitBricks\Client\Model\ImageProperties | Modified Image
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -204,13 +204,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **image_id** | [**map[string,string]**](string.md)|  | 
- **image** | [**\Swagger\Client\Model\ImageProperties**](\Swagger\Client\Model\ImageProperties.md)| Modified Image | 
+ **image** | [**\ProfitBricks\Client\Model\ImageProperties**](\ProfitBricks\Client\Model\ImageProperties.md)| Modified Image | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Image**](Image.md)
+[**\ProfitBricks\Client\Model\Image**](Image.md)
 
 ### Authorization
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update**
-> \Swagger\Client\Model\Image update($image_id, $image, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Image update($image_id, $image, $pretty_print_query_parameter, $depth)
 
 Modify an Image
 
@@ -236,12 +236,12 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ImageApi();
+$api_instance = new ProfitBricks\Client\Api\ImageApi();
 $image_id = array('key' => "image_id_example"); // map[string,string] | 
-$image = new \Swagger\Client\Model\Image(); // \Swagger\Client\Model\Image | Modified Image
+$image = new \ProfitBricks\Client\Model\Image(); // \ProfitBricks\Client\Model\Image | Modified Image
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -259,13 +259,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **image_id** | [**map[string,string]**](string.md)|  | 
- **image** | [**\Swagger\Client\Model\Image**](\Swagger\Client\Model\Image.md)| Modified Image | 
+ **image** | [**\ProfitBricks\Client\Model\Image**](\ProfitBricks\Client\Model\Image.md)| Modified Image | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Image**](Image.md)
+[**\ProfitBricks\Client\Model\Image**](Image.md)
 
 ### Authorization
 

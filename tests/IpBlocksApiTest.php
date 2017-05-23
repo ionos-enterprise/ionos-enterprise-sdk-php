@@ -13,12 +13,12 @@ class IpBlocksApiTest extends BaseTest
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$ipblocks_api = new Swagger\Client\Api\IPBlocksApi(self::$api_client);
+    self::$ipblocks_api = new ProfitBricks\Client\Api\IPBlocksApi(self::$api_client);
   }
 
   public function testCreate() {
-    $block = new \Swagger\Client\Model\IpBlock();
-    $props = new \Swagger\Client\Model\IpBlockProperties();
+    $block = new \ProfitBricks\Client\Model\IpBlock();
+    $props = new \ProfitBricks\Client\Model\IpBlockProperties();
     $props->setSize(2)->setLocation("us/las");
     $block->setProperties($props);
 
@@ -50,7 +50,7 @@ class IpBlocksApiTest extends BaseTest
   }
 
   public function testRemove() {
-    self::$ipblocks_api->delete(self::$testIpBlock->getId());
+      self::$ipblocks_api->delete(self::$testIpBlock->getId());
     $this->assertTrue(
       self::assertPredicate(
         function () { self::$ipblocks_api->findById(self::$testIpBlock->getId()); }, null, true

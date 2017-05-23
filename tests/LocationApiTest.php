@@ -12,7 +12,7 @@ class LocationApiTest extends BaseTest
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$location_api = new Swagger\Client\Api\LocationApi(self::$api_client);
+    self::$location_api = new ProfitBricks\Client\Api\LocationApi(self::$api_client);
   }
 
   public function testList() {

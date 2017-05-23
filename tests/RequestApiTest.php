@@ -12,7 +12,7 @@ class RequestApiTest extends BaseTest
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$reqiest_api = new Swagger\Client\Api\RequestApi(self::$api_client);
+    self::$reqiest_api = new ProfitBricks\Client\Api\RequestApi(self::$api_client);
   }
 
   public function testList() {

@@ -1,4 +1,4 @@
-# Swagger\Client\LocationApi
+# ProfitBricks\Client\LocationApi
 
 All URIs are relative to *https://localhost*
 
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **findAll**
-> \Swagger\Client\Model\Locations findAll($pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Locations findAll($pretty_print_query_parameter, $depth)
 
 List Locations
 
@@ -22,10 +22,10 @@ Retrieve a list of Locations. This list represents where you can provision your 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LocationApi();
+$api_instance = new ProfitBricks\Client\Api\LocationApi();
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Locations**](Locations.md)
+[**\ProfitBricks\Client\Model\Locations**](Locations.md)
 
 ### Authorization
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Location findById($region_id, $location_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Location findById($region_id, $location_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a Location
 
@@ -73,10 +73,10 @@ Retrieves the attributes of a given location
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LocationApi();
+$api_instance = new ProfitBricks\Client\Api\LocationApi();
 $region_id = "region_id_example"; // string | 
 $location_id = "location_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Location**](Location.md)
+[**\ProfitBricks\Client\Model\Location**](Location.md)
 
 ### Authorization
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listByRegion**
-> \Swagger\Client\Model\Locations listByRegion($region_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Locations listByRegion($region_id, $pretty_print_query_parameter, $depth)
 
 List Locations within a region
 
@@ -128,10 +128,10 @@ Retrieve a list of Locations within a world's region
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LocationApi();
+$api_instance = new ProfitBricks\Client\Api\LocationApi();
 $region_id = "region_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Locations**](Locations.md)
+[**\ProfitBricks\Client\Model\Locations**](Locations.md)
 
 ### Authorization
 

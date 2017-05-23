@@ -1,4 +1,4 @@
-# Swagger\Client\ServerApi
+# ProfitBricks\Client\ServerApi
 
 All URIs are relative to *https://localhost*
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create**
-> \Swagger\Client\Model\Server create($datacenter_id, $server, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Server create($datacenter_id, $server, $pretty_print_query_parameter, $depth)
 
 Create a Server
 
@@ -28,12 +28,12 @@ Creates a server within an existing datacenter. You can configure the boot volum
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
-$server = new \Swagger\Client\Model\Server(); // \Swagger\Client\Model\Server | Server to be created
+$server = new \ProfitBricks\Client\Model\Server(); // \ProfitBricks\Client\Model\Server | Server to be created
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -51,13 +51,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
- **server** | [**\Swagger\Client\Model\Server**](\Swagger\Client\Model\Server.md)| Server to be created | 
+ **server** | [**\ProfitBricks\Client\Model\Server**](\ProfitBricks\Client\Model\Server.md)| Server to be created | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Server**](Server.md)
+[**\ProfitBricks\Client\Model\Server**](Server.md)
 
 ### Authorization
 
@@ -83,10 +83,10 @@ This will remove a server from your datacenter; however, it will not remove the 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = array('key' => "server_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -126,7 +126,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Servers findAll($datacenter_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Servers findAll($datacenter_id, $pretty_print_query_parameter, $depth)
 
 List Servers 
 
@@ -138,10 +138,10 @@ You can retrieve a list of servers within a datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Servers**](Servers.md)
+[**\ProfitBricks\Client\Model\Servers**](Servers.md)
 
 ### Authorization
 
@@ -179,7 +179,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Server findById($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Server findById($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a Server
 
@@ -191,10 +191,10 @@ Returns information about a server such as its configuration, provisioning statu
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = array('key' => "server_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Server**](Server.md)
+[**\ProfitBricks\Client\Model\Server**](Server.md)
 
 ### Authorization
 
@@ -234,7 +234,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **partialUpdate**
-> \Swagger\Client\Model\Server partialUpdate($datacenter_id, $server_id, $server, $body, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Server partialUpdate($datacenter_id, $server_id, $server, $body, $pretty_print_query_parameter, $depth)
 
 Partially modify a Server
 
@@ -246,13 +246,13 @@ You can use update attributes of a server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = array('key' => "server_id_example"); // map[string,string] | The unique ID of the server
-$server = new \Swagger\Client\Model\ServerProperties(); // \Swagger\Client\Model\ServerProperties | Modified properties of Server
+$server = new \ProfitBricks\Client\Model\ServerProperties(); // \ProfitBricks\Client\Model\ServerProperties | Modified properties of Server
 $body = NULL; // object | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -272,14 +272,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **server_id** | [**map[string,string]**](string.md)| The unique ID of the server | 
- **server** | [**\Swagger\Client\Model\ServerProperties**](\Swagger\Client\Model\ServerProperties.md)| Modified properties of Server | 
+ **server** | [**\ProfitBricks\Client\Model\ServerProperties**](\ProfitBricks\Client\Model\ServerProperties.md)| Modified properties of Server | 
  **body** | **object**|  | [optional] 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Server**](Server.md)
+[**\ProfitBricks\Client\Model\Server**](Server.md)
 
 ### Authorization
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reboot**
-> \Swagger\Client\Model\Error reboot($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Error reboot($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 Reboot a Server
 
@@ -305,10 +305,10 @@ This will force a hard reboot of the server. Do not use this method if you want 
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Error**](Error.md)
+[**\ProfitBricks\Client\Model\Error**](Error.md)
 
 ### Authorization
 
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start**
-> \Swagger\Client\Model\Error start($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Error start($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 Start a Server
 
@@ -360,10 +360,10 @@ This will start a server. If the server's public IP was deallocated then a new I
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Error**](Error.md)
+[**\ProfitBricks\Client\Model\Error**](Error.md)
 
 ### Authorization
 
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **stop**
-> \Swagger\Client\Model\Error stop($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Error stop($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 Stop a Server
 
@@ -415,10 +415,10 @@ This will stop a server. The machine will be forcefully powered off, billing wil
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -444,7 +444,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Error**](Error.md)
+[**\ProfitBricks\Client\Model\Error**](Error.md)
 
 ### Authorization
 
@@ -458,7 +458,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update**
-> \Swagger\Client\Model\Server update($datacenter_id, $server_id, $server, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Server update($datacenter_id, $server_id, $server, $pretty_print_query_parameter, $depth)
 
 Modify a Server
 
@@ -470,13 +470,13 @@ You can use update attributes of a server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\ServerApi();
+$api_instance = new ProfitBricks\Client\Api\ServerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = array('key' => "server_id_example"); // map[string,string] | The unique ID of the server
-$server = new \Swagger\Client\Model\Server(); // \Swagger\Client\Model\Server | Modified Server
+$server = new \ProfitBricks\Client\Model\Server(); // \ProfitBricks\Client\Model\Server | Modified Server
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -495,13 +495,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **server_id** | [**map[string,string]**](string.md)| The unique ID of the server | 
- **server** | [**\Swagger\Client\Model\Server**](\Swagger\Client\Model\Server.md)| Modified Server | 
+ **server** | [**\ProfitBricks\Client\Model\Server**](\ProfitBricks\Client\Model\Server.md)| Modified Server | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Server**](Server.md)
+[**\ProfitBricks\Client\Model\Server**](Server.md)
 
 ### Authorization
 

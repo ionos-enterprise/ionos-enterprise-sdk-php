@@ -1,4 +1,4 @@
-# Swagger\Client\AttachedCDROMsApi
+# ProfitBricks\Client\AttachedCDROMsApi
 
 All URIs are relative to *https://localhost*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create**
-> \Swagger\Client\Model\Image create($datacenter_id, $server_id, $cdrom, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Image create($datacenter_id, $server_id, $cdrom, $pretty_print_query_parameter, $depth)
 
 Attach a CD-ROM
 
@@ -23,13 +23,13 @@ You can attach a CD-ROM to an existing server. You can attach up to 2 CD-ROMs to
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedCDROMsApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedCDROMsApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
-$cdrom = new \Swagger\Client\Model\Image(); // \Swagger\Client\Model\Image | CD-ROM to be attached
+$cdrom = new \ProfitBricks\Client\Model\Image(); // \ProfitBricks\Client\Model\Image | CD-ROM to be attached
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -48,13 +48,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **server_id** | **string**|  | 
- **cdrom** | [**\Swagger\Client\Model\Image**](\Swagger\Client\Model\Image.md)| CD-ROM to be attached | 
+ **cdrom** | [**\ProfitBricks\Client\Model\Image**](\ProfitBricks\Client\Model\Image.md)| CD-ROM to be attached | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Image**](Image.md)
+[**\ProfitBricks\Client\Model\Image**](Image.md)
 
 ### Authorization
 
@@ -80,10 +80,10 @@ This will detach a CD-ROM from the server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedCDROMsApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedCDROMsApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $cdrom_id = array('key' => "cdrom_id_example"); // map[string,string] | 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Cdroms findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Cdroms findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 List attached CD-ROMs 
 
@@ -137,10 +137,10 @@ You can retrieve a list of CD-ROMs attached to the server.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedCDROMsApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedCDROMsApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Cdroms**](Cdroms.md)
+[**\ProfitBricks\Client\Model\Cdroms**](Cdroms.md)
 
 ### Authorization
 
@@ -180,7 +180,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Image findById($datacenter_id, $server_id, $cdrom_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Image findById($datacenter_id, $server_id, $cdrom_id, $pretty_print_query_parameter, $depth)
 
 Retrieve an attached CD-ROM
 
@@ -192,10 +192,10 @@ You can retrieve a specific CD-ROM attached to the server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\AttachedCDROMsApi();
+$api_instance = new ProfitBricks\Client\Api\AttachedCDROMsApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $cdrom_id = array('key' => "cdrom_id_example"); // map[string,string] | 
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Image**](Image.md)
+[**\ProfitBricks\Client\Model\Image**](Image.md)
 
 ### Authorization
 

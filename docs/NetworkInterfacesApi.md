@@ -1,4 +1,4 @@
-# Swagger\Client\NetworkInterfacesApi
+# ProfitBricks\Client\NetworkInterfacesApi
 
 All URIs are relative to *https://localhost*
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **create**
-> \Swagger\Client\Model\Nic create($datacenter_id, $server_id, $nic, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic create($datacenter_id, $server_id, $nic, $pretty_print_query_parameter, $depth)
 
 Create a Nic
 
@@ -25,13 +25,13 @@ Adds a NIC to the target server
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
-$nic = new \Swagger\Client\Model\Nic(); // \Swagger\Client\Model\Nic | Nic to be created
+$nic = new \ProfitBricks\Client\Model\Nic(); // \ProfitBricks\Client\Model\Nic | Nic to be created
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -50,13 +50,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **server_id** | **string**|  | 
- **nic** | [**\Swagger\Client\Model\Nic**](\Swagger\Client\Model\Nic.md)| Nic to be created | 
+ **nic** | [**\ProfitBricks\Client\Model\Nic**](\ProfitBricks\Client\Model\Nic.md)| Nic to be created | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -82,10 +82,10 @@ Deletes the specified NIC.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $nic_id = array('key' => "nic_id_example"); // map[string,string] | 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Nics findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nics findAll($datacenter_id, $server_id, $pretty_print_query_parameter, $depth)
 
 List Nics 
 
@@ -139,10 +139,10 @@ Retrieves a list of NICs.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Nics**](Nics.md)
+[**\ProfitBricks\Client\Model\Nics**](Nics.md)
 
 ### Authorization
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Nic findById($datacenter_id, $server_id, $nic_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic findById($datacenter_id, $server_id, $nic_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a Nic
 
@@ -194,10 +194,10 @@ Retrieves the attributes of a given NIC
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $nic_id = array('key' => "nic_id_example"); // map[string,string] | 
@@ -225,7 +225,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -239,7 +239,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **partialUpdate**
-> \Swagger\Client\Model\Nic partialUpdate($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic partialUpdate($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth)
 
 Partially modify a Nic
 
@@ -251,14 +251,14 @@ You can use update attributes of a Nic
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $nic_id = array('key' => "nic_id_example"); // map[string,string] | 
-$nic = new \Swagger\Client\Model\NicProperties(); // \Swagger\Client\Model\NicProperties | Modified properties of Nic
+$nic = new \ProfitBricks\Client\Model\NicProperties(); // \ProfitBricks\Client\Model\NicProperties | Modified properties of Nic
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -278,13 +278,13 @@ Name | Type | Description  | Notes
  **datacenter_id** | **string**|  | 
  **server_id** | **string**|  | 
  **nic_id** | [**map[string,string]**](string.md)|  | 
- **nic** | [**\Swagger\Client\Model\NicProperties**](\Swagger\Client\Model\NicProperties.md)| Modified properties of Nic | 
+ **nic** | [**\ProfitBricks\Client\Model\NicProperties**](\ProfitBricks\Client\Model\NicProperties.md)| Modified properties of Nic | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update**
-> \Swagger\Client\Model\Nic update($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic update($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth)
 
 Modify a Nic
 
@@ -310,14 +310,14 @@ You can use update attributes of a Nic
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\NetworkInterfacesApi();
+$api_instance = new ProfitBricks\Client\Api\NetworkInterfacesApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $server_id = "server_id_example"; // string | 
 $nic_id = array('key' => "nic_id_example"); // map[string,string] | 
-$nic = new \Swagger\Client\Model\Nic(); // \Swagger\Client\Model\Nic | Modified Nic
+$nic = new \ProfitBricks\Client\Model\Nic(); // \ProfitBricks\Client\Model\Nic | Modified Nic
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -337,13 +337,13 @@ Name | Type | Description  | Notes
  **datacenter_id** | **string**|  | 
  **server_id** | **string**|  | 
  **nic_id** | [**map[string,string]**](string.md)|  | 
- **nic** | [**\Swagger\Client\Model\Nic**](\Swagger\Client\Model\Nic.md)| Modified Nic | 
+ **nic** | [**\ProfitBricks\Client\Model\Nic**](\ProfitBricks\Client\Model\Nic.md)| Modified Nic | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
