@@ -1,4 +1,4 @@
-# Swagger\Client\LanApi
+# ProfitBricks\Client\LanApi
 
 All URIs are relative to *https://localhost*
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **attachNic**
-> \Swagger\Client\Model\Nic attachNic($datacenter_id, $lan_id, $nic, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic attachNic($datacenter_id, $lan_id, $nic, $pretty_print_query_parameter, $depth)
 
 Attach a nic
 
@@ -28,13 +28,13 @@ This will attach a pre-existing nic to a lan.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = "lan_id_example"; // string | 
-$nic = new \Swagger\Client\Model\Nic(); // \Swagger\Client\Model\Nic | Nic to be attached
+$nic = new \ProfitBricks\Client\Model\Nic(); // \ProfitBricks\Client\Model\Nic | Nic to be attached
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -53,13 +53,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **lan_id** | **string**|  | 
- **nic** | [**\Swagger\Client\Model\Nic**](\Swagger\Client\Model\Nic.md)| Nic to be attached | 
+ **nic** | [**\ProfitBricks\Client\Model\Nic**](\ProfitBricks\Client\Model\Nic.md)| Nic to be attached | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -73,7 +73,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create**
-> \Swagger\Client\Model\Lan create($datacenter_id, $lan, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Lan create($datacenter_id, $lan, $pretty_print_query_parameter, $depth)
 
 Create a Lan
 
@@ -85,12 +85,12 @@ Creates a LAN within the datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
-$lan = new \Swagger\Client\Model\Lan(); // \Swagger\Client\Model\Lan | Lan to be created
+$lan = new \ProfitBricks\Client\Model\Lan(); // \ProfitBricks\Client\Model\Lan | Lan to be created
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -108,13 +108,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
- **lan** | [**\Swagger\Client\Model\Lan**](\Swagger\Client\Model\Lan.md)| Lan to be created | 
+ **lan** | [**\ProfitBricks\Client\Model\Lan**](\ProfitBricks\Client\Model\Lan.md)| Lan to be created | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Lan**](Lan.md)
+[**\ProfitBricks\Client\Model\Lan**](Lan.md)
 
 ### Authorization
 
@@ -140,10 +140,10 @@ Removes the specific Lan
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = array('key' => "lan_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Lans findAll($datacenter_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Lans findAll($datacenter_id, $pretty_print_query_parameter, $depth)
 
 List Lans
 
@@ -195,10 +195,10 @@ Retrieve a list of LANs within the datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Lans**](Lans.md)
+[**\ProfitBricks\Client\Model\Lans**](Lans.md)
 
 ### Authorization
 
@@ -236,7 +236,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Lan findById($datacenter_id, $lan_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Lan findById($datacenter_id, $lan_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a Lan
 
@@ -248,10 +248,10 @@ Retrieves the attributes of a given LAN
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = array('key' => "lan_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Lan**](Lan.md)
+[**\ProfitBricks\Client\Model\Lan**](Lan.md)
 
 ### Authorization
 
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getMember**
-> \Swagger\Client\Model\Nic getMember($datacenter_id, $lan_id, $nic_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic getMember($datacenter_id, $lan_id, $nic_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a nic attached to lan
 
@@ -303,10 +303,10 @@ This will retrieve the properties of an attached nic.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = "lan_id_example"; // string | 
 $nic_id = "nic_id_example"; // string | 
@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listNics**
-> \Swagger\Client\Model\LanNics listNics($datacenter_id, $lan_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\LanNics listNics($datacenter_id, $lan_id, $pretty_print_query_parameter, $depth)
 
 List Lan Members 
 
@@ -360,10 +360,10 @@ You can retrieve a list of nics attached to a lan
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = "lan_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\LanNics**](LanNics.md)
+[**\ProfitBricks\Client\Model\LanNics**](LanNics.md)
 
 ### Authorization
 
@@ -403,7 +403,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **partialUpdate**
-> \Swagger\Client\Model\Lan partialUpdate($datacenter_id, $lan_id, $lan, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Lan partialUpdate($datacenter_id, $lan_id, $lan, $pretty_print_query_parameter, $depth)
 
 Partially modify a Lan
 
@@ -415,13 +415,13 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = array('key' => "lan_id_example"); // map[string,string] | 
-$lan = new \Swagger\Client\Model\LanProperties(); // \Swagger\Client\Model\LanProperties | Modified Lan
+$lan = new \ProfitBricks\Client\Model\LanProperties(); // \ProfitBricks\Client\Model\LanProperties | Modified Lan
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -440,13 +440,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **lan_id** | [**map[string,string]**](string.md)|  | 
- **lan** | [**\Swagger\Client\Model\LanProperties**](\Swagger\Client\Model\LanProperties.md)| Modified Lan | 
+ **lan** | [**\ProfitBricks\Client\Model\LanProperties**](\ProfitBricks\Client\Model\LanProperties.md)| Modified Lan | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Lan**](Lan.md)
+[**\ProfitBricks\Client\Model\Lan**](Lan.md)
 
 ### Authorization
 
@@ -460,7 +460,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update**
-> \Swagger\Client\Model\Lan update($datacenter_id, $lan_id, $lan, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Lan update($datacenter_id, $lan_id, $lan, $pretty_print_query_parameter, $depth)
 
 Modify a Lan
 
@@ -472,13 +472,13 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LanApi();
+$api_instance = new ProfitBricks\Client\Api\LanApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $lan_id = array('key' => "lan_id_example"); // map[string,string] | 
-$lan = new \Swagger\Client\Model\Lan(); // \Swagger\Client\Model\Lan | Modified Lan
+$lan = new \ProfitBricks\Client\Model\Lan(); // \ProfitBricks\Client\Model\Lan | Modified Lan
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -497,13 +497,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **lan_id** | [**map[string,string]**](string.md)|  | 
- **lan** | [**\Swagger\Client\Model\Lan**](\Swagger\Client\Model\Lan.md)| Modified Lan | 
+ **lan** | [**\ProfitBricks\Client\Model\Lan**](\ProfitBricks\Client\Model\Lan.md)| Modified Lan | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Lan**](Lan.md)
+[**\ProfitBricks\Client\Model\Lan**](Lan.md)
 
 ### Authorization
 

@@ -1,4 +1,4 @@
-# Swagger\Client\IPBlocksApi
+# ProfitBricks\Client\IPBlocksApi
 
 All URIs are relative to *https://localhost*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create**
-> \Swagger\Client\Model\IpBlock create($ipblock, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\IpBlock create($ipblock, $pretty_print_query_parameter, $depth)
 
 Reserve IP Block
 
@@ -23,11 +23,11 @@ This will reserve a new IP Block
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\IPBlocksApi();
-$ipblock = new \Swagger\Client\Model\IpBlock(); // \Swagger\Client\Model\IpBlock | IP Block to be reserved
+$api_instance = new ProfitBricks\Client\Api\IPBlocksApi();
+$ipblock = new \ProfitBricks\Client\Model\IpBlock(); // \ProfitBricks\Client\Model\IpBlock | IP Block to be reserved
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -44,13 +44,13 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ipblock** | [**\Swagger\Client\Model\IpBlock**](\Swagger\Client\Model\IpBlock.md)| IP Block to be reserved | 
+ **ipblock** | [**\ProfitBricks\Client\Model\IpBlock**](\ProfitBricks\Client\Model\IpBlock.md)| IP Block to be reserved | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\IpBlock**](IpBlock.md)
+[**\ProfitBricks\Client\Model\IpBlock**](IpBlock.md)
 
 ### Authorization
 
@@ -76,10 +76,10 @@ Removes the specific IP Block
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\IPBlocksApi();
+$api_instance = new ProfitBricks\Client\Api\IPBlocksApi();
 $ipblock_id = array('key' => "ipblock_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\IpBlocks findAll($pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\IpBlocks findAll($pretty_print_query_parameter, $depth)
 
 List IP Blocks 
 
@@ -129,10 +129,10 @@ Retrieve a list of all reserver IP Blocks
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\IPBlocksApi();
+$api_instance = new ProfitBricks\Client\Api\IPBlocksApi();
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\IpBlocks**](IpBlocks.md)
+[**\ProfitBricks\Client\Model\IpBlocks**](IpBlocks.md)
 
 ### Authorization
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\IpBlock findById($ipblock_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\IpBlock findById($ipblock_id, $pretty_print_query_parameter, $depth)
 
 Retrieve an IP Block
 
@@ -180,10 +180,10 @@ Retrieves the attributes of a given IP Block.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\IPBlocksApi();
+$api_instance = new ProfitBricks\Client\Api\IPBlocksApi();
 $ipblock_id = array('key' => "ipblock_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\IpBlock**](IpBlock.md)
+[**\ProfitBricks\Client\Model\IpBlock**](IpBlock.md)
 
 ### Authorization
 

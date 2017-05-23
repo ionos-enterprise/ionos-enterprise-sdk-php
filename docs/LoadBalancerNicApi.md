@@ -1,4 +1,4 @@
-# Swagger\Client\LoadBalancerNicApi
+# ProfitBricks\Client\LoadBalancerNicApi
 
 All URIs are relative to *https://localhost*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **attachNic**
-> \Swagger\Client\Model\Nic attachNic($datacenter_id, $loadbalancer_id, $nic, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic attachNic($datacenter_id, $loadbalancer_id, $nic, $pretty_print_query_parameter, $depth)
 
 Attach a nic to Load Balancer
 
@@ -23,13 +23,13 @@ This will attach a pre-existing nic to a Load Balancer.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerNicApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerNicApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = "loadbalancer_id_example"; // string | 
-$nic = new \Swagger\Client\Model\Nic(); // \Swagger\Client\Model\Nic | Nic id to be attached
+$nic = new \ProfitBricks\Client\Model\Nic(); // \ProfitBricks\Client\Model\Nic | Nic id to be attached
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -48,13 +48,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **loadbalancer_id** | **string**|  | 
- **nic** | [**\Swagger\Client\Model\Nic**](\Swagger\Client\Model\Nic.md)| Nic id to be attached | 
+ **nic** | [**\ProfitBricks\Client\Model\Nic**](\ProfitBricks\Client\Model\Nic.md)| Nic id to be attached | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -80,10 +80,10 @@ This will remove a nic from Load Balancer
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerNicApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerNicApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = "loadbalancer_id_example"; // string | 
 $nic_id = array('key' => "nic_id_example"); // map[string,string] | 
@@ -125,7 +125,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getMember**
-> \Swagger\Client\Model\Nic getMember($datacenter_id, $loadbalancer_id, $nic_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Nic getMember($datacenter_id, $loadbalancer_id, $nic_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a nic attached to Load Balancer
 
@@ -137,10 +137,10 @@ This will retrieve the properties of an attached nic.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerNicApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerNicApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = "loadbalancer_id_example"; // string | 
 $nic_id = "nic_id_example"; // string | 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Nic**](Nic.md)
+[**\ProfitBricks\Client\Model\Nic**](Nic.md)
 
 ### Authorization
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listNics**
-> \Swagger\Client\Model\BalancedNics listNics($datacenter_id, $loadbalancer_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\BalancedNics listNics($datacenter_id, $loadbalancer_id, $pretty_print_query_parameter, $depth)
 
 List Load Balancer Members 
 
@@ -194,10 +194,10 @@ You can retrieve a list of nics attached to a Load Balancer
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerNicApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerNicApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = "loadbalancer_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\BalancedNics**](BalancedNics.md)
+[**\ProfitBricks\Client\Model\BalancedNics**](BalancedNics.md)
 
 ### Authorization
 

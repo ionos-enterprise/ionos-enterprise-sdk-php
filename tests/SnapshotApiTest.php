@@ -15,13 +15,13 @@ class SnapshotApiTest extends BaseTest
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$volume_api = new Swagger\Client\Api\VolumeApi(self::$api_client);
-    self::$snapshot_api = new Swagger\Client\Api\SnapshotApi(self::$api_client);
+    self::$volume_api = new ProfitBricks\Client\Api\VolumeApi(self::$api_client);
+    self::$snapshot_api = new ProfitBricks\Client\Api\SnapshotApi(self::$api_client);
   }
 
   public function testCreateVolume() {
-    $volume = new Swagger\Client\Model\Volume();
-    $props = new \Swagger\Client\Model\VolumeProperties();
+    $volume = new ProfitBricks\Client\Model\Volume();
+    $props = new \ProfitBricks\Client\Model\VolumeProperties();
     $props->setName("test-volume")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
     $volume->setProperties($props);
 
@@ -64,7 +64,7 @@ class SnapshotApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $props = new \Swagger\Client\Model\SnapshotProperties();
+    $props = new \ProfitBricks\Client\Model\SnapshotProperties();
     $props->setName("new-name");
 
     self::$snapshot_api->partialUpdate(self::$testSnapshot->getId(), $props);

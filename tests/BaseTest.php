@@ -8,16 +8,15 @@ class BaseTest extends \PHPUnit_Framework_TestCase
   use CommonTestMethods;
 
   protected static $api_client;
-
+  
   public static function setUpBeforeClass() {
-    $params = json_decode(file_get_contents("config.json"), true);
-    $config = (new Swagger\Client\Configuration())
-      ->setHost($params['host'])
-      ->setUsername($params['username'])
-      ->setPassword($params['password']);
-    self::$api_client = new Swagger\Client\ApiClient($config);
+    $config = (new ProfitBricks\Client\Configuration())
+        ->setHost('https://api.profitbricks.com/cloudapi/v3')
+        ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+        ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+    self::$api_client = new ProfitBricks\Client\ApiClient($config);
   }
-
+  
   protected function find($list, $predicate) {
     foreach ($list as $item) {
       if ($predicate($item))

@@ -1,4 +1,4 @@
-# Swagger\Client\DefaultApi
+# ProfitBricks\Client\DefaultApi
 
 All URIs are relative to *https://localhost*
 
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **printInfo**
-> \Swagger\Client\Model\Info printInfo($pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Info printInfo($pretty_print_query_parameter, $depth)
 
 Display API information
 
@@ -19,7 +19,7 @@ Display API information
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$api_instance = new Swagger\Client\Api\DefaultApi();
+$api_instance = new ProfitBricks\Client\Api\DefaultApi();
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -41,7 +41,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Info**](Info.md)
+[**\ProfitBricks\Client\Model\Info**](Info.md)
 
 ### Authorization
 

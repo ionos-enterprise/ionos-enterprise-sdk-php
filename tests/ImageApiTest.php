@@ -12,7 +12,7 @@ class ImageApiTest extends BaseTest
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$image_api = new Swagger\Client\Api\ImageApi(self::$api_client);
+    self::$image_api = new ProfitBricks\Client\Api\ImageApi(self::$api_client);
   }
 
   public function testList() {

@@ -1,4 +1,4 @@
-# Swagger\Client\LoadBalancerApi
+# ProfitBricks\Client\LoadBalancerApi
 
 All URIs are relative to *https://localhost*
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **create**
-> \Swagger\Client\Model\Loadbalancer create($datacenter_id, $loadbalancer, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Loadbalancer create($datacenter_id, $loadbalancer, $pretty_print_query_parameter, $depth)
 
 Create a Lan
 
@@ -25,12 +25,12 @@ Creates a Loadbalancer within the datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
-$loadbalancer = new \Swagger\Client\Model\Loadbalancer(); // \Swagger\Client\Model\Loadbalancer | Loadbalancer to be created
+$loadbalancer = new \ProfitBricks\Client\Model\Loadbalancer(); // \ProfitBricks\Client\Model\Loadbalancer | Loadbalancer to be created
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
 
@@ -48,13 +48,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
- **loadbalancer** | [**\Swagger\Client\Model\Loadbalancer**](\Swagger\Client\Model\Loadbalancer.md)| Loadbalancer to be created | 
+ **loadbalancer** | [**\ProfitBricks\Client\Model\Loadbalancer**](\ProfitBricks\Client\Model\Loadbalancer.md)| Loadbalancer to be created | 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Loadbalancer**](Loadbalancer.md)
+[**\ProfitBricks\Client\Model\Loadbalancer**](Loadbalancer.md)
 
 ### Authorization
 
@@ -80,10 +80,10 @@ Removes the specific Loadbalancer
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = array('key' => "loadbalancer_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findAll**
-> \Swagger\Client\Model\Loadbalancers findAll($datacenter_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Loadbalancers findAll($datacenter_id, $pretty_print_query_parameter, $depth)
 
 List Load Balancers
 
@@ -135,10 +135,10 @@ Retrieve a list of LANs within the datacenter
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Loadbalancers**](Loadbalancers.md)
+[**\ProfitBricks\Client\Model\Loadbalancers**](Loadbalancers.md)
 
 ### Authorization
 
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **findById**
-> \Swagger\Client\Model\Loadbalancer findById($datacenter_id, $loadbalancer_id, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Loadbalancer findById($datacenter_id, $loadbalancer_id, $pretty_print_query_parameter, $depth)
 
 Retrieve a loadbalancer
 
@@ -188,10 +188,10 @@ Retrieves the attributes of a given Loadbalancer
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = array('key' => "loadbalancer_id_example"); // map[string,string] | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Loadbalancer**](Loadbalancer.md)
+[**\ProfitBricks\Client\Model\Loadbalancer**](Loadbalancer.md)
 
 ### Authorization
 
@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **partialUpdate**
-> \Swagger\Client\Model\Loadbalancer partialUpdate($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Loadbalancer partialUpdate($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth)
 
 Partially modify a Loadbalancer
 
@@ -243,13 +243,13 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = array('key' => "loadbalancer_id_example"); // map[string,string] | 
-$loadbalancer = new \Swagger\Client\Model\LoadbalancerProperties(); // \Swagger\Client\Model\LoadbalancerProperties | Modified Loadbalancer
+$loadbalancer = new \ProfitBricks\Client\Model\LoadbalancerProperties(); // \ProfitBricks\Client\Model\LoadbalancerProperties | Modified Loadbalancer
 $body = NULL; // object | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -269,14 +269,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **loadbalancer_id** | [**map[string,string]**](string.md)|  | 
- **loadbalancer** | [**\Swagger\Client\Model\LoadbalancerProperties**](\Swagger\Client\Model\LoadbalancerProperties.md)| Modified Loadbalancer | 
+ **loadbalancer** | [**\ProfitBricks\Client\Model\LoadbalancerProperties**](\ProfitBricks\Client\Model\LoadbalancerProperties.md)| Modified Loadbalancer | 
  **body** | **object**|  | [optional] 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Loadbalancer**](Loadbalancer.md)
+[**\ProfitBricks\Client\Model\Loadbalancer**](Loadbalancer.md)
 
 ### Authorization
 
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update**
-> \Swagger\Client\Model\Loadbalancer update($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth)
+> \ProfitBricks\Client\Model\Loadbalancer update($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth)
 
 Modify a Loadbalancer
 
@@ -302,13 +302,13 @@ You can use update attributes of a resource
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: basicAuth
-Swagger\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-Swagger\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+ProfitBricks\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
-$api_instance = new Swagger\Client\Api\LoadBalancerApi();
+$api_instance = new ProfitBricks\Client\Api\LoadBalancerApi();
 $datacenter_id = "datacenter_id_example"; // string | 
 $loadbalancer_id = array('key' => "loadbalancer_id_example"); // map[string,string] | 
-$loadbalancer = new \Swagger\Client\Model\Loadbalancer(); // \Swagger\Client\Model\Loadbalancer | Modified Loadbalancer
+$loadbalancer = new \ProfitBricks\Client\Model\Loadbalancer(); // \ProfitBricks\Client\Model\Loadbalancer | Modified Loadbalancer
 $body = NULL; // object | 
 $pretty_print_query_parameter = true; // bool | Controls whether response is pretty-printed (with indentation and new lines)
 $depth = 0; // int | Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children's children are included\n\t- depth=... and so on
@@ -328,14 +328,14 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **datacenter_id** | **string**|  | 
  **loadbalancer_id** | [**map[string,string]**](string.md)|  | 
- **loadbalancer** | [**\Swagger\Client\Model\Loadbalancer**](\Swagger\Client\Model\Loadbalancer.md)| Modified Loadbalancer | 
+ **loadbalancer** | [**\ProfitBricks\Client\Model\Loadbalancer**](\ProfitBricks\Client\Model\Loadbalancer.md)| Modified Loadbalancer | 
  **body** | **object**|  | [optional] 
  **pretty_print_query_parameter** | **bool**| Controls whether response is pretty-printed (with indentation and new lines) | [optional] [default to true]
  **depth** | **int**| Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on | [optional] [default to 0]
 
 ### Return type
 
-[**\Swagger\Client\Model\Loadbalancer**](Loadbalancer.md)
+[**\ProfitBricks\Client\Model\Loadbalancer**](Loadbalancer.md)
 
 ### Authorization
 

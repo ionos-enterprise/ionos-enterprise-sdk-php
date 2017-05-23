@@ -17,14 +17,14 @@ class FirewallApiTest extends BaseTest
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
-    self::$firewall_api = new Swagger\Client\Api\FirewallRuleApi(self::$api_client);
-    self::$server_api = new Swagger\Client\Api\ServerApi(self::$api_client);
-    self::$nic_api = new Swagger\Client\Api\NetworkInterfacesApi(self::$api_client);
+    self::$firewall_api = new ProfitBricks\Client\Api\FirewallRuleApi(self::$api_client);
+    self::$server_api = new ProfitBricks\Client\Api\ServerApi(self::$api_client);
+    self::$nic_api = new ProfitBricks\Client\Api\NetworkInterfacesApi(self::$api_client);
   }
 
   public function testCreateServer() {
-    $server = new \Swagger\Client\Model\Server();
-    $props = new \Swagger\Client\Model\ServerProperties();
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
     $props->setName("jclouds-node")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
@@ -41,8 +41,8 @@ class FirewallApiTest extends BaseTest
   }
 
   public function testCreateNic() {
-    $nic = new \Swagger\Client\Model\Nic();
-    $props = new \Swagger\Client\Model\NicProperties();
+    $nic = new \ProfitBricks\Client\Model\Nic();
+    $props = new \ProfitBricks\Client\Model\NicProperties();
     $props->setName("jclouds-nic")->setLan(1);
     $nic->setProperties($props);
 
@@ -59,8 +59,8 @@ class FirewallApiTest extends BaseTest
   }
 
   public function testCreateFirewallRule() {
-    $rule = new \Swagger\Client\Model\FirewallRule();
-    $props = new \Swagger\Client\Model\FirewallruleProperties();
+    $rule = new \ProfitBricks\Client\Model\FirewallRule();
+    $props = new \ProfitBricks\Client\Model\FirewallruleProperties();
     $props->setName("jclouds-firewall")->setProtocol("TCP")->setPortRangeStart(1)->setPortRangeEnd(600);
     $rule->setProperties($props);
 
@@ -99,8 +99,8 @@ class FirewallApiTest extends BaseTest
   }
 
   public function testUpdate() {
-    $rule = new \Swagger\Client\Model\FirewallRule();
-    $props = new \Swagger\Client\Model\FirewallruleProperties();
+    $rule = new \ProfitBricks\Client\Model\FirewallRule();
+    $props = new \ProfitBricks\Client\Model\FirewallruleProperties();
     $props->setName("new-name");
     $rule->setProperties($props);
 
