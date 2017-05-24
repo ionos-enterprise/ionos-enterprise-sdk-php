@@ -99,6 +99,9 @@ class NetworkInterfacesApi
     public function create($datacenter_id, $server_id, $nic, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter_id, $server_id, $nic, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -658,6 +661,9 @@ class NetworkInterfacesApi
     public function partialUpdate($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -812,6 +818,9 @@ class NetworkInterfacesApi
     public function update($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($datacenter_id, $server_id, $nic_id, $nic, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

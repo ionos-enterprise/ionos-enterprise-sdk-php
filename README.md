@@ -87,7 +87,7 @@ Version: profitbricks-sdk-php **3.0.1**
     * [List Requests](#list-requests)
     * [Get a Request](#get-a-request)
     * [Get a Request Status](#get-a-request-status)
-* [Example](#example)
+* [Examples](#examples)
 * [Support](#support)
 * [Testing](#testing)
 * [Contributing](#contributing)
@@ -1724,16 +1724,58 @@ The following table describes the request arguments:
 $request = $reqiest_api->getStatus($request_id);
 ```
 
-## Example
+## Examples
+
+### Wait for Resources
+
+ProfitBricks allows servers to be created with individual, customizable components including NICs and volumes. A wait method is necessary to provision components that depends on each other. Below is an example of a `waitTillProvisioned` method that can be used between dependent requests:
 
 ```php
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
+```
+
+### Component Build
+```php
+<?php
+
+require_once(__DIR__.'/vendor/autoload.php');
+
+$test_location = 'us/las';
+
 $config = (new ProfitBricks\Client\Configuration())
-  ->setHost('https://api.profitbricks.com/cloudapi/v3/')
-  ->setUsername('pb_username')
-  ->setPassword('pb_password');
-$api = new ProfitBricks\Client\ApiClient($config);
+    ->setHost('https://api.profitbricks.com/cloudapi/v3/')
+    ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+    ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+$api_client = new ProfitBricks\Client\ApiClient($config);
 
 $datacenter_api = new ProfitBricks\Client\Api\DataCenterApi($api_client);
+$server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
+$volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi($api_client);
+
+echo "Creating DataCenter";
+echo PHP_EOL ;
 
 $datacenter = new \ProfitBricks\Client\Model\Datacenter();
 
@@ -1743,7 +1785,15 @@ $props->setDescription("example description");
 $props->setLocation($test_location);
 $datacenter->setProperties($props);
 
+
 $testDatacenter = $datacenter_api->create($datacenter);
+waitTillProvisioned($testDatacenter->getRequestId());
+
+echo "DataCenter Ready";
+echo PHP_EOL ;
+
+echo "Creating Server";
+echo PHP_EOL ;
 
 $server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
 
@@ -1754,33 +1804,204 @@ $server->setProperties($props);
 
 $testServer = $server_api->create($testDatacenter->getId(), $server);
 
+waitTillProvisioned($testServer->getRequestId());
+
+echo "Server Ready";
+echo PHP_EOL ;
+
+echo "looking for a linux image";
+echo PHP_EOL ;
+
+$image_api = new ProfitBricks\Client\Api\ImageApi($api_client);
+$images=$image_api->findAll(null,5);
+$osImage = null;
+foreach ($images->getItems() as $image) {
+  if ($image->getProperties()->getPublic() == true
+      && $image->getProperties()->getLocation() == "us/las"
+      && $image->getProperties()->getLicenceType() == "LINUX"
+      && $image->getProperties()->getImageType() == "HDD"
+  ) {
+    $osImage = $image;
+  }
+}
+
+echo "image found";
+echo PHP_EOL ;
+
+echo "Creating Volume with the os Image installed";
+echo PHP_EOL ;
 $volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
 
 $volume = new ProfitBricks\Client\Model\Volume();
 $props = new \ProfitBricks\Client\Model\VolumeProperties();
 $props->setName("test-volume")
-  ->setSize(3)
-  ->setType('HDD')
-  ->setImage('image-id')
-  ->setImagePassword("testpassword123")
-  ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
+    ->setSize(3)
+    ->setType('HDD')
+    ->setImage($osImage->getId())
+    ->setImagePassword("testpassword123")
+    ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
 $volume->setProperties($props);
 
 $testVolume = $volume_api->create($testDatacenter->getId(), $volume);
 
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("new-name")->setCores(2)->setRam(1024 * 2);
-$server->setProperties($props);
+waitTillProvisioned($testVolume->getRequestId());
+echo "Volume Ready";
+echo PHP_EOL ;
 
-$server_api->partialUpdate($testDatacenter->getId(), $testServer->getId(), $props);
+echo "Attaching volume to server";
+echo PHP_EOL ;
 
-$servers = $server_api->findAll($testDatacenter->getId());
-$volumes = $volume_api->findAll($testDatacenter->getId());
-$datacenters = $datacenter_api->findAll();
+$attachedVolume=$attached_volume_api->attachVolume($testDatacenter->getId(), $testServer->getId(), $volume);
+waitTillProvisioned($attachedVolume->getRequestId());
 
-$server_api->delete($testDatacenter->getId(), $testServer->getId());
-$datacenter_api->delete($id);
+echo "Volume attached";
+echo PHP_EOL ;
+
+
+echo "Cleaning example";
+echo PHP_EOL ;
+$datacenter_api->delete($testDatacenter->getId());
+
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
+?>
+```
+
+### Composite Build
+
+```php
+<?php
+
+require_once(__DIR__.'/vendor/autoload.php');
+
+$test_location = 'us/las';
+
+$config = (new ProfitBricks\Client\Configuration())
+    ->setHost('https://api.profitbricks.com/cloudapi/v3/')
+    ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+    ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+$api_client = new ProfitBricks\Client\ApiClient($config);
+
+$datacenter_api = new ProfitBricks\Client\Api\DataCenterApi($api_client);
+$server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
+$volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi($api_client);
+
+echo "looking for a linux image";
+echo PHP_EOL ;
+
+$image_api = new ProfitBricks\Client\Api\ImageApi($api_client);
+$images=$image_api->findAll(null,5);
+$osImage = null;
+foreach ($images->getItems() as $image) {
+  if ($image->getProperties()->getPublic() == true
+      && $image->getProperties()->getLocation() == "us/las"
+      && $image->getProperties()->getLicenceType() == "LINUX"
+      && $image->getProperties()->getImageType() == "HDD"
+  ) {
+    $osImage = $image;
+  }
+}
+
+echo "image found";
+echo PHP_EOL ;
+
+echo "Creating Composite DataCenter";
+echo PHP_EOL ;
+
+$datacenter_composite = new \ProfitBricks\Client\Model\Datacenter();
+
+//Configuring DataCenter properties
+$props = new \ProfitBricks\Client\Model\DatacenterProperties();
+$props->setName("test-data-center-composite");
+$props->setDescription("example description");
+$props->setLocation("us/las");
+
+//Creating an array of servers to be added within the DataCenter
+$servers=new \ProfitBricks\Client\Model\Servers();
+$server_composite = new \ProfitBricks\Client\Model\Server();
+$server_props = new \ProfitBricks\Client\Model\ServerProperties();
+$server_props->setName("composite-node")->setCores(1)->setRam(1024);
+$server_composite->setProperties($server_props);
+
+//Creating an array of volumes to be added within the Server
+$server_entities= new \ProfitBricks\Client\Model\ServerEntities();
+
+$volume = new ProfitBricks\Client\Model\Volume();
+$v_props = new \ProfitBricks\Client\Model\VolumeProperties();
+$v_props->setName("test-volume")
+    ->setSize(3)
+    ->setType('HDD')
+    ->setImage($osImage->getId())
+    ->setImagePassword("testpassword123")
+    ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
+$volume->setProperties($v_props);
+$attachedVolumes= new \ProfitBricks\Client\Model\Volumes();
+$attachedVolumes->setItems(array($volume));
+$server_entities->setVolumes($attachedVolumes);
+$server_composite->setEntities($server_entities);
+
+$servers->setItems(array($server_composite));
+$entities= new \ProfitBricks\Client\Model\DatacenterEntities();
+$entities->setServers($servers);
+
+$datacenter_composite->setProperties($props);
+$datacenter_composite->setEntities($entities);
+$testDatacenterComposite = $datacenter_api->create($datacenter_composite);
+waitTillProvisioned($testDatacenterComposite->getRequestId());
+
+echo "DataCenter Ready";
+echo PHP_EOL ;
+
+
+
+echo "Cleaning example";
+echo PHP_EOL ;
+$datacenter_api->delete($testDatacenterComposite->getId());
+
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
+?>
 ```
 
 ## Support

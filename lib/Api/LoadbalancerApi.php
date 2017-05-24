@@ -98,6 +98,9 @@ class LoadBalancerApi
     public function create($datacenter_id, $loadbalancer, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter_id, $loadbalancer, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -602,6 +605,9 @@ class LoadBalancerApi
     public function partialUpdate($datacenter_id, $loadbalancer_id, $loadbalancer, $body = null, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -748,6 +754,9 @@ class LoadBalancerApi
     public function update($datacenter_id, $loadbalancer_id, $loadbalancer, $body = null, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($datacenter_id, $loadbalancer_id, $loadbalancer, $body, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

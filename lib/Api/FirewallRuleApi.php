@@ -101,6 +101,9 @@ class FirewallRuleApi
     public function create($datacenter_id, $server_id, $nic_id, $firewallrule, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter_id, $server_id, $nic_id, $firewallrule, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -716,6 +719,7 @@ class FirewallRuleApi
     public function partialUpdate($datacenter_id, $server_id, $nic_id, $firewallrule_id, $firewallrule, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($datacenter_id, $server_id, $nic_id, $firewallrule_id, $firewallrule, $pretty_print_query_parameter, $depth);
+        $response->setRequestId($httpHeader['Location']);
         return $response;
     }
 
@@ -884,6 +888,9 @@ class FirewallRuleApi
     public function update($datacenter_id, $server_id, $nic_id, $firewallrule_id, $firewallrule, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($datacenter_id, $server_id, $nic_id, $firewallrule_id, $firewallrule, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
