@@ -29,15 +29,10 @@ class FirewallApiTest extends BaseTest
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
+    
+    $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-      if ($server->getMetadata()->getState() == 'AVAILABLE') {
-        return $server;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
   }
 
   public function testCreateNic() {
@@ -47,15 +42,10 @@ class FirewallApiTest extends BaseTest
     $nic->setProperties($props);
 
     self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
+  
+    $this->waitTillProvisioned(self::$testNic->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $nic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId());
-      if ($nic->getMetadata()->getState() == 'AVAILABLE') {
-        return $nic;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-nic");
+    $this->assertEquals(self::$testNic->getProperties()->getName(), "jclouds-nic");
   }
 
   public function testCreateFirewallRule() {
@@ -65,13 +55,8 @@ class FirewallApiTest extends BaseTest
     $rule->setProperties($props);
 
     self::$testRule = self::$firewall_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), $rule);
-
-    $result = self::assertPredicate(function() {
-      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-      if ($server->getMetadata()->getState() == 'AVAILABLE') {
-        return $server;
-      }
-    });
+  
+    $this->waitTillProvisioned(self::$testRule->getRequestId());
 
     $result = self::assertPredicate(function() {
       $rule = self::$firewall_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), self::$testRule->getId());
@@ -103,14 +88,9 @@ class FirewallApiTest extends BaseTest
     $props = new \ProfitBricks\Client\Model\FirewallruleProperties();
     $props->setName("new-name");
     $rule->setProperties($props);
-
-    self::$firewall_api->partialUpdate(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), self::$testRule->getId(), $props);
-    $result = self::assertPredicate(function() {
-      $rule = self::$firewall_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), self::$testRule->getId());
-      if ($rule->getMetadata()->getState() == 'AVAILABLE') {
-        return $rule;
-      }
-    });
+  
+    $updateResponse=self::$firewall_api->partialUpdate(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), self::$testRule->getId(), $props);
+    $this->waitTillProvisioned($updateResponse->getRequestId());
 
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 

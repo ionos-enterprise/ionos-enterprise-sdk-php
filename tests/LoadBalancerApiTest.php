@@ -31,15 +31,10 @@ class LoadBalancerApiTest extends BaseTest
     $balancer->setProperties($props);
 
     self::$testLoadBalancer = self::$loadbalancer_api->create(self::$testDatacenter->getId(), $balancer);
+  
+    $this->waitTillProvisioned(self::$testLoadBalancer->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $balancer = self::$loadbalancer_api->findById(self::$testDatacenter->getId(), self::$testLoadBalancer->getId());
-      if ($balancer->getMetadata()->getState() != 'BUSY') {
-        return $balancer;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-balancer");
+    $this->assertEquals(self::$testLoadBalancer->getProperties()->getName(), "jclouds-balancer");
   }
 
   public function testGet() {
@@ -63,13 +58,8 @@ class LoadBalancerApiTest extends BaseTest
     $props->setName("new-name");
     $balancer->setProperties($props);
 
-    self::$loadbalancer_api->partialUpdate(self::$testDatacenter->getId(), self::$testLoadBalancer->getId(), $props);
-    $result = self::assertPredicate(function() {
-      $balancer = self::$loadbalancer_api->findById(self::$testDatacenter->getId(), self::$testLoadBalancer->getId());
-      if ($balancer->getMetadata()->getState() != 'BUSY') {
-        return $balancer;
-      }
-    });
+    $updateResponse=self::$loadbalancer_api->partialUpdate(self::$testDatacenter->getId(), self::$testLoadBalancer->getId(), $props);
+    $this->waitTillProvisioned($updateResponse->getRequestId());
 
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 
@@ -84,15 +74,10 @@ class LoadBalancerApiTest extends BaseTest
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
+  
+    $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-      if ($server->getMetadata()->getState() == 'AVAILABLE') {
-        return $server;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
   }
 
   public function testAssociateNic() {
@@ -102,15 +87,10 @@ class LoadBalancerApiTest extends BaseTest
     $nic->setProperties($props);
 
     self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
+  
+    $this->waitTillProvisioned(self::$testNic->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $nic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId());
-      if ($nic->getMetadata()->getState() == 'AVAILABLE') {
-        return $nic;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-nic");
+    $this->assertEquals(self::$testNic->getProperties()->getName(), "jclouds-nic");
 
     $nic = new ProfitBricks\Client\Model\Nic();
     $nic->setId(self::$testNic->getId());

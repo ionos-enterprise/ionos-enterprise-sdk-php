@@ -99,6 +99,9 @@ class LoadBalancerNicApi
     public function attachNic($datacenter_id, $loadbalancer_id, $nic, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->attachNicWithHttpInfo ($datacenter_id, $loadbalancer_id, $nic, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

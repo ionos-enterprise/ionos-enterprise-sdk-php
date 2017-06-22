@@ -118,6 +118,12 @@ class Server implements ArrayAccess
     protected $id;
     
     /**
+     * $requestId The resource's  request id
+     * @var string
+     */
+    protected $requestId;
+
+    /**
       * $type The type of object that has been created
       * @var string
       */
@@ -157,6 +163,7 @@ class Server implements ArrayAccess
         
         if ($data != null) {
             $this->id = $data["id"];
+            $this->requestId = $data["requestId"];
             $this->type = $data["type"];
             $this->href = $data["href"];
             $this->metadata = $data["metadata"];
@@ -183,6 +190,28 @@ class Server implements ArrayAccess
     {
         
         $this->id = $id;
+        return $this;
+    }
+    
+    
+    /**
+     * Gets requestId
+     * @return string
+     */
+    public function getRequestId()
+    {
+        return $this->requestId;
+    }
+    
+    /**
+     * Sets id
+     * @param string $requestId The resource's unique identifier
+     * @return $this
+     */
+    public function setRequestId($requestId)
+    {
+        
+        $this->requestId = $requestId;
         return $this;
     }
     

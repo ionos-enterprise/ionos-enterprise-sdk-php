@@ -101,6 +101,9 @@ class AttachedVolumesApi
     public function attachVolume($datacenter_id, $server_id, $volume, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->attachVolumeWithHttpInfo ($datacenter_id, $server_id, $volume, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

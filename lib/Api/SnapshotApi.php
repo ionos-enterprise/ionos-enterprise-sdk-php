@@ -434,6 +434,9 @@ class SnapshotApi
     public function partialUpdate($snapshot_id, $snapshot, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($snapshot_id, $snapshot, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -560,6 +563,9 @@ class SnapshotApi
     public function update($snapshot_id, $snapshot, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($snapshot_id, $snapshot, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

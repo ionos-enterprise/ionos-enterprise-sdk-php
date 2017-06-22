@@ -31,15 +31,10 @@ class LanApiTest extends BaseTest
     $lan->setProperties($props);
 
     self::$testLan = self::$lan_api->create(self::$testDatacenter->getId(), $lan);
+  
+    $this->waitTillProvisioned(self::$testLan->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $lan = self::$lan_api->findById(self::$testDatacenter->getId(), self::$testLan->getId());
-      if ($lan->getMetadata()->getState() == 'AVAILABLE') {
-        return $lan;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-lan");
+    $this->assertEquals(self::$testLan->getProperties()->getName(), "jclouds-lan");
   }
   
   public function testCreateComposite() {
@@ -50,26 +45,16 @@ class LanApiTest extends BaseTest
     $server->setProperties($props);
   
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
-    $result = self::assertPredicate(function() {
-      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-      if ($server->getMetadata()->getState() == 'AVAILABLE') {
-        return $server;
-      }
-    });
+    $this->waitTillProvisioned(self::$testServer->getRequestId());
   
     $nic = new \ProfitBricks\Client\Model\Nic();
     $props = new \ProfitBricks\Client\Model\NicProperties();
     $props->setName("jclouds-nic")->setLan(1);
     $nic->setProperties($props);
   
-    self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), $result->getId(), $nic);
+    self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
   
-    $niceResult = self::assertPredicate(function() {
-      $nic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId());
-      if ($nic->getMetadata()->getState() == 'AVAILABLE') {
-        return $nic;
-      }
-    });
+    $this->waitTillProvisioned(self::$testNic->getRequestId());
   
     $lanNics=new \ProfitBricks\Client\Model\Nics();
     $nicToAdd=new \ProfitBricks\Client\Model\Nic();
@@ -87,15 +72,10 @@ class LanApiTest extends BaseTest
     
     self::$testLanComposite = self::$lan_api->create(self::$testDatacenter->getId(), $lan_composite);
     sleep(10);
-    $composite_result = self::assertPredicate(function() {
-      $lan_composite = self::$lan_api->findById(self::$testDatacenter->getId(), self::$testLanComposite->getId());
-      if ($lan_composite->getMetadata()->getState() == 'AVAILABLE') {
-        return $lan_composite;
-      }
-    });
+    $this->waitTillProvisioned(self::$testLanComposite->getRequestId());
     
-    $this->assertEquals($composite_result->getProperties()->getName(), "composite-lan");
-    $this->assertEquals(sizeof($composite_result->getEntities()->getNics()), 1);
+    $this->assertEquals(self::$testLanComposite->getProperties()->getName(), "composite-lan");
+    $this->assertEquals(sizeof(self::$testLanComposite->getEntities()->getNics()), 1);
   }
 
   public function testGet() {
@@ -119,13 +99,8 @@ class LanApiTest extends BaseTest
     $props->setName("new-name")->setPublic(false);
     $lan->setProperties($props);
 
-    self::$lan_api->partialUpdate(self::$testDatacenter->getId(), self::$testLan->getId(), $props);
-    $result = self::assertPredicate(function() {
-      $lan = self::$lan_api->findById(self::$testDatacenter->getId(), self::$testLan->getId());
-      if ($lan->getMetadata()->getState() == 'AVAILABLE') {
-        return $lan;
-      }
-    });
+    $updateResponse=self::$lan_api->partialUpdate(self::$testDatacenter->getId(), self::$testLan->getId(), $props);
+    $this->waitTillProvisioned($updateResponse->getRequestId());
 
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 

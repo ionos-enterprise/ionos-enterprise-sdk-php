@@ -98,6 +98,9 @@ class VolumeApi
     public function create($datacenter_id, $volume, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter_id, $volume, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -226,6 +229,9 @@ class VolumeApi
     public function createSnapshot($datacenter_id, $volume_id, $name = null, $description = null, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createSnapshotWithHttpInfo ($datacenter_id, $volume_id, $name, $description, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -747,6 +753,9 @@ class VolumeApi
     public function partialUpdate($datacenter_id, $volume_id, $volume, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($datacenter_id, $volume_id, $volume, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -1025,6 +1034,9 @@ class VolumeApi
     public function update($datacenter_id, $volume_id, $volume, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($datacenter_id, $volume_id, $volume, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

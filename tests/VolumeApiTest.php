@@ -82,15 +82,10 @@ class VolumeApiTest extends BaseTest
   public function testUpdate() {
     $props = new \ProfitBricks\Client\Model\VolumeProperties();
     $props->setName("new-name")->setSize(3);
-
-    self::$volume_api->partialUpdate(self::$testDatacenter->getId(), self::$testVolume->getId(), $props);
-
-    self::assertPredicate(function() {
-      $volume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
-      if ($volume->getMetadata()->getState() == 'AVAILABLE') {
-        return $volume;
-      }
-    });
+  
+    $updateResponse=self::$volume_api->partialUpdate(self::$testDatacenter->getId(), self::$testVolume->getId(), $props);
+  
+    $this->waitTillProvisioned($updateResponse->getRequestId());
 
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 

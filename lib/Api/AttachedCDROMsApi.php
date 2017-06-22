@@ -98,6 +98,9 @@ class AttachedCDROMsApi
     public function create($datacenter_id, $server_id, $cdrom, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter_id, $server_id, $cdrom, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
