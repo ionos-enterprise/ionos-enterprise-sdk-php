@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Contract Resources
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Resources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ContractResources implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'type' => 'string',
+        'properties' => '\ProfitBricks\Client\Model\ContractProperties'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'type' => 'type',
+        'properties' => 'properties'
     );
 
     static function attributeMap() {
@@ -74,8 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+        'type' => 'setType',
+        'properties' => 'setProperties'
     );
 
     static function setters() {
@@ -87,8 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+        'type' => 'getType',
+        'properties' => 'getProperties'
     );
 
     static function getters() {
@@ -97,16 +96,17 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
-    protected $name;
+    protected $type;
+
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $items Array of items in that collection
+      * @var \ProfitBricks\Client\Model\Datacenter[]
       */
-    protected $public = false;
+    protected $properties;
 
 
     /**
@@ -117,50 +117,55 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->type = $data["type"];
+            $this->properties = $data["properties"];
         }
     }
 
+
     /**
-     * Gets name
+     * Gets type
      * @return string
      */
-    public function getName()
+    public function getType()
     {
-        return $this->name;
+        return $this->type;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setName($name)
+    public function setType($type)
     {
-
-        $this->name = $name;
+        $allowed_values = array("contract", "datacenter", "server", "volume", "nic", "loadbalancer", "location", "firewall-rule", "image", "snapshot", "lan", "ipblock", "collection", "request", "request-status");
+        if (!in_array($type, $allowed_values)) {
+            throw new \InvalidArgumentException("Invalid value for 'type', must be one of 'contract', 'datacenter', 'server', 'volume', 'nic', 'loadbalancer', 'location', 'firewall-rule', 'image', 'snapshot', 'lan', 'ipblock', 'collection', 'request', 'request-status'");
+        }
+        $this->type = $type;
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
      */
-    public function getPublic()
+    public function getProperties()
     {
-        return $this->public;
+        return $this->properties;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
      * @return $this
      */
-    public function setPublic($public)
+    public function setProperties($properties)
     {
 
-        $this->public = $public;
+        $this->properties = $properties;
         return $this;
     }
 

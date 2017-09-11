@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Contract Properties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Properties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,17 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ContractProperties implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'contractNumber' => 'int',
+        'owner' => 'string',
+        'status' => 'string',
+        'resourceLimits' => '\ProfitBricks\Client\Model\ResourceLimits'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +62,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'contractNumber' => 'contractNumber',
+        'owner' => 'owner',
+        'status' => 'status',
+        'resourceLimits' => 'resourceLimits'
     );
 
     static function attributeMap() {
@@ -74,8 +77,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+        'contractNumber' => 'setContractNumber',
+        'owner' => 'setOwner',
+        'status' => 'setStatus',
+        'resourceLimits' => 'setResourceLimits'
     );
 
     static function setters() {
@@ -87,8 +92,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+        'contractNumber' => 'getContractNumber',
+        'owner' => 'getOwner',
+        'status' => 'getStatus',
+        'resourceLimits' => 'getResourceLimits'
     );
 
     static function getters() {
@@ -97,16 +104,19 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
-    protected $name;
+    protected $contractNumber;
+
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $items Array of items in that collection
+      * @var \ProfitBricks\Client\Model\Datacenter[]
       */
-    protected $public = false;
+    protected $owner;
+    protected $status;
+    protected $resourceLimits;
 
 
     /**
@@ -117,52 +127,100 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->contractNumber = $data["contractNumber"];
+            $this->owner = $data["owner"];
+            $this->status = $data["status"];
+            $this->resourceLimits = $data["resourceLimits"];
         }
     }
 
+
     /**
-     * Gets name
+     * Gets type
      * @return string
      */
-    public function getName()
+    public function getContractNumber()
     {
-        return $this->name;
+        return $this->contractNumber;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setName($name)
+    public function setContractNumber($contractNumber)
     {
-
-        $this->name = $name;
+        $this->contractNumber = $contractNumber;
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
      */
-    public function getPublic()
+    public function getOwner()
     {
-        return $this->public;
+        return $this->owner;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
      * @return $this
      */
-    public function setPublic($public)
+    public function setOwner($owner)
     {
 
-        $this->public = $public;
+        $this->owner = $owner;
         return $this;
     }
+
+
+    /**
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+
+        $this->status = $status;
+        return $this;
+    }
+
+
+    /**
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
+     */
+    public function getResourceLimits()
+    {
+        return $this->resourceLimits;
+    }
+
+    /**
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @return $this
+     */
+    public function setResourceLimits($resourceLimits)
+    {
+
+        $this->resourceLimits = $resourceLimits;
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

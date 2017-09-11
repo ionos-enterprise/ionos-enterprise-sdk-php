@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Group Item Property
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Resources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,7 +40,7 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItemProperty implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -48,8 +48,10 @@ class LanProperties implements ArrayAccess
       */
     static $ProfitBricksTypes = array(
         'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'createDataCenter' => 'boolean',
+        'createSnapshot' => 'boolean',
+        'reserveIp' => 'boolean',
+        'accessActivityLog' => 'boolean'
     );
 
     static function ProfitBricksTypes() {
@@ -62,7 +64,10 @@ class LanProperties implements ArrayAccess
       */
     static $attributeMap = array(
         'name' => 'name',
-        'public' => 'public'
+        'createDataCenter' => 'createDataCenter',
+        'createSnapshot' => 'createSnapshot',
+        'reserveIp' => 'reserveIp',
+        'accessActivityLog' => 'accessActivityLog'
     );
 
     static function attributeMap() {
@@ -75,7 +80,10 @@ class LanProperties implements ArrayAccess
       */
     static $setters = array(
         'name' => 'setName',
-        'public' => 'setPublic'
+        'createDataCenter' => 'setCreateDataCenter',
+        'createSnapshot' => 'setCreateSnapshot',
+        'reserveIp' => 'setReserveIp',
+        'accessActivityLog' => 'setAccessActivityLog'
     );
 
     static function setters() {
@@ -88,7 +96,10 @@ class LanProperties implements ArrayAccess
       */
     static $getters = array(
         'name' => 'getName',
-        'public' => 'getPublic'
+        'createDataCenter' => 'getCreateDataCenter',
+        'createSnapshot' => 'getCreateSnapshot',
+        'reserveIp' => 'getReserveIp',
+        'accessActivityLog' => 'getAccessActivityLog'
     );
 
     static function getters() {
@@ -97,16 +108,14 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
     protected $name;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $createDataCenter;
+    protected $createSnapshot;
+    protected $reserveIp;
+    protected $accessActivityLog;
 
 
     /**
@@ -118,12 +127,15 @@ class LanProperties implements ArrayAccess
 
         if ($data != null) {
             $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->createDataCenter = $data["createDataCenter"];
+            $this->createSnapshot = $data["createSnapshot"];
+            $this->reserveIp = $data["reserveIp"];
+            $this->accessActivityLog = $data["accessActivityLog"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
     public function getName()
@@ -132,8 +144,8 @@ class LanProperties implements ArrayAccess
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
     public function setName($name)
@@ -143,26 +155,91 @@ class LanProperties implements ArrayAccess
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets type
+     * @return string
      */
-    public function getPublic()
+    public function getCreateDataCenter()
     {
-        return $this->public;
+        return $this->createDataCenter;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setPublic($public)
+    public function setCreateDataCenter($createDataCenter)
     {
-
-        $this->public = $public;
+        $this->createDataCenter = $createDataCenter;
         return $this;
     }
+
+
+    /**
+     * Gets type
+     * @return string
+     */
+    public function getCreateSnapshot()
+    {
+        return $this->createSnapshot;
+    }
+
+    /**
+     * Sets type
+     * @param string $type The type of object that has been created
+     * @return $this
+     */
+    public function setCreateSnapshot($createSnapshot)
+    {
+        $this->createSnapshot = $createSnapshot;
+        return $this;
+    }
+
+
+    /**
+     * Gets href
+     * @return string
+     */
+    public function getReserveIp()
+    {
+        return $this->reserveIp;
+    }
+
+    /**
+     * Sets href
+     * @param string $href URL to the object\u2019s representation (absolute path)
+     * @return $this
+     */
+    public function setReserveIp($reserveIp)
+    {
+
+        $this->reserveIp = $reserveIp;
+        return $this;
+    }
+
+    /**
+     * Gets properties
+     * @return \ProfitBricks\Client\Model\DatacenterProperties
+     */
+    public function getAccessActivityLog()
+    {
+        return $this->accessActivityLog;
+    }
+
+    /**
+     * Sets properties
+     * @param \ProfitBricks\Client\Model\DatacenterProperties $properties Resource's properties
+     * @return $this
+     */
+    public function setAccessActivityLog($accessActivityLog)
+    {
+
+        $this->accessActivityLog = $accessActivityLog;
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

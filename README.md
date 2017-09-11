@@ -130,7 +130,7 @@ Add your credentials for connecting to ProfitBricks:
 
 ```php
 $config = (new ProfitBricks\Client\Configuration())
-      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
 $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -1062,7 +1062,7 @@ The following table describes the request arguments:
 
 | Name| Required | Type | Description |
 |---|:-:|---|---|
-| $location | **yes** | string | This must be one of the locations: us/las, de/fra, de/fkb. |
+| $location | **yes** | string | This must be one of the locations: us/las, us/ewr, de/fra, de/fkb. |
 | $size | **yes** | int | The size of the IP block you want. |
 | $name | no | string | A descriptive name for the IP block |
 
@@ -1071,6 +1071,7 @@ The following table outlines the locations currently supported:
 | Value| Country | City |
 |---|---|---|
 | us/las | United States | Las Vegas |
+| us/ewr | United States | Newark |
 | de/fra | Germany | Frankfurt |
 | de/fkb | Germany | Karlsruhe |
 
@@ -1671,7 +1672,7 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id); 
+$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id);
 ```
 
 ---
@@ -1736,7 +1737,7 @@ function waitTillProvisioned($url)
   //regex to get the request id
   preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
   $config = (new ProfitBricks\Client\Configuration())
-      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
   $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -1764,7 +1765,7 @@ require_once(__DIR__.'/vendor/autoload.php');
 $test_location = 'us/las';
 
 $config = (new ProfitBricks\Client\Configuration())
-    ->setHost('https://api.profitbricks.com/cloudapi/v3/')
+    ->setHost('https://api.profitbricks.com/cloudapi/v4/')
     ->setUsername(getenv('PROFITBRICKS_USERNAME'))
     ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
 $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -1867,7 +1868,7 @@ function waitTillProvisioned($url)
   //regex to get the request id
   preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
   $config = (new ProfitBricks\Client\Configuration())
-      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
   $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -1897,7 +1898,7 @@ require_once(__DIR__.'/vendor/autoload.php');
 $test_location = 'us/las';
 
 $config = (new ProfitBricks\Client\Configuration())
-    ->setHost('https://api.profitbricks.com/cloudapi/v3/')
+    ->setHost('https://api.profitbricks.com/cloudapi/v4/')
     ->setUsername(getenv('PROFITBRICKS_USERNAME'))
     ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
 $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -1984,7 +1985,7 @@ function waitTillProvisioned($url)
   //regex to get the request id
   preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
   $config = (new ProfitBricks\Client\Configuration())
-      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
   $api_client = new ProfitBricks\Client\ApiClient($config);

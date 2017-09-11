@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * DatacenterProperties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * DatacenterProperties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,19 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class UserProperties implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'firstname' => 'string',
+        'lastname' => 'string',
+        'email' => 'string',
+        'administrator' => 'boolean',
+        'forceSecAuth' => 'boolean',
+        'secAuthActive' => 'boolean'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +64,12 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+      'firstname' => 'firstname',
+      'lastname' => 'lastname',
+      'email' => 'email',
+      'administrator' => 'administrator',
+      'forceSecAuth' => 'forceSecAuth',
+      'secAuthActive' => 'secAuthActive'
     );
 
     static function attributeMap() {
@@ -74,8 +81,12 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+      'firstname' => 'setFirstname',
+      'lastname' => 'setLastname',
+      'email' => 'setEmail',
+      'administrator' => 'setAdministrator',
+      'forceSecAuth' => 'setForceSecAuth',
+      'secAuthActive' => 'setSecAuthActive'
     );
 
     static function setters() {
@@ -87,8 +98,12 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+      'firstname' => 'getFirstname',
+      'lastname' => 'getLastname',
+      'email' => 'getEmail',
+      'administrator' => 'getAdministrator',
+      'forceSecAuth' => 'getForceSecAuth',
+      'secAuthActive' => 'getSecAuthActive'
     );
 
     static function getters() {
@@ -100,13 +115,27 @@ class LanProperties implements ArrayAccess
       * $name A name of that resource
       * @var string
       */
-    protected $name;
+    protected $firstname;
+    protected $lastname;
+    protected $email;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $description A description for the datacenter, e.g. staging, production
+      * @var string
       */
-    protected $public = false;
+    protected $administrator;
+
+    /**
+      * $location The physical location where the datacenter will be created. This will be where all of your servers live. Property cannot be modified after datacenter creation (disallowed in update requests)
+      * @var string
+      */
+    protected $forceSecAuth;
+
+    /**
+      * $version The version of that Data Center. Gets incremented with every change
+      * @var int
+      */
+    protected $secAuthActive;
 
 
     /**
@@ -117,8 +146,12 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->firstname = $data["firstname"];
+            $this->lastname = $data["lastname"];
+            $this->email = $data["email"];
+            $this->administrator = $data["administrator"];
+            $this->forceSecAuth = $data["forceSecAuth"];
+            $this->secAuthActive = $data["secAuthActive"];
         }
     }
 
@@ -126,9 +159,9 @@ class LanProperties implements ArrayAccess
      * Gets name
      * @return string
      */
-    public function getName()
+    public function getFirstname()
     {
-        return $this->name;
+        return $this->firstname;
     }
 
     /**
@@ -136,31 +169,95 @@ class LanProperties implements ArrayAccess
      * @param string $name A name of that resource
      * @return $this
      */
-    public function setName($name)
+    public function setFirstname($firstname)
     {
 
-        $this->name = $name;
+        $this->firstname = $firstname;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets description
+     * @return string
      */
-    public function getPublic()
+    public function getLastname()
     {
-        return $this->public;
+        return $this->lastname;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets description
+     * @param string $description A description for the datacenter, e.g. staging, production
      * @return $this
      */
-    public function setPublic($public)
+    public function setLastname($lastname)
     {
 
-        $this->public = $public;
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    /**
+     * Gets location
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets location
+     * @param string $location The physical location where the datacenter will be created. This will be where all of your servers live. Property cannot be modified after datacenter creation (disallowed in update requests)
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Gets version
+     * @return int
+     */
+    public function getForceSecAuth()
+    {
+        return $this->forceSecAuth;
+    }
+
+    /**
+     * Sets version
+     * @param int $version The version of that Data Center. Gets incremented with every change
+     * @return $this
+     */
+    public function setForceSecAuth($forceSecAuth)
+    {
+
+        $this->forceSecAuth = $forceSecAuth;
+        return $this;
+    }
+
+
+    /**
+     * Gets version
+     * @return int
+     */
+    public function getSecAuthActive()
+    {
+        return $this->secAuthActive;
+    }
+
+    /**
+     * Sets version
+     * @param int $version The version of that Data Center. Gets incremented with every change
+     * @return $this
+     */
+    public function setSecAuthActive($secAuthActive)
+    {
+
+        $this->secAuthActive = $secAuthActive;
         return $this;
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Users
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Datacenters Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,14 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ResourceEntity implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'groups' => '\ProfitBricks\Client\Model\ResourceEntityGroup'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +59,7 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'groups' => 'groups'
     );
 
     static function attributeMap() {
@@ -74,8 +71,7 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+        'groups' => 'setGroups'
     );
 
     static function setters() {
@@ -87,8 +83,7 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+        'groups' => 'getGroups'
     );
 
     static function getters() {
@@ -97,16 +92,10 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $id The resource's unique identifier
       * @var string
       */
-    protected $name;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $groups;
 
 
     /**
@@ -117,52 +106,31 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->groups = $data["groups"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getGroups()
     {
-        return $this->name;
+        return $this->groups;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setGroups($groups)
     {
 
-        $this->name = $name;
+        $this->groups = $groups;
         return $this;
     }
 
-    /**
-     * Gets public
-     * @return bool
-     */
-    public function getPublic()
-    {
-        return $this->public;
-    }
-
-    /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
-     * @return $this
-     */
-    public function setPublic($public)
-    {
-
-        $this->public = $public;
-        return $this;
-    }
 
     /**
      * Returns true if offset exists. False otherwise.

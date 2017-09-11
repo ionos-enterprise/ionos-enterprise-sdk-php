@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Users
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Datacenters Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class UserEntities implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'owns' => '\ProfitBricks\Client\Model\UserEntityOwns',
+        'groups' => '\ProfitBricks\Client\Model\UserEntityGroups'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'owns' => 'owns',
+        'groups' => 'groups'
     );
 
     static function attributeMap() {
@@ -74,8 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+      'owns' => 'setOwns',
+      'groups' => 'setGroups'
     );
 
     static function setters() {
@@ -87,8 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+      'owns' => 'getOwns',
+      'groups' => 'getGroups'
     );
 
     static function getters() {
@@ -97,16 +96,16 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $id The resource's unique identifier
       * @var string
       */
-    protected $name;
+    protected $owns;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $type The type of object that has been created
+      * @var string
       */
-    protected $public = false;
+    protected $groups;
 
 
     /**
@@ -117,52 +116,52 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->owns = $data["owns"];
+            $this->groups = $data["groups"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getOwns()
     {
-        return $this->name;
+        return $this->owns;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setOwns($owns)
     {
 
-        $this->name = $name;
+        $this->owns = $owns;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets type
+     * @return string
      */
-    public function getPublic()
+    public function getGroups()
     {
-        return $this->public;
+        return $this->groups;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setPublic($public)
+    public function setGroups($groups)
     {
-
-        $this->public = $public;
+        $this->groups = $groups;
         return $this;
     }
+
 
     /**
      * Returns true if offset exists. False otherwise.

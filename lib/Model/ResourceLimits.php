@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Resource Limits
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Properties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,17 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ResourceLimits implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'coresPerContract' => 'int',
+        'ramPerContract' => 'int',
+        'hddLimitPerContract' => 'int',
+        'ssdLimitPerContract' => 'int'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +62,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'coresPerContract' => 'coresPerContract',
+        'ramPerContract' => 'ramPerContract',
+        'hddLimitPerContract' => 'hddLimitPerContract',
+        'ssdLimitPerContract' => 'ssdLimitPerContract'
     );
 
     static function attributeMap() {
@@ -74,8 +77,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+        'coresPerContract' => 'setCoresPerContract',
+        'ramPerContract' => 'setRamPerContract',
+        'hddLimitPerContract' => 'setHddLimitPerContract',
+        'ssdLimitPerContract' => 'setSsdLimitPerContract'
     );
 
     static function setters() {
@@ -87,8 +92,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+        'coresPerContract' => 'getCoresPerContract',
+        'ramPerContract' => 'getRamPerContract',
+        'hddLimitPerContract' => 'getHddLimitPerContract',
+        'ssdLimitPerContract' => 'getSsdLimitPerContract'
     );
 
     static function getters() {
@@ -97,16 +104,19 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
-    protected $name;
+    protected $coresPerContract;
+
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $items Array of items in that collection
+      * @var \ProfitBricks\Client\Model\Datacenter[]
       */
-    protected $public = false;
+    protected $ramPerContract;
+    protected $hddLimitPerContract;
+    protected $ssdLimitPerContract;
 
 
     /**
@@ -117,52 +127,100 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->coresPerContract = $data["coresPerContract"];
+            $this->ramPerContract = $data["ramPerContract"];
+            $this->hddLimitPerContract = $data["hddLimitPerContract"];
+            $this->ssdLimitPerContract = $data["ssdLimitPerContract"];
         }
     }
 
+
     /**
-     * Gets name
+     * Gets type
      * @return string
      */
-    public function getName()
+    public function getCoresPerContract()
     {
-        return $this->name;
+        return $this->coresPerContract;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setName($name)
+    public function setCoresPerContract($coresPerContract)
     {
-
-        $this->name = $name;
+        $this->coresPerContract = $coresPerContract;
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
      */
-    public function getPublic()
+    public function getRamPerContract()
     {
-        return $this->public;
+        return $this->ramPerContract;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
      * @return $this
      */
-    public function setPublic($public)
+    public function setRamPerContract($ramPerContract)
     {
 
-        $this->public = $public;
+        $this->ramPerContract = $ramPerContract;
         return $this;
     }
+
+
+    /**
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
+     */
+    public function getHddLimitPerContract()
+    {
+        return $this->hddLimitPerContract;
+    }
+
+    /**
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @return $this
+     */
+    public function setHddLimitPerContract($hddLimitPerContract)
+    {
+
+        $this->hddLimitPerContract = $hddLimitPerContract;
+        return $this;
+    }
+
+
+    /**
+     * Gets items
+     * @return \ProfitBricks\Client\Model\Datacenter[]
+     */
+    public function getSsdLimitPerContract()
+    {
+        return $this->ssdLimitPerContract;
+    }
+
+    /**
+     * Sets items
+     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @return $this
+     */
+    public function setSsdLimitPerContract($ssdLimitPerContract)
+    {
+
+        $this->ssdLimitPerContract = $ssdLimitPerContract;
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

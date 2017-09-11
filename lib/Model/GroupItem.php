@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Groups
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Resources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,18 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItem implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'id' => 'string',
+        'type' => 'string',
+        'href' => 'string',
+        'properties' => '\ProfitBricks\Client\Model\GroupItemProperty',
+        'entities' => '\ProfitBricks\Client\Model\GroupItemEntity'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +63,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'id' => 'id',
+        'type' => 'type',
+        'href' => 'href',
+        'properties' => 'properties',
+        'entities' => 'entities'
     );
 
     static function attributeMap() {
@@ -74,8 +79,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+        'id' => 'setId',
+        'type' => 'setType',
+        'href' => 'setHref',
+        'properties' => 'setProperties',
+        'entities' => 'setEntities'
     );
 
     static function setters() {
@@ -87,8 +95,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+      'id' => 'getId',
+      'type' => 'getType',
+      'href' => 'getHref',
+      'properties' => 'getProperties',
+      'entities' => 'getEntities'
     );
 
     static function getters() {
@@ -97,16 +108,14 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
-    protected $name;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $id;
+    protected $type;
+    protected $href;
+    protected $properties;
+    protected $entities;
 
 
     /**
@@ -117,52 +126,120 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->id = $data["id"];
+            $this->type = $data["type"];
+            $this->href = $data["href"];
+            $this->properties = $data["properties"];
+            $this->entities = $data["entities"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setId($id)
     {
 
-        $this->name = $name;
+        $this->id = $id;
+        return $this;
+    }
+
+
+    /**
+     * Gets type
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Sets type
+     * @param string $type The type of object that has been created
+     * @return $this
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+
+    /**
+     * Gets href
+     * @return string
+     */
+    public function getHref()
+    {
+        return $this->href;
+    }
+
+    /**
+     * Sets href
+     * @param string $href URL to the object\u2019s representation (absolute path)
+     * @return $this
+     */
+    public function setHref($href)
+    {
+
+        $this->href = $href;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets properties
+     * @return \ProfitBricks\Client\Model\DatacenterProperties
      */
-    public function getPublic()
+    public function getProperties()
     {
-        return $this->public;
+        return $this->properties;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets properties
+     * @param \ProfitBricks\Client\Model\DatacenterProperties $properties Resource's properties
      * @return $this
      */
-    public function setPublic($public)
+    public function setProperties($properties)
     {
 
-        $this->public = $public;
+        $this->properties = $properties;
         return $this;
     }
+
+    /**
+     * Gets entities
+     * @return \ProfitBricks\Client\Model\DatacenterEntities
+     */
+    public function getEntities()
+    {
+        return $this->entities;
+    }
+
+    /**
+     * Sets entities
+     * @param \ProfitBricks\Client\Model\DatacenterEntities $entities Attached children and references. May be included in create calls. Disallowed in update calls
+     * @return $this
+     */
+    public function setEntities($entities)
+    {
+
+        $this->entities = $entities;
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

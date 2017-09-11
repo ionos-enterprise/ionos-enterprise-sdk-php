@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Group Item Entity
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Contract Resources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItemEntity implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'users' => '\ProfitBricks\Client\Model\GroupItemUser',
+        'resources' => '\ProfitBricks\Client\Model\GroupItemResource'
     );
 
     static function ProfitBricksTypes() {
@@ -61,8 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'public' => 'public'
+        'users' => 'users',
+        'resources' => 'resources'
     );
 
     static function attributeMap() {
@@ -74,8 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'public' => 'setPublic'
+      'users' => 'setUsers',
+      'resources' => 'setResources'
     );
 
     static function setters() {
@@ -87,8 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'public' => 'getPublic'
+      'users' => 'getUsers',
+      'resources' => 'getResources'
     );
 
     static function getters() {
@@ -97,16 +96,11 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $type The type of object that has been created
       * @var string
       */
-    protected $name;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $users;
+    protected $resources;
 
 
     /**
@@ -117,50 +111,51 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->public = $data["public"];
+            $this->users = $data["users"];
+            $this->resources = $data["resources"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getUsers()
     {
-        return $this->name;
+        return $this->users;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setUsers($users)
     {
 
-        $this->name = $name;
+        $this->users = $users;
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets entities
+     * @return \ProfitBricks\Client\Model\DatacenterEntities
      */
-    public function getPublic()
+    public function getResources()
     {
-        return $this->public;
+        return $this->resources;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets entities
+     * @param \ProfitBricks\Client\Model\DatacenterEntities $entities Attached children and references. May be included in create calls. Disallowed in update calls
      * @return $this
      */
-    public function setPublic($public)
+    public function setResources($resources)
     {
 
-        $this->public = $public;
+        $this->resources = $resources;
         return $this;
     }
 
