@@ -1,6 +1,6 @@
 # PHP SDK
 
-Version: profitbricks-sdk-php **3.0.1**
+Version: profitbricks-sdk-php **4.0.0**
 
 ## Table of Contents
 
@@ -83,6 +83,30 @@ Version: profitbricks-sdk-php **3.0.1**
     * [Get a Load Balanced NIC](#get-a-load-balanced-nic)
     * [Associate NIC to a Load Balancer](#associate-nic-to-a-load-balancer)
     * [Remove a NIC Association](#remove-a-nic-association)
+  * [Contract Resources](#contract-resources)
+    * [List Contract Resources](#list-contract-resources)
+  * [User Management](#user-management)
+    * [List Groups](#list-groups)
+    * [Retrieve Group](#retrieve-group)
+    * [Create Group](#create-group)
+    * [Update Group](#update-group)
+    * [Delete Group](#delete-group)
+    * [List Shares](#list-shares)
+    * [Retrieve Share](#retrieve-share)
+    * [Create Share](#create-share)
+    * [Update Share](#update-share)
+    * [Delete Share](#delete-share)
+    * [List Users](#list-users)
+    * [Retrieve User](#retrieve-user)
+    * [Create User](#create-user)
+    * [Update User](#update-user)
+    * [Delete User](#delete-user)
+    * [List Users In Group](#list-users-in-group)
+    * [Add User To Group](#add-user-to-group)
+    * [Remove User From Group](#remove-user-from-group)
+    * [List Resources](#list-resources)
+    * [List Resources Of Type](#list-resources-of-type)
+    * [Find Resource By Id](#find-resource-by-id)
   * [Requests](#requests)
     * [List Requests](#list-requests)
     * [Get a Request](#get-a-request)
@@ -793,6 +817,7 @@ The following table describes the request arguments:
 | $size | **yes** | int | The size of the volume in GB. |
 | $bus | no | string | The bus type of the volume (VIRTIO or IDE). Default: VIRTIO. |
 | $image | **yes** | string | The image or snapshot ID. |
+| $imageAlias | **yes** | string | An alias to a ProfitBricks public image. Use instead of $image. |
 | $type | **yes** | string | The volume type, HDD or SSD. |
 | $licence_type | **yes** | string | The licence type of the volume. Options: LINUX, WINDOWS, WINDOWS2016, UNKNOWN, OTHER |
 | $image_password | **yes** | string | One-time password is set on the Image for the appropriate root or administrative account. This field may only be set in creation requests. When reading, it always returns *null*. The password has to contain 8-50 characters. Only these characters are allowed: [abcdefghjkmnpqrstuvxABCDEFGHJKLMNPQRSTUVX23456789] |
@@ -1135,6 +1160,7 @@ The following table describes the request arguments:
 |---|:-:|---|---|
 | $datacenter_id | **yes** | string | The ID of the VDC. |
 | $name | no | string | The name of your LAN. |
+| $ipFailover | no | array{ip, nicUuid} | Information about IP Failovers can be found [here](https://devops.profitbricks.com/api/cloud/v4/#ip-failover-groups) |
 | $public | **Yes** | bool | Boolean indicating if the LAN faces the public Internet or not. |
 | $nics | no | object | A collection of NICs associated with the LAN. |
 
@@ -1676,6 +1702,470 @@ $loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id);
 ```
 
 ---
+
+### Contract Resources
+
+Checking the amount of available resources under a contract can help you to avoid provisioning errors resulting from the attempt to provision more resources than are available.
+
+Create an instance of the api class:
+
+         $contract_resources_api = new ProfitBricks\Client\Api\ContractResourcesApi($api_client);
+
+#### List Contract Resources
+
+Returns information about the resource limits for a particular contract and the current resource usage.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$contract_resources = $contract_resources_api->findAll();
+```
+
+---
+
+
+### User Management
+
+These operations are designed to allow you to orchestrate users and resources via the Cloud API. Previously this functionality required use of the DCD (Data Center Designer) web application.
+
+Create an instance of the api class:
+
+         $user_management_api = new ProfitBricks\Client\Api\UserManagementApi($api_client);
+
+#### List Groups
+
+This retrieves a full list of all groups.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$groups = $user_management_api->findAllGroups();
+```
+
+---
+
+
+#### Retrieve Group
+
+Retrieves detailed information about a specific group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $depth | no | int | The level of details returned. |
+
+```
+$group = $user_management_api->findGroupById($group_id);
+```
+
+---
+
+#### Create Group
+
+Use this operation to create a new group and set group privileges.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $name | **yes** | string | A name for the group. |
+| $createDataCenter | no | boolean | The group will be allowed to create virtual data centers. |
+| $createSnapshot | no | boolean | The group will be allowed to create snapshots. |
+| $reserveIp | no | boolean | The group will be allowed to reserve IP addresses. |
+| $accessActivityLog | no | boolean | The group will be allowed to access the activity log. |
+
+**NOTES**:
+- The value for `$name` cannot contain the following characters: (@, /, , |, ‘’, ‘).
+
+```    
+$props = new \ProfitBricks\Client\Model\GroupItemProperty();
+$props->setName("test-group");
+$props->setCreateDataCenter(True);
+$props->setCreateSnapshot(True);
+```
+```
+$new_group = $user_management_api->createGroup($props);
+```
+
+---
+
+#### Update Group
+
+Use this operation to update a group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $name | **yes** | string | A name for the group. |
+| $createDataCenter | no | boolean | The group will be allowed to create virtual data centers. |
+| $createSnapshot | no | boolean | The group will be allowed to create snapshots. |
+| $reserveIp | no | boolean | The group will be allowed to reserve IP addresses. |
+| $accessActivityLog | no | boolean | The group will be allowed to access the activity log. |
+
+```    
+$props = new \ProfitBricks\Client\Model\GroupItemProperty();
+$props->setName("test-group");
+$props->setCreateDataCenter(False);
+$props->setCreateSnapshot(False);
+```
+```
+$new_group = $user_management_api->updateGroup($group_id, $props);
+```
+
+---
+
+#### Delete Group
+
+Use this operation to delete a single group. Resources that are assigned to the group are NOT deleted, but are no longer accessible to the group members unless the member is a Contract Owner, Admin, or Resource Owner.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group that you want to delete. |
+
+```
+$user_management_api->deleteGroup($group_id);
+```
+
+---
+
+#### List Shares
+
+Retrieves a full list of all the resources that are shared through this group and lists the permissions granted to the group members for each shared resource.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+
+```
+$shares = $user_management_api->findAllShares($group_id);
+```
+
+---
+
+
+#### Retrieve Share
+
+Retrieves the details of a specific shared resource available to the specified group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $share_id | **yes** | string | The ID of the share. |
+| $depth | no | int | The level of details returned. |
+
+```
+$share = $user_management_api->findShareById($group_id, $share_id);
+```
+
+---
+
+#### Create Share
+
+Adds a specific resource share to a group and optionally allows the setting of permissions for that resource. As an example, you might use this to grant permissions to use an image or snapshot to a specific group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $resource_id | **yes** | string | The ID of the share. |
+| $editPrivilege | no | boolean | The group has permission to edit privileges on this resource. |
+| $sharePrivilege | no | boolean | The group has permission to share this resource. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\ShareProperties();
+$props->setEditPrivilege(True);
+$props->setSharePrivilege(True);
+```
+```
+$new_share = $user_management_api->addShare($group_id, $resource_id, $props);
+```
+
+---
+
+#### Update Share
+
+Use this to update the permissions that a group has for a specific resource share.
+
+The following table describes the available request arguments:
+
+|| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $resource_id | **yes** | string | The ID of the share. |
+| $editPrivilege | no | boolean | The group has permission to edit privileges on this resource. |
+| $sharePrivilege | no | boolean | The group has permission to share this resource. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\ShareProperties();
+$props->setEditPrivilege(False);
+$props->setSharePrivilege(False);
+```
+```
+$updated_share = $user_management_api->updateShare($group_id, $resource_id, $props);
+```
+
+---
+
+#### Delete Share
+
+Removes a resource share from a specified group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $share_id | **yes** | string | The ID of the share. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_share = $user_management_api->deleteShare($group_id, $share_id);
+```
+
+---
+
+#### List Users
+
+Retrieve a list of all the users that have been created under a contract.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$users = $user_management_api->findAllUsers();
+```
+
+---
+
+
+#### Retrieve User
+
+Retrieve details about a specific user including what groups and resources the user is associated with.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | The ID of the user. |
+| $depth | no | int | The level of details returned. |
+
+```
+$user = $user_management_api->findUserById($user_id);
+```
+
+---
+
+#### Create User
+
+Creates a new user under a particular contract.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $firstName | **yes** | string | A name for the user. |
+| $lastName | **yes** | string | A name for the user. |
+| $email | **yes** | string | An e-mail address for the user. |
+| $password | **yes** | string | A password for the user. |
+| $administrator | no | boolean | Assigns the user have administrative rights. |
+| $forceSecAuth | no | boolean | Indicates if secure authentication should be forced for the user. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\UserProperties();
+$props->setFirstName('Bob');
+$props->setLastName('Smith');
+$props->setEmail('bob_smith@example.com');
+$props->setPassword('testPassword123!');
+```
+```
+$new_user = $user_management_api->createUser($props);
+```
+
+---
+
+#### Update User
+
+Update details about a specific user including their privileges.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | ID for the user. |
+| $firstName | **yes** | string | A name for the user. |
+| $lastName | **yes** | string | A name for the user. |
+| $email | **yes** | string | An e-mail address for the user. |
+| $administrator | no | boolean | Assigns the user have administrative rights. |
+| $forceSecAuth | no | boolean | Indicates if secure authentication should be forced for the user. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\UserProperties();
+$props->setFirstName('Bob');
+$props->setLastName('Smith');
+$props->setEmail('bob_smith@example.com');
+$props->setAdministrator(True);
+$props->setForceSecAuth(True);
+```
+```
+$updated_user = $user_management_api->updateUser($user_id, $props);
+```
+
+---
+
+#### Delete User
+
+Blacklists the user, disabling them. The user is not completely purged, therefore if you anticipate needing to create a user with the same name in the future, we suggest renaming the user before you delete it.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | The ID of the user. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_user = $user_management_api->deleteUser($user_id);
+```
+
+---
+
+
+#### List Users In Group
+
+Retrieves a full list of all the users that are members of a particular group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $depth | no | int | The level of details returned. |
+
+```
+$users = $user_management_api->findUsersInGroup($group_id);
+```
+
+---
+
+#### Add User To Group
+
+Use this operation to add an existing user to a group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $user_id | **yes** | string | The ID of the user to add. |
+| $depth | no | int | The level of details returned. |
+
+```
+$new_user = $user_management_api->addUserToGroup($group_id, $user_id);
+```
+
+---
+
+#### Remove User From Group
+
+Use this operation to remove a user from a group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $user_id | **yes** | string | The ID of the user to add. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_user = $user_management_api->removeUserFromGroup($group_id, $user_id);
+```
+
+---
+
+
+#### List Resources
+
+Retrieves a list of all resources and optionally their group associations.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$resources = $user_management_api->findAllResources();
+```
+
+---
+
+
+#### List Resources Of Type
+
+Lists all shareable resources of a specific type.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $resource_type | **yes** | string | The specific type of resources to retrieve information about. |
+| $depth | no | int | The level of details returned. |
+
+`$resource_type` can be any of the following values:
+
+| Name| Description |
+|---|---|
+| datacenter | A virtual data center. |
+| image | A private image that has been uploaded to ProfitBricks. |
+| snapshot | A snapshot of a storage volume. |
+| ipblock | An IP block that has been reserved. |
+
+```
+$resources = $user_management_api->findAllResourcesByType('datacenter');
+```
+
+---
+
+#### Find Resource By Id
+
+Retrieve a shareable resource by Id.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $resource_type | **yes** | string | The specific type of resources to retrieve information about. |
+| $resource_id | **yes** | string | ID of resource. |
+| $depth | no | int | The level of details returned. |
+
+`$resource_type` can be any of the following values:
+
+| Name| Description |
+|---|---|
+| datacenter | A virtual data center. |
+| image | A private image that has been uploaded to ProfitBricks. |
+| snapshot | A snapshot of a storage volume. |
+| ipblock | An IP block that has been reserved. |
+
+```
+$resource = $user_management_api->findResourceById('datacenter', $resource_id);
+```
+
+---
+
 
 ### Requests
 
