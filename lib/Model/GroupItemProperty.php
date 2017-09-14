@@ -1,6 +1,6 @@
 <?php
 /**
- * Group Item Property
+ * GroupItemProperty
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * GroupItemProperty Class Doc Comment
  *
  * @category    Class
  * @description
@@ -108,13 +108,33 @@ class GroupItemProperty implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
+      * $name Group name.
       * @var string
       */
     protected $name;
+
+    /**
+      * $createDataCenter The group has permission to create virtual data centers.
+      * @var boolean
+      */
     protected $createDataCenter;
+
+    /**
+      * $createSnapshot The group has permission to create snapshots.
+      * @var boolean
+      */
     protected $createSnapshot;
+
+    /**
+      * $reserveIp The group has permission to reserve IP addresses.
+      * @var boolean
+      */
     protected $reserveIp;
+
+    /**
+      * $accessActivityLog The group has permission to access the activity log.
+      * @var boolean
+      */
     protected $accessActivityLog;
 
 
@@ -135,7 +155,7 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets name
      * @return string
      */
     public function getName()
@@ -144,8 +164,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets name
+     * @param string $name Group name.
      * @return $this
      */
     public function setName($name)
@@ -157,8 +177,8 @@ class GroupItemProperty implements ArrayAccess
 
 
     /**
-     * Gets type
-     * @return string
+     * Gets createDataCenter
+     * @return boolean
      */
     public function getCreateDataCenter()
     {
@@ -166,8 +186,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets createDataCenter
+     * @param boolean $createDataCenter The group has permission to create virtual data centers.
      * @return $this
      */
     public function setCreateDataCenter($createDataCenter)
@@ -178,8 +198,8 @@ class GroupItemProperty implements ArrayAccess
 
 
     /**
-     * Gets type
-     * @return string
+     * Gets createSnapshot
+     * @return boolean
      */
     public function getCreateSnapshot()
     {
@@ -187,8 +207,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets createSnapshot
+     * @param boolean $createSnapshot The group has permission to create snapshots.
      * @return $this
      */
     public function setCreateSnapshot($createSnapshot)
@@ -199,8 +219,8 @@ class GroupItemProperty implements ArrayAccess
 
 
     /**
-     * Gets href
-     * @return string
+     * Gets reserveIp
+     * @return boolean
      */
     public function getReserveIp()
     {
@@ -208,8 +228,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets reserveIp
+     * @param boolean $reserveIp The group has permission to reserve IP addresses.
      * @return $this
      */
     public function setReserveIp($reserveIp)
@@ -220,8 +240,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Gets properties
-     * @return \ProfitBricks\Client\Model\DatacenterProperties
+     * Gets accessActivityLog
+     * @return boolean
      */
     public function getAccessActivityLog()
     {
@@ -229,8 +249,8 @@ class GroupItemProperty implements ArrayAccess
     }
 
     /**
-     * Sets properties
-     * @param \ProfitBricks\Client\Model\DatacenterProperties $properties Resource's properties
+     * Sets accessActivityLog
+     * @param boolean $accessActivityLog The group has permission to access the activity log.
      * @return $this
      */
     public function setAccessActivityLog($accessActivityLog)

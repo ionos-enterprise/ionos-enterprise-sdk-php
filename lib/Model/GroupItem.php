@@ -1,6 +1,6 @@
 <?php
 /**
- * Groups
+ * GroupItem
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * GroupItem Class Doc Comment
  *
  * @category    Class
  * @description
@@ -108,13 +108,33 @@ class GroupItem implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
+      * $id The group's identifier.
       * @var string
       */
     protected $id;
+
+    /**
+      * $type The type of response, in this case it will be "group".
+      * @var string
+      */
     protected $type;
+
+    /**
+      * $href A URI for accessing the object.
+      * @var string
+      */
     protected $href;
+
+    /**
+      * $properties A collection containing the group's properties.
+      * @var \ProfitBricks\Client\Model\GroupItemProperty
+      */
     protected $properties;
+
+    /**
+      * $entities A collection containing users and resources associated with the group.
+      * @var \ProfitBricks\Client\Model\GroupItemEntity
+      */
     protected $entities;
 
 
@@ -200,7 +220,7 @@ class GroupItem implements ArrayAccess
 
     /**
      * Gets properties
-     * @return \ProfitBricks\Client\Model\DatacenterProperties
+     * @return \ProfitBricks\Client\Model\GroupItemProperty
      */
     public function getProperties()
     {
@@ -209,7 +229,7 @@ class GroupItem implements ArrayAccess
 
     /**
      * Sets properties
-     * @param \ProfitBricks\Client\Model\DatacenterProperties $properties Resource's properties
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $properties A collection containing the group's properties.
      * @return $this
      */
     public function setProperties($properties)
@@ -221,7 +241,7 @@ class GroupItem implements ArrayAccess
 
     /**
      * Gets entities
-     * @return \ProfitBricks\Client\Model\DatacenterEntities
+     * @return \ProfitBricks\Client\Model\GroupItemEntity
      */
     public function getEntities()
     {
@@ -230,7 +250,7 @@ class GroupItem implements ArrayAccess
 
     /**
      * Sets entities
-     * @param \ProfitBricks\Client\Model\DatacenterEntities $entities Attached children and references. May be included in create calls. Disallowed in update calls
+     * @param \ProfitBricks\Client\Model\GroupItemEntity $entities A collection containing users and resources associated with the group.
      * @return $this
      */
     public function setEntities($entities)

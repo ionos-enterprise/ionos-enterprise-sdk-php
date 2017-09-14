@@ -1,6 +1,6 @@
 <?php
 /**
- * User Metadata
+ * UserMetadata
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * UserMetadata Class Doc Comment
  *
  * @category    Class
  * @description
@@ -100,28 +100,22 @@ class UserMetadata implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
+      * $etag ETag for the user.
       * @var string
       */
     protected $etag;
 
     /**
-      * $type The type of object that has been created
+      * $creationDate A time and date stamp indicating when the user was created.
       * @var string
       */
     protected $creationDate;
 
     /**
-      * $href URL to the object\u2019s representation (absolute path)
+      * $lastLogin A time and date stamp indicating when the user last logged in.
       * @var string
       */
     protected $lastLogin;
-
-    /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
-      */
-
 
     /**
      * Constructor
@@ -138,7 +132,7 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets etag
      * @return string
      */
     public function getEtag()
@@ -147,8 +141,8 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets etag
+     * @param string $etag ETag for the user.
      * @return $this
      */
     public function setEtag($etag)
@@ -159,7 +153,7 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Gets type
+     * Gets creationDate
      * @return string
      */
     public function getCreationDate()
@@ -168,8 +162,8 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets creationDate
+     * @param string $creationDate A time and date stamp indicating when the user was created.
      * @return $this
      */
     public function setCreationDate($creationDate)
@@ -179,7 +173,7 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Gets href
+     * Gets lastLogin
      * @return string
      */
     public function getLastLogin()
@@ -188,8 +182,8 @@ class UserMetadata implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets lastLogin
+     * @param string $lastLogin A time and date stamp indicating when the user last logged in.
      * @return $this
      */
     public function setLastLogin($lastLogin)
@@ -198,7 +192,6 @@ class UserMetadata implements ArrayAccess
         $this->lastLogin = $lastLogin;
         return $this;
     }
-
 
     /**
      * Returns true if offset exists. False otherwise.

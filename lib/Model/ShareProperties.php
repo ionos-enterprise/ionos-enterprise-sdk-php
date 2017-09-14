@@ -1,6 +1,6 @@
 <?php
 /**
- * Datacenters
+ * ShareProperties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * ShareProperties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -96,14 +96,14 @@ class ShareProperties implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
-      * @var string
+      * $editPrivilege The group has permission to edit privileges on this resource.
+      * @var boolean
       */
     protected $editPrivilege;
 
     /**
-      * $type The type of object that has been created
-      * @var string
+      * $sharePrivilege The group has permission to share this resource.
+      * @var boolean
       */
     protected $sharePrivilege;
 
@@ -122,8 +122,8 @@ class ShareProperties implements ArrayAccess
     }
 
     /**
-     * Gets id
-     * @return string
+     * Gets editPrivilege
+     * @return boolean
      */
     public function getEditPrivilege()
     {
@@ -131,8 +131,8 @@ class ShareProperties implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets editPrivilege
+     * @param boolean $editPrivilege The group has permission to edit privileges on this resource.
      * @return $this
      */
     public function setEditPrivilege($editPrivilege)
@@ -143,8 +143,8 @@ class ShareProperties implements ArrayAccess
     }
 
     /**
-     * Gets type
-     * @return string
+     * Gets sharePrivilege
+     * @return boolean
      */
     public function getSharePrivilege()
     {
@@ -152,8 +152,8 @@ class ShareProperties implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets sharePrivilege
+     * @param boolean $sharePrivilege The group has permission to share this resource.
      * @return $this
      */
     public function setSharePrivilege($sharePrivilege)
@@ -161,7 +161,6 @@ class ShareProperties implements ArrayAccess
         $this->sharePrivilege = $sharePrivilege;
         return $this;
     }
-
 
     /**
      * Returns true if offset exists. False otherwise.

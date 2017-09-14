@@ -34,7 +34,7 @@ use \ProfitBricks\Client\ApiException;
 use \ProfitBricks\Client\ObjectSerializer;
 
 /**
- * DataCenterApi Class Doc Comment
+ * UserManagementApi Class Doc Comment
  *
  * @category Class
  * @package  ProfitBricks\Client
@@ -90,8 +90,8 @@ class UserManagementApi
      * List all Groups
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenters
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Groups
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllGroups($pretty_print_query_parameter = null, $depth = null)
@@ -102,13 +102,13 @@ class UserManagementApi
 
 
     /**
-     * findAllWithHttpInfo
+     * findAllGroupsWithHttpInfo
      *
      * List all Groups
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenters, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Groups, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllGroupsWithHttpInfo($pretty_print_query_parameter = null, $depth = null)
@@ -137,12 +137,8 @@ class UserManagementApi
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -188,13 +184,14 @@ class UserManagementApi
 
 
     /**
-     * findAllGroups
+     * findAllShares
      *
-     * List all Groups
+     * List all Shares
      *
+     * @param string $groupId ID of group to list shares for.
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenters
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Shares
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllShares($groupId, $pretty_print_query_parameter = null, $depth = null)
@@ -205,13 +202,14 @@ class UserManagementApi
 
 
     /**
-     * findAllWithHttpInfo
+     * findAllSharesWithHttpInfo
      *
-     * List all Groups
+     * List all Shares
      *
+     * @param string $groupId ID of group to list shares for.
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenters, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Shares, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllSharesWithHttpInfo($groupId, $pretty_print_query_parameter = null, $depth = null)
@@ -240,12 +238,8 @@ class UserManagementApi
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -291,14 +285,15 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findShareById
      *
-     * Retrieve a Data Center
+     * Retrieve a Share
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $share_id The unique ID of the share. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Share
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findShareById($group_id, $share_id, $pretty_print_query_parameter = null, $depth = null)
@@ -309,14 +304,15 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findShareByIdWithHttpInfo
      *
-     * Retrieve a Data Center
+     * Retrieve a Share
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $share_id The unique ID of the share. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Share, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findShareByIdWithHttpInfo($group_id, $share_id, $pretty_print_query_parameter = null, $depth = null)
@@ -353,20 +349,8 @@ class UserManagementApi
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -412,14 +396,16 @@ class UserManagementApi
 
 
     /**
-     * create
+     * addShare
      *
-     * Create a Data Center
+     * Add a Share.
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
+     * @param \ProfitBricks\Client\Model\ShareProperties $share Properties of share to be added (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Share
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function addShare($group_id, $resource_id, $share, $pretty_print_query_parameter = null, $depth = null)
@@ -433,20 +419,28 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * addShareHttpInfo
      *
-     * Create a Data Center
+     * Add a Share.
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
+     * @param \ProfitBricks\Client\Model\ShareProperties $share Properties of share to be added (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Share, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function addShareWithHttpInfo($group_id, $resource_id, $share, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameters are set
+        if ($group_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $group_id when calling create');
+        }
+        if ($resource_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $resource_id when calling create');
+        }
         if ($share === null) {
             throw new \InvalidArgumentException('Missing the required parameter $share when calling create');
         }
@@ -473,10 +467,8 @@ class UserManagementApi
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -528,14 +520,16 @@ class UserManagementApi
 
 
     /**
-     * create
+     * updateShare
      *
-     * Create a Data Center
+     * Update a share
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
+     * @param \ProfitBricks\Client\Model\ShareProperties $share Properties of share to be updated (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
      * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @return \ProfitBricks\Client\Model\Share
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateShare($group_id, $resource_id, $share, $pretty_print_query_parameter = null, $depth = null)
@@ -549,20 +543,28 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * updateShareWithHttpInfo
      *
-     * Create a Data Center
+     * Update a share
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
+     * @param \ProfitBricks\Client\Model\ShareProperties $share Properties of share to be updated (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
      * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @return Array of \ProfitBricks\Client\Model\Share, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateShareWithHttpInfo($group_id, $resource_id, $share, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameters are set
+        if ($group_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $group_id when calling create');
+        }
+        if ($resource_id === null) {
+            throw new \InvalidArgumentException('Missing the required parameter $resource_id when calling create');
+        }
         if ($share === null) {
             throw new \InvalidArgumentException('Missing the required parameter $share when calling create');
         }
@@ -579,20 +581,16 @@ class UserManagementApi
         }
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
-        // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -644,13 +642,14 @@ class UserManagementApi
 
 
     /**
-     * delete
+     * deleteShare
      *
-     * Delete a Data Center
+     * Delete a share
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return object
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
@@ -662,20 +661,21 @@ class UserManagementApi
 
 
     /**
-     * deleteWithHttpInfo
+     * deleteShareWithHttpInfo
      *
-     * Delete a Data Center
+     * Delete a share
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param $group_id ID of the group. (required)
+     * @param $resource_id ID of the resource to add. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return Array of object, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function deleteShareWithHttpInfo($group_id, $resource_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameters are set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling delete');
         }
@@ -696,10 +696,9 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
@@ -707,9 +706,6 @@ class UserManagementApi
 
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -755,13 +751,13 @@ class UserManagementApi
 
 
     /**
-     * findAllGroups
+     * findAllUsers
      *
-     * List all Groups
+     * List all Users
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
      * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenters
+     * @return \ProfitBricks\Client\Model\Users
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllUsers($pretty_print_query_parameter = null, $depth = null)
@@ -772,13 +768,13 @@ class UserManagementApi
 
 
     /**
-     * findAllWithHttpInfo
+     * findAllUsersWithHttpInfo
      *
-     * List all Groups
+     * List all Users
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
      * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenters, HTTP status code, HTTP response headers (array of strings)
+     * @return Array of \ProfitBricks\Client\Model\Users, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllUsersWithHttpInfo($pretty_print_query_parameter = null, $depth = null)
@@ -798,21 +794,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -858,14 +849,14 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findUserById
      *
-     * Retrieve a Data Center
+     * Retrieve a User
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $user_id The unique ID of the user (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\User
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findUserById($user_id, $pretty_print_query_parameter = null, $depth = null)
@@ -876,20 +867,20 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findUserByIdWithHttpInfo
      *
-     * Retrieve a Data Center
+     * Retrieve a User
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $user_id The unique ID of the user (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\User, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findUserByIdWithHttpInfo($user_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'user_id' is set
         if ($user_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $user_id when calling findShareById');
         }
@@ -907,29 +898,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -975,14 +953,14 @@ class UserManagementApi
 
 
     /**
-     * create user
+     * createUser
      *
-     * Create a Data Center
+     * Create a User
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param \ProfitBricks\Client\Model\UserProperties $user_properties Properties for the User to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\User
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function createUser($user_properties, $pretty_print_query_parameter = null, $depth = null)
@@ -996,20 +974,20 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * createUserWithHttpInfo
      *
-     * Create a Data Center
+     * Create a User
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param \ProfitBricks\Client\Model\UserProperties $user_properties Properties for the User to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\User, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function createUserWithHttpInfo($user_properties, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameter 'user_properties' is set
         if ($user_properties === null) {
             throw new \InvalidArgumentException('Missing the required parameter $user_properties when calling create');
         }
@@ -1027,19 +1005,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -1091,14 +1066,15 @@ class UserManagementApi
 
 
     /**
-     * create
+     * updateUser
      *
-     * Create a Data Center
+     * Update a User
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $user_id ID of the user to update. (required)
+     * @param \ProfitBricks\Client\Model\UserProperties $user_properties Properties for the User to be updated. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\User
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateUser($user_id, $user_properties, $pretty_print_query_parameter = null, $depth = null)
@@ -1112,20 +1088,21 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * updateUserWithHttpInfo
      *
-     * Create a Data Center
+     * Update a User
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $user_id ID of the user to update. (required)
+     * @param \ProfitBricks\Client\Model\UserProperties $user_properties Properties for the User to be updated. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\User, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateUserWithHttpInfo($user_id, $user_properties, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameters are set
         if ($user_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $user_id when calling create');
         }
@@ -1146,19 +1123,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -1210,13 +1184,13 @@ class UserManagementApi
 
 
     /**
-     * delete
+     * deleteUser
      *
-     * Delete a Data Center
+     * Delete a User
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $user_id ID of the user to update. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return object
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
@@ -1228,20 +1202,20 @@ class UserManagementApi
 
 
     /**
-     * deleteWithHttpInfo
+     * deleteUserWithHttpInfo
      *
-     * Delete a Data Center
+     * Delete a User
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $user_id ID of the user to update. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return Array of object, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function deleteUserWithHttpInfo($user_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'user_id' is set
         if ($user_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $user_id when calling delete');
         }
@@ -1259,10 +1233,9 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
@@ -1270,9 +1243,6 @@ class UserManagementApi
 
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -1318,13 +1288,13 @@ class UserManagementApi
 
 
     /**
-     * findAllGroups
+     * findAllResources
      *
-     * List all Groups
+     * List all Resources
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenters
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Resources
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllResources($pretty_print_query_parameter = null, $depth = null)
@@ -1335,13 +1305,13 @@ class UserManagementApi
 
 
     /**
-     * findAllWithHttpInfo
+     * findAllResourcesWithHttpInfo
      *
-     * List all Groups
+     * List all Resources
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenters, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Resources, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllResourcesWithHttpInfo($pretty_print_query_parameter = null, $depth = null)
@@ -1361,21 +1331,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -1421,14 +1386,14 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findAllResourcesByType
      *
-     * Retrieve a Data Center
+     * List all Resources by Type
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $resource_type The type of resources to return. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Resources
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllResourcesByType($resource_type, $pretty_print_query_parameter = null, $depth = null)
@@ -1439,20 +1404,20 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findAllResourcesByTypeWithHttpInfo
      *
-     * Retrieve a Data Center
+     * List all Resources by Type
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $resource_type The type of resources to return. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Resources, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllResourcesByTypeWithHttpInfo($resource_type, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'resource_type' is set
         if ($resource_type === null) {
             throw new \InvalidArgumentException('Missing the required parameter $resource_type when calling findShareById');
         }
@@ -1470,29 +1435,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -1538,14 +1490,15 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findResourceById
      *
-     * Retrieve a Data Center
+     * Retrieve a Resource
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $resource_type The type of resources to return. (required)
+     * @param string $resource_id The unique ID of a resource. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\Resource
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findResourceById($resource_type, $resource_id, $pretty_print_query_parameter = null, $depth = null)
@@ -1556,20 +1509,21 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findResourceByIdWithHttpInfo
      *
-     * Retrieve a Data Center
+     * Retrieve a Resource
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $resource_type The type of resources to return. (required)
+     * @param string $resource_id The unique ID of a resource. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\Resource, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findResourceByIdWithHttpInfo($resource_type, $resource_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameters are set
         if ($resource_type === null) {
             throw new \InvalidArgumentException('Missing the required parameter $resource_type when calling findShareById');
         }
@@ -1590,29 +1544,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -1658,14 +1599,14 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findGroupById
      *
-     * Retrieve a Data Center
+     * Retrieve a Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\GroupItem
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findGroupById($group_id, $pretty_print_query_parameter = null, $depth = null)
@@ -1676,20 +1617,20 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findGroupByIdWithHttpInfo
      *
-     * Retrieve a Data Center
+     * Retrieve a Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\GroupItem, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findGroupByIdWithHttpInfo($group_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'group_id' is set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling findShareById');
         }
@@ -1707,29 +1648,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -1775,14 +1703,14 @@ class UserManagementApi
 
 
     /**
-     * create user
+     * createGroup
      *
-     * Create a Data Center
+     * Create a Group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $group_properties Properties of the Group to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\GroupItem
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function createGroup($group_properties, $pretty_print_query_parameter = null, $depth = null)
@@ -1796,20 +1724,20 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * createGroupWithHttpInfo
      *
-     * Create a Data Center
+     * Create a Group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $group_properties Properties of the Group to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\GroupItem, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function createGroupWithHttpInfo($group_properties, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameter 'group_properties' is set
         if ($group_properties === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_properties when calling create');
         }
@@ -1827,19 +1755,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -1891,14 +1816,15 @@ class UserManagementApi
 
 
     /**
-     * create
+     * updateGroup
      *
-     * Create a Data Center
+     * Update a group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $group_properties Properties of the Group to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\GroupItem
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateGroup($group_id, $group_properties, $pretty_print_query_parameter = null, $depth = null)
@@ -1912,20 +1838,21 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * updateGroupWithHttpInfo
      *
-     * Create a Data Center
+     * Update a group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $group_properties Properties of the Group to be created. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\GroupItem, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function updateGroupWithHttpInfo($group_id, $group_properties, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameter 'group_id' is set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling create');
         }
@@ -1943,19 +1870,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -2007,13 +1931,13 @@ class UserManagementApi
 
 
     /**
-     * delete
+     * deleteGroup
      *
-     * Delete a Data Center
+     * Delete a Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return object
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
@@ -2025,20 +1949,20 @@ class UserManagementApi
 
 
     /**
-     * deleteWithHttpInfo
+     * deleteGroupWithHttpInfo
      *
-     * Delete a Data Center
+     * Delete a Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return Array of object, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function deleteGroupWithHttpInfo($group_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'group_id' is set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling delete');
         }
@@ -2056,10 +1980,9 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
@@ -2067,9 +1990,6 @@ class UserManagementApi
 
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -2115,14 +2035,14 @@ class UserManagementApi
 
 
     /**
-     * findById
+     * findUsersInGroup
      *
-     * Retrieve a Data Center
+     * List Users in Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\UsersInGroup
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findUsersInGroup($group_id, $pretty_print_query_parameter = null, $depth = null)
@@ -2133,20 +2053,20 @@ class UserManagementApi
 
 
     /**
-     * findByIdWithHttpInfo
+     * findUsersInGroupWithHttpInfo
      *
-     * Retrieve a Data Center
+     * List Users in Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\UsersInGroup, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findUsersInGroupWithHttpInfo($group_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameter 'group_id' is set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling findShareById');
         }
@@ -2164,29 +2084,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-        // path params
-
-        /*if ($datacenter_id !== null) {
-            $resourcePath = str_replace(
-                "{" . "datacenterId" . "}",
-                $this->apiClient->getSerializer()->toPathValue($datacenter_id),
-                $resourcePath
-            );
-        }*/
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {
@@ -2232,14 +2139,15 @@ class UserManagementApi
 
 
     /**
-     * create
+     * addUserToGroup
      *
-     * Create a Data Center
+     * Add User to Group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $user_id The unique ID of the user. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenter
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\User
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function addUserToGroup($group_id, $user_id, $pretty_print_query_parameter = null, $depth = null)
@@ -2253,20 +2161,21 @@ class UserManagementApi
 
 
     /**
-     * createWithHttpInfo
+     * addUserToGroupWithHttpInfo
      *
-     * Create a Data Center
+     * Add User to Group
      *
-     * @param \ProfitBricks\Client\Model\Datacenter $datacenter Datacenter to be created (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $user_id The unique ID of the user. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenter, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\User, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function addUserToGroupWithHttpInfo($group_id, $user_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter' is set
+        // verify the required parameters are set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling create');
         }
@@ -2287,19 +2196,16 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('application/json'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
 
         // body params
         $_tempBody = null;
@@ -2351,13 +2257,14 @@ class UserManagementApi
 
 
     /**
-     * delete
+     * removeUserFromGroup
      *
-     * Delete a Data Center
+     * Remove User from Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $user_id The unique ID of the user. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return object
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
@@ -2369,20 +2276,21 @@ class UserManagementApi
 
 
     /**
-     * deleteWithHttpInfo
+     * removeUserFromGroupWithHttpInfo
      *
-     * Delete a Data Center
+     * Remove User from Group
      *
-     * @param map[string,string] $datacenter_id The unique ID of the data center (required)
+     * @param string $group_id The unique ID of the group. (required)
+     * @param string $user_id The unique ID of the user. (required)
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
+     * @param int $depth Controls the details depth of response objects.
      * @return Array of object, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function removeUserFromGroupWithHttpInfo($group_id, $user_id, $pretty_print_query_parameter = null, $depth = null)
     {
 
-        // verify the required parameter 'datacenter_id' is set
+        // verify the required parameters are set
         if ($group_id === null) {
             throw new \InvalidArgumentException('Missing the required parameter $group_id when calling delete');
         }
@@ -2403,10 +2311,9 @@ class UserManagementApi
         $headerParams['Content-Type'] = ApiClient::selectHeaderContentType(array('*/*'));
 
         // query params
-
         if ($pretty_print_query_parameter !== null) {
             $queryParams['Pretty print query parameter'] = $this->apiClient->getSerializer()->toQueryValue($pretty_print_query_parameter);
-        }// query params
+        }
 
         if ($depth !== null) {
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
@@ -2414,9 +2321,6 @@ class UserManagementApi
 
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {

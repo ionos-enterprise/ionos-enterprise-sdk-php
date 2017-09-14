@@ -1,6 +1,6 @@
 <?php
 /**
- * Datacenters
+ * ResourceMetadata
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * ResourceMetadata Class Doc Comment
  *
  * @category    Class
  * @description
@@ -112,24 +112,39 @@ class ResourceMetadata implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
+      * $createdDate A time and date stamp indicating when the resource was created.
       * @var string
       */
     protected $createdDate;
 
     /**
-      * $type The type of object that has been created
+      * $createdBy The user who created the resource.
       * @var string
       */
     protected $createdBy;
 
     /**
-      * $href URL to the object\u2019s representation (absolute path)
+      * $etag ETag.
       * @var string
       */
     protected $etag;
+
+    /**
+      * $lastModifiedDate A time and date stamp indicating when the resource was last modified.
+      * @var string
+      */
     protected $lastModifiedDate;
+
+    /**
+      * $lastModifiedBy The user who last modified the resource.
+      * @var string
+      */
     protected $lastModifiedBy;
+
+    /**
+      * $state The current state of the resource. [ AVAILABLE, BUSY, INACTIVE ]
+      * @var string
+      */
     protected $state;
 
 
@@ -151,7 +166,7 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets createdDate
      * @return string
      */
     public function getCreatedDate()
@@ -160,8 +175,8 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets createdDate
+     * @param string $createdDate A time and date stamp indicating when the resource was created.
      * @return $this
      */
     public function setCreatedDate($createdDate)
@@ -172,7 +187,7 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Gets type
+     * Gets createdBy
      * @return string
      */
     public function getCreatedBy()
@@ -181,8 +196,8 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets createdBy
+     * @param string $createdBy The user who created the resource.
      * @return $this
      */
     public function setCreatedBy($createdBy)
@@ -192,7 +207,7 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Gets href
+     * Gets etag
      * @return string
      */
     public function getEtag()
@@ -201,8 +216,8 @@ class ResourceMetadata implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets etag
+     * @param string $etag ETag.
      * @return $this
      */
     public function setEtag($etag)
@@ -212,16 +227,8 @@ class ResourceMetadata implements ArrayAccess
         return $this;
     }
 
-
-    /**
-     * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
-     * @return boolean
-     */
-
-
      /**
-      * Gets href
+      * Gets lastModifiedDate
       * @return string
       */
      public function getLastModifiedDate()
@@ -230,8 +237,8 @@ class ResourceMetadata implements ArrayAccess
      }
 
      /**
-      * Sets href
-      * @param string $href URL to the object\u2019s representation (absolute path)
+      * Sets lastModifiedDate
+      * @param string $lastModifiedDate A time and date stamp indicating when the resource was last modified.
       * @return $this
       */
      public function setLastModifiedDate($lastModifiedDate)
@@ -243,7 +250,7 @@ class ResourceMetadata implements ArrayAccess
 
 
      /**
-      * Gets href
+      * Gets lastModifiedBy
       * @return string
       */
      public function getLastModifiedBy()
@@ -252,8 +259,8 @@ class ResourceMetadata implements ArrayAccess
      }
 
      /**
-      * Sets href
-      * @param string $href URL to the object\u2019s representation (absolute path)
+      * Sets lastModifiedBy
+      * @param string $lastModifiedBy The user who last modified the resource.
       * @return $this
       */
      public function setLastModifiedBy($lastModifiedBy)
@@ -265,7 +272,7 @@ class ResourceMetadata implements ArrayAccess
 
 
      /**
-      * Gets href
+      * Gets state
       * @return string
       */
      public function getState()
@@ -274,8 +281,8 @@ class ResourceMetadata implements ArrayAccess
      }
 
      /**
-      * Sets href
-      * @param string $href URL to the object\u2019s representation (absolute path)
+      * Sets state
+      * @param string $state The current state of the resource. [ AVAILABLE, BUSY, INACTIVE ]
       * @return $this
       */
      public function setState($state)

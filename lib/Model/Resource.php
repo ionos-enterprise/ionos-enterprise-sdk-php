@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * Resource
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * Resource Class Doc Comment
  *
  * @category    Class
  * @description
@@ -106,7 +106,6 @@ class Resource implements ArrayAccess
         return self::$getters;
     }
 
-
     /**
       * $id The resource's unique identifier
       * @var string
@@ -124,14 +123,18 @@ class Resource implements ArrayAccess
       * @var string
       */
     protected $href;
-    protected $metadata;
-    protected $entities;
 
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $metadata Metadata for the specific resource.
+      * @var \ProfitBricks\Client\Model\ResourceMetadata
       */
+    protected $metadata;
 
+    /**
+      * $entities A collection containing groups the resource is associated with.
+      * @var \ProfitBricks\Client\Model\ResourceEntity
+      */
+    protected $entities;
 
     /**
      * Constructor
@@ -213,8 +216,8 @@ class Resource implements ArrayAccess
     }
 
     /**
-     * Gets href
-     * @return string
+     * Gets metadata
+     * @return \ProfitBricks\Client\Model\ResourceMetadata
      */
     public function getMetadata()
     {
@@ -222,8 +225,8 @@ class Resource implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets metadata
+     * @param \ProfitBricks\Client\Model\ResourceMetadata $metadata Metadata for the specific resource.
      * @return $this
      */
     public function setMetadata($metadata)
@@ -235,8 +238,8 @@ class Resource implements ArrayAccess
 
 
     /**
-     * Gets href
-     * @return string
+     * Gets entities
+     * @return \ProfitBricks\Client\Model\ResourceEntity
      */
     public function getEntities()
     {
@@ -244,8 +247,8 @@ class Resource implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets entities
+     * @param \ProfitBricks\Client\Model\ResourceEntity $entities A collection containing groups the resource is associated with.
      * @return $this
      */
     public function setEntities($entities)

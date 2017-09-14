@@ -1,6 +1,6 @@
 <?php
 /**
- * Datacenters
+ * ResourceEntityGroup
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * ResourceEntityGroup Class Doc Comment
  *
  * @category    Class
  * @description
@@ -194,22 +194,11 @@ class ResourceEntityGroup implements ArrayAccess
         return $this;
     }
 
-
     /**
      * Returns true if offset exists. False otherwise.
      * @param  integer $offset Offset
      * @return boolean
      */
-
-
-
-     /**
-      * Returns true if offset exists. False otherwise.
-      * @param  integer $offset Offset
-      * @return boolean
-      */
-
-
     public function offsetExists($offset)
     {
         return isset($this->$offset);

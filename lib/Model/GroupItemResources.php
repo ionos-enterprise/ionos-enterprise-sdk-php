@@ -1,6 +1,6 @@
 <?php
 /**
- * Groups
+ * GroupItemResources
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * GroupItemResources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -100,11 +100,21 @@ class GroupItemResources implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
+      * $id ID of resource.
       * @var string
       */
     protected $id;
+
+    /**
+      * $type The type of object that has been created
+      * @var string
+      */
     protected $type;
+
+    /**
+      * $href A URI for accessing the object.
+      * @var string
+      */
     protected $href;
 
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Resource Limits
+ * ResourceLimits
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Properties Class Doc Comment
+ * ResourceLimits Class Doc Comment
  *
  * @category    Class
  * @description
@@ -102,22 +102,29 @@ class ResourceLimits implements ArrayAccess
         return self::$getters;
     }
 
-
     /**
-      * $type The type of object that has been created
-      * @var string
+      * $coresPerContract Maximum number of CPU cores per contract.
+      * @var int
       */
     protected $coresPerContract;
 
-
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * ramPerContract Maximum amount of RAM per contract.
+      * @var int
       */
     protected $ramPerContract;
-    protected $hddLimitPerContract;
-    protected $ssdLimitPerContract;
 
+    /**
+      * $hddLimitPerContract Maximum number of HDD volumes per contract.
+      * @var int
+      */
+    protected $hddLimitPerContract;
+
+    /**
+      * $ssdLimitPerContract Maximum number of SSD volumes per contract.
+      * @var int
+      */
+    protected $ssdLimitPerContract;
 
     /**
      * Constructor
@@ -136,8 +143,8 @@ class ResourceLimits implements ArrayAccess
 
 
     /**
-     * Gets type
-     * @return string
+     * Gets coresPerContract
+     * @return int
      */
     public function getCoresPerContract()
     {
@@ -145,8 +152,8 @@ class ResourceLimits implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets coresPerContract
+     * @param int $type Maximum number of CPU cores per contract.
      * @return $this
      */
     public function setCoresPerContract($coresPerContract)
@@ -157,8 +164,8 @@ class ResourceLimits implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets ramPerContract
+     * @return int
      */
     public function getRamPerContract()
     {
@@ -166,8 +173,8 @@ class ResourceLimits implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets ramPerContract
+     * @param int $ramPerContract Maximum amount of RAM per contract.
      * @return $this
      */
     public function setRamPerContract($ramPerContract)
@@ -179,8 +186,8 @@ class ResourceLimits implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets hddLimitPerContract
+     * @return int
      */
     public function getHddLimitPerContract()
     {
@@ -188,8 +195,8 @@ class ResourceLimits implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets hddLimitPerContract
+     * @param int $hddLimitPerContract Maximum number of HDD volumes per contract.
      * @return $this
      */
     public function setHddLimitPerContract($hddLimitPerContract)
@@ -201,8 +208,8 @@ class ResourceLimits implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets ssdLimitPerContract
+     * @return int
      */
     public function getSsdLimitPerContract()
     {
@@ -210,8 +217,8 @@ class ResourceLimits implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets ssdLimitPerContract
+     * @param int $ssdLimitPerContract Maximum number of SSD volumes per contract.
      * @return $this
      */
     public function setSsdLimitPerContract($ssdLimitPerContract)
@@ -220,7 +227,6 @@ class ResourceLimits implements ArrayAccess
         $this->ssdLimitPerContract = $ssdLimitPerContract;
         return $this;
     }
-
 
     /**
      * Returns true if offset exists. False otherwise.

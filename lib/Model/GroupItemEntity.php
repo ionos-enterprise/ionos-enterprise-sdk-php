@@ -1,6 +1,6 @@
 <?php
 /**
- * Group Item Entity
+ * GroupItemEntity
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * GroupItemEntity Class Doc Comment
  *
  * @category    Class
  * @description
@@ -96,10 +96,15 @@ class GroupItemEntity implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
-      * @var string
+      * $users A collection of users that belong to this group.
+      * @var \ProfitBricks\Client\Model\GroupItemUser
       */
     protected $users;
+
+    /**
+      * $resources A collection of resources that are assigned to this group.
+      * @var \ProfitBricks\Client\Model\GroupItemResource
+      */
     protected $resources;
 
 
@@ -117,8 +122,8 @@ class GroupItemEntity implements ArrayAccess
     }
 
     /**
-     * Gets id
-     * @return string
+     * Gets users
+     * @return \ProfitBricks\Client\Model\GroupItemUser
      */
     public function getUsers()
     {
@@ -126,8 +131,8 @@ class GroupItemEntity implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets users
+     * @param \ProfitBricks\Client\Model\GroupItemUser $users A collection of users that belong to this group.
      * @return $this
      */
     public function setUsers($users)
@@ -139,8 +144,8 @@ class GroupItemEntity implements ArrayAccess
 
 
     /**
-     * Gets entities
-     * @return \ProfitBricks\Client\Model\DatacenterEntities
+     * Gets resources
+     * @return \ProfitBricks\Client\Model\GroupItemResource
      */
     public function getResources()
     {
@@ -148,8 +153,8 @@ class GroupItemEntity implements ArrayAccess
     }
 
     /**
-     * Sets entities
-     * @param \ProfitBricks\Client\Model\DatacenterEntities $entities Attached children and references. May be included in create calls. Disallowed in update calls
+     * Sets resources
+     * @param \ProfitBricks\Client\Model\GroupItemResource $resources A collection of resources that are assigned to this group.
      * @return $this
      */
     public function setResources($resources)

@@ -1,6 +1,6 @@
 <?php
 /**
- * DatacenterProperties
+ * UserProperties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * DatacenterProperties Class Doc Comment
+ * UserProperties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -110,30 +110,39 @@ class UserProperties implements ArrayAccess
         return self::$getters;
     }
 
-
     /**
-      * $name A name of that resource
+      * $firstname The first name of the user.
       * @var string
       */
     protected $firstname;
+
+    /**
+      * $lastname The last name of the user.
+      * @var string
+      */
     protected $lastname;
+
+    /**
+      * $email The e-mail address of the user.
+      * @var string
+      */
     protected $email;
 
     /**
-      * $description A description for the datacenter, e.g. staging, production
-      * @var string
+      * $administrator Indicates if the user has administrative rights.
+      * @var boolean
       */
     protected $administrator;
 
     /**
-      * $location The physical location where the datacenter will be created. This will be where all of your servers live. Property cannot be modified after datacenter creation (disallowed in update requests)
-      * @var string
+      * $administrator Indicates if secure (two-factor) authentication was enabled for the user.
+      * @var boolean
       */
     protected $forceSecAuth;
 
     /**
-      * $version The version of that Data Center. Gets incremented with every change
-      * @var int
+      * $forceSecAuth Indicates if secure (two-factor) authentication is enabled for the user.
+      * @var boolean
       */
     protected $secAuthActive;
 
@@ -156,7 +165,7 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Gets name
+     * Gets firstname
      * @return string
      */
     public function getFirstname()
@@ -165,8 +174,8 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets firstname
+     * @param string $firstname The first name of the user.
      * @return $this
      */
     public function setFirstname($firstname)
@@ -177,7 +186,7 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Gets description
+     * Gets lastname
      * @return string
      */
     public function getLastname()
@@ -186,8 +195,8 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Sets description
-     * @param string $description A description for the datacenter, e.g. staging, production
+     * Sets lastname
+     * @param string $lastname The last name of the user.
      * @return $this
      */
     public function setLastname($lastname)
@@ -198,7 +207,7 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Gets location
+     * Gets email
      * @return string
      */
     public function getEmail()
@@ -207,8 +216,8 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Sets location
-     * @param string $location The physical location where the datacenter will be created. This will be where all of your servers live. Property cannot be modified after datacenter creation (disallowed in update requests)
+     * Sets email
+     * @param string $email The email address of the user.
      * @return $this
      */
     public function setEmail($email)
@@ -219,8 +228,29 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Gets version
-     * @return int
+     * Gets administrator
+     * @return boolean
+     */
+    public function getAdministrator()
+    {
+        return $this->administrator;
+    }
+
+    /**
+     * Sets administrator
+     * @param boolean $administrator Indicates if the user has administrative rights.
+     * @return $this
+     */
+    public function setAdministrator($administrator)
+    {
+
+        $this->administrator = $administrator;
+        return $this;
+    }
+
+    /**
+     * Gets forceSecAuth
+     * @return boolean
      */
     public function getForceSecAuth()
     {
@@ -228,8 +258,8 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Sets version
-     * @param int $version The version of that Data Center. Gets incremented with every change
+     * Sets forceSecAuth
+     * @param boolean $forceSecAuth Indicates if secure (two-factor) authentication was enabled for the user.
      * @return $this
      */
     public function setForceSecAuth($forceSecAuth)
@@ -239,10 +269,9 @@ class UserProperties implements ArrayAccess
         return $this;
     }
 
-
     /**
-     * Gets version
-     * @return int
+     * Gets secAuthActive
+     * @return boolean
      */
     public function getSecAuthActive()
     {
@@ -250,8 +279,8 @@ class UserProperties implements ArrayAccess
     }
 
     /**
-     * Sets version
-     * @param int $version The version of that Data Center. Gets incremented with every change
+     * Sets secAuthActive
+     * @param boolean $secAuthActive Indicates if secure (two-factor) authentication is enabled for the user.
      * @return $this
      */
     public function setSecAuthActive($secAuthActive)

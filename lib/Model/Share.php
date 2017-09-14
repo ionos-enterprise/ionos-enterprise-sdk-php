@@ -1,6 +1,6 @@
 <?php
 /**
- * Datacenters
+ * Share
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * Share Class Doc Comment
  *
  * @category    Class
  * @description
@@ -120,8 +120,12 @@ class Share implements ArrayAccess
       * @var string
       */
     protected $href;
-    protected $properties;
 
+    /**
+      * $properties A collection of properties.
+      * @var \ProfitBricks\Client\Model\ShareProperties
+      */
+    protected $properties;
 
     /**
      * Constructor
@@ -200,17 +204,9 @@ class Share implements ArrayAccess
         return $this;
     }
 
-
-    /**
-     * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
-     * @return boolean
-     */
-
-
      /**
-      * Gets href
-      * @return string
+      * Gets properties
+      * @return \ProfitBricks\Client\Model\ShareProperties
       */
      public function getProperties()
      {
@@ -218,8 +214,8 @@ class Share implements ArrayAccess
      }
 
      /**
-      * Sets href
-      * @param string $href URL to the object\u2019s representation (absolute path)
+      * Sets properties
+      * @param \ProfitBricks\Client\Model\ShareProperties $properties A collection of properties.
       * @return $this
       */
      public function setProperties($properties)
@@ -229,14 +225,11 @@ class Share implements ArrayAccess
          return $this;
      }
 
-
      /**
       * Returns true if offset exists. False otherwise.
       * @param  integer $offset Offset
       * @return boolean
       */
-
-
     public function offsetExists($offset)
     {
         return isset($this->$offset);

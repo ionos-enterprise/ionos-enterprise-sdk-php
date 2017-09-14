@@ -1,6 +1,6 @@
 <?php
 /**
- * Contract Properties
+ * ContractProperties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Properties Class Doc Comment
+ * ContractProperties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -102,20 +102,28 @@ class ContractProperties implements ArrayAccess
         return self::$getters;
     }
 
-
     /**
-      * $type The type of object that has been created
-      * @var string
+      * $contractNumber The contract number that the returned information is from.
+      * @var int
       */
     protected $contractNumber;
 
-
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $owner The username of the "Contract Owner".
+      * @var string
       */
     protected $owner;
+
+    /**
+      * $status The status of the contract. [ BILLABLE...]
+      * @var string
+      */
     protected $status;
+
+    /**
+      * $resourceLimits An object containing the contract's resource limits.
+      * @var \ProfitBricks\Client\Model\ResourceLimits
+      */
     protected $resourceLimits;
 
 
@@ -136,8 +144,8 @@ class ContractProperties implements ArrayAccess
 
 
     /**
-     * Gets type
-     * @return string
+     * Gets contractNumber
+     * @return int
      */
     public function getContractNumber()
     {
@@ -145,8 +153,8 @@ class ContractProperties implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets contractNumber
+     * @param int $contractNumber The contract number that the returned information is from.
      * @return $this
      */
     public function setContractNumber($contractNumber)
@@ -157,8 +165,8 @@ class ContractProperties implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets owner
+     * @return string
      */
     public function getOwner()
     {
@@ -166,8 +174,8 @@ class ContractProperties implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets owner
+     * @param string $owner The username of the "Contract Owner".
      * @return $this
      */
     public function setOwner($owner)
@@ -179,8 +187,8 @@ class ContractProperties implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets status
+     * @return string
      */
     public function getStatus()
     {
@@ -188,8 +196,8 @@ class ContractProperties implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets status
+     * @param string $status The status of the contract. [ BILLABLE...]
      * @return $this
      */
     public function setStatus($status)
@@ -201,8 +209,8 @@ class ContractProperties implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets resourceLimits
+     * @return \ProfitBricks\Client\Model\ResourceLimits
      */
     public function getResourceLimits()
     {
@@ -210,8 +218,8 @@ class ContractProperties implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets resourceLimits
+     * @param \ProfitBricks\Client\Model\ResourceLimits $resourceLimits An object containing the contract's resource limits.
      * @return $this
      */
     public function setResourceLimits($resourceLimits)

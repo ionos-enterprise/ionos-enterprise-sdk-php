@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * User
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * User Class Doc Comment
  *
  * @category    Class
  * @description
@@ -128,15 +128,24 @@ class User implements ArrayAccess
       * @var string
       */
     protected $href;
-    protected $metadata;
-    protected $properties;
-    protected $entities;
 
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $metadata A collection containing metadata for the user.
+      * @var \ProfitBricks\Client\Model\UserMetadata
       */
+    protected $metadata;
 
+    /**
+      * $properties A collection containing the user's properties.
+      * @var \ProfitBricks\Client\Model\UserProperties
+      */
+    protected $properties;
+
+    /**
+      * $entities A collection containing resources the user owns, and groups the user is a member of.
+      * @var \ProfitBricks\Client\Model\UserEntities
+      */
+    protected $entities;
 
     /**
      * Constructor
@@ -219,8 +228,8 @@ class User implements ArrayAccess
 
 
     /**
-     * Gets href
-     * @return string
+     * Gets metadata
+     * @return \ProfitBricks\Client\Model\UserMetadata
      */
     public function getMetadata()
     {
@@ -228,8 +237,8 @@ class User implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets metadata
+     * @param \ProfitBricks\Client\Model\UserMetadata $metadata A collection containing metadata for the user.
      * @return $this
      */
     public function setMetadata($metadata)
@@ -241,8 +250,8 @@ class User implements ArrayAccess
 
 
     /**
-     * Gets href
-     * @return string
+     * Gets properties
+     * @return \ProfitBricks\Client\Model\UserProperties
      */
     public function getProperties()
     {
@@ -250,8 +259,8 @@ class User implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets properties
+     * @param \ProfitBricks\Client\Model\UserProperties $properties A collection containing the user's properties.
      * @return $this
      */
     public function setProperties($properties)
@@ -263,8 +272,8 @@ class User implements ArrayAccess
 
 
     /**
-     * Gets href
-     * @return string
+     * Gets entities
+     * @return \ProfitBricks\Client\Model\UserEntities
      */
     public function getEntities()
     {
@@ -272,8 +281,8 @@ class User implements ArrayAccess
     }
 
     /**
-     * Sets href
-     * @param string $href URL to the object\u2019s representation (absolute path)
+     * Sets entities
+     * @param \ProfitBricks\Client\Model\UserEntities $entities A collection containing resources the user owns, and groups the user is a member of.
      * @return $this
      */
     public function setEntities($entities)

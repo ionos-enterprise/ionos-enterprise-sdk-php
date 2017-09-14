@@ -34,7 +34,7 @@ use \ProfitBricks\Client\ApiException;
 use \ProfitBricks\Client\ObjectSerializer;
 
 /**
- * DataCenterApi Class Doc Comment
+ * ContractResourcesApi Class Doc Comment
  *
  * @category Class
  * @package  ProfitBricks\Client
@@ -90,8 +90,8 @@ class ContractResourcesApi
      * List Contract Resources
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return \ProfitBricks\Client\Model\Datacenters
+     * @param int $depth Controls the details depth of response objects.
+     * @return \ProfitBricks\Client\Model\ContractResources
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAll($pretty_print_query_parameter = null, $depth = null)
@@ -107,8 +107,8 @@ class ContractResourcesApi
      * List Contract Resources
      *
      * @param bool $pretty_print_query_parameter Controls whether response is pretty-printed (with indentation and new lines) (optional, default to true)
-     * @param int $depth Controls the details depth of response objects. \nEg. GET /datacenters/[ID]\n\t- depth=0: only direct properties are included. Children (servers etc.) are not included\n\t- depth=1: direct properties and children references are included\n\t- depth=2: direct properties and children properties are included\n\t- depth=3: direct properties and children properties and children&#39;s children are included\n\t- depth=... and so on (optional, default to 0)
-     * @return Array of \ProfitBricks\Client\Model\Datacenters, HTTP status code, HTTP response headers (array of strings)
+     * @param int $depth Controls the details depth of response objects.
+     * @return Array of \ProfitBricks\Client\Model\ContractResources, HTTP status code, HTTP response headers (array of strings)
      * @throws \ProfitBricks\Client\ApiException on non-2xx response
      */
     public function findAllWithHttpInfo($pretty_print_query_parameter = null, $depth = null)
@@ -137,12 +137,8 @@ class ContractResourcesApi
             $queryParams['depth'] = $this->apiClient->getSerializer()->toQueryValue($depth);
         }
 
-
         // default format to json
         $resourcePath = str_replace("{format}", "json", $resourcePath);
-
-
-
 
         // for model (json/xml)
         if (isset($_tempBody)) {

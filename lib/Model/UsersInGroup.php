@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * UsersInGroup
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * UsersInGroup Class Doc Comment
  *
  * @category    Class
  * @description
@@ -123,7 +123,7 @@ class UsersInGroup implements ArrayAccess
 
     /**
       * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * @var \ProfitBricks\Client\Model\UserInGroup[]
       */
     protected $items;
 
@@ -207,7 +207,7 @@ class UsersInGroup implements ArrayAccess
 
     /**
      * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * @return \ProfitBricks\Client\Model\UserInGroup[]
      */
     public function getItems()
     {
@@ -216,7 +216,7 @@ class UsersInGroup implements ArrayAccess
 
     /**
      * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @param \ProfitBricks\Client\Model\UserInGroup[] $items Array of items in that collection
      * @return $this
      */
     public function setItems($items)

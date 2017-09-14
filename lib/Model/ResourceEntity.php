@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * ResourceEntity
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * ResourceEntity Class Doc Comment
  *
  * @category    Class
  * @description
@@ -92,8 +92,8 @@ class ResourceEntity implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
-      * @var string
+      * $groups A collection of groups associated with the resource.
+      * @var \ProfitBricks\Client\Model\ResourceEntityGroup
       */
     protected $groups;
 
@@ -111,8 +111,8 @@ class ResourceEntity implements ArrayAccess
     }
 
     /**
-     * Gets id
-     * @return string
+     * Gets groups
+     * @return \ProfitBricks\Client\Model\ResourceEntityGroup
      */
     public function getGroups()
     {
@@ -120,8 +120,8 @@ class ResourceEntity implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets groups
+     * @param \ProfitBricks\Client\Model\ResourceEntityGroup $groups A collection of groups associated with the resource.
      * @return $this
      */
     public function setGroups($groups)

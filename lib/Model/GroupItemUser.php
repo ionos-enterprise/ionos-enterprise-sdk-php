@@ -104,12 +104,27 @@ class GroupItemUser implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
+      * $id ID of resource.
       * @var string
       */
     protected $id;
+
+    /**
+      * $type The type of object that has been created
+      * @var string
+      */
     protected $type;
+
+    /**
+      * $href A URI for accessing the object.
+      * @var string
+      */
     protected $href;
+
+    /**
+      * $items A collection of resources that are assigned to this group.
+      * @var \ProfitBricks\Client\Model\GroupItemUsers[]
+      */
     protected $items;
 
 
@@ -194,7 +209,7 @@ class GroupItemUser implements ArrayAccess
 
     /**
      * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * @return \ProfitBricks\Client\Model\GroupItemUsers[]
      */
     public function getItems()
     {
@@ -203,7 +218,7 @@ class GroupItemUser implements ArrayAccess
 
     /**
      * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @param \ProfitBricks\Client\Model\GroupItemUsers[] $items Array of items in that collection
      * @return $this
      */
     public function setItems($items)

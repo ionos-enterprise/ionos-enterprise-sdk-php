@@ -1,6 +1,6 @@
 <?php
 /**
- * Contract Resources
+ * IpFailover
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * IpFailover Class Doc Comment
  *
  * @category    Class
  * @description
@@ -96,15 +96,15 @@ class IpFailover implements ArrayAccess
 
 
     /**
-      * $type The type of object that has been created
+      * $ip IP to be added.
       * @var string
       */
     protected $ip;
 
 
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $nicUuid ID of NIC.
+      * @var string
       */
     protected $nicUuid;
 
@@ -124,7 +124,7 @@ class IpFailover implements ArrayAccess
 
 
     /**
-     * Gets type
+     * Gets IP
      * @return string
      */
     public function getIp()
@@ -133,8 +133,8 @@ class IpFailover implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets IP
+     * @param string $ip IP address to be used.
      * @return $this
      */
     public function setIp($ip)
@@ -145,8 +145,8 @@ class IpFailover implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets nicUuid
+     * @return string
      */
     public function getNicUuid()
     {
@@ -154,8 +154,8 @@ class IpFailover implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets nicUuid
+     * @param string $nicUuid ID of NIC.
      * @return $this
      */
     public function setNicUuid($nicUuid)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * UserEntities
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * UserEntities Class Doc Comment
  *
  * @category    Class
  * @description
@@ -96,14 +96,14 @@ class UserEntities implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
-      * @var string
+      * $owns A collection of resources that this user owns.
+      * @var \ProfitBricks\Client\Model\UserEntityOwns
       */
     protected $owns;
 
     /**
-      * $type The type of object that has been created
-      * @var string
+      * $groups A collection of groups that this user is a member of.
+      * @var \ProfitBricks\Client\Model\UserEntityGroups
       */
     protected $groups;
 
@@ -122,8 +122,8 @@ class UserEntities implements ArrayAccess
     }
 
     /**
-     * Gets id
-     * @return string
+     * Gets owns
+     * @return \ProfitBricks\Client\Model\UserEntityOwns
      */
     public function getOwns()
     {
@@ -131,8 +131,8 @@ class UserEntities implements ArrayAccess
     }
 
     /**
-     * Sets id
-     * @param string $id The resource's unique identifier
+     * Sets owns
+     * @param \ProfitBricks\Client\Model\UserEntityOwns $owns A collection of resources that this user owns.
      * @return $this
      */
     public function setOwns($owns)
@@ -143,8 +143,8 @@ class UserEntities implements ArrayAccess
     }
 
     /**
-     * Gets type
-     * @return string
+     * Gets groups
+     * @return \ProfitBricks\Client\Model\UserEntityGroups
      */
     public function getGroups()
     {
@@ -152,8 +152,8 @@ class UserEntities implements ArrayAccess
     }
 
     /**
-     * Sets type
-     * @param string $type The type of object that has been created
+     * Sets groups
+     * @param \ProfitBricks\Client\Model\UserEntityGroups $groups A collection of groups that this user is a member of.
      * @return $this
      */
     public function setGroups($groups)

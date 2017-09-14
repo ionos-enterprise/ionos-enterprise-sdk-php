@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * UserEntityGroups
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * UserEntityGroups Class Doc Comment
  *
  * @category    Class
  * @description
@@ -116,12 +116,6 @@ class UserEntityGroups implements ArrayAccess
       * @var string
       */
     protected $href;
-
-    /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
-      */
-
 
     /**
      * Constructor

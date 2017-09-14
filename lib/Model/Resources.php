@@ -1,6 +1,6 @@
 <?php
 /**
- * Users
+ * Resources
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Datacenters Class Doc Comment
+ * Resources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -104,7 +104,7 @@ class Resources implements ArrayAccess
 
 
     /**
-      * $id The resource's unique identifier
+      * $id ID of resource.
       * @var string
       */
     protected $id;
@@ -116,14 +116,14 @@ class Resources implements ArrayAccess
     protected $type;
 
     /**
-      * $href URL to the object\u2019s representation (absolute path)
+      * $href A URI for accessing the object.
       * @var string
       */
     protected $href;
 
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $items A collection containing the available resources.
+      * @var \ProfitBricks\Client\Model\Resource[]
       */
     protected $items;
 
@@ -207,7 +207,7 @@ class Resources implements ArrayAccess
 
     /**
      * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * @return \ProfitBricks\Client\Model\Resource[]
      */
     public function getItems()
     {
@@ -216,7 +216,7 @@ class Resources implements ArrayAccess
 
     /**
      * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * @param \ProfitBricks\Client\Model\Resource[] $items Array of items in that collection
      * @return $this
      */
     public function setItems($items)

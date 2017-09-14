@@ -1,6 +1,6 @@
 <?php
 /**
- * Contract Resources
+ * ContractResources
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * Contract Resources Class Doc Comment
+ * ContractResources Class Doc Comment
  *
  * @category    Class
  * @description
@@ -103,8 +103,8 @@ class ContractResources implements ArrayAccess
 
 
     /**
-      * $items Array of items in that collection
-      * @var \ProfitBricks\Client\Model\Datacenter[]
+      * $properties A collection of properties for each item.
+      * @var \ProfitBricks\Client\Model\ContractProperties
       */
     protected $properties;
 
@@ -149,8 +149,8 @@ class ContractResources implements ArrayAccess
 
 
     /**
-     * Gets items
-     * @return \ProfitBricks\Client\Model\Datacenter[]
+     * Gets properties
+     * @return \ProfitBricks\Client\Model\ContractProperties
      */
     public function getProperties()
     {
@@ -158,8 +158,8 @@ class ContractResources implements ArrayAccess
     }
 
     /**
-     * Sets items
-     * @param \ProfitBricks\Client\Model\Datacenter[] $items Array of items in that collection
+     * Sets properties
+     * @param \ProfitBricks\Client\Model\ContractProperties $properties A collection of properties for each item.
      * @return $this
      */
     public function setProperties($properties)
