@@ -62,6 +62,7 @@ class LanProperties implements ArrayAccess
       */
     static $attributeMap = array(
         'name' => 'name',
+        'ipFailover' => 'ipFailover',
         'public' => 'public'
     );
 
@@ -75,6 +76,7 @@ class LanProperties implements ArrayAccess
       */
     static $setters = array(
         'name' => 'setName',
+        'ipFailover' => 'setIpFailover',
         'public' => 'setPublic'
     );
 
@@ -88,6 +90,7 @@ class LanProperties implements ArrayAccess
       */
     static $getters = array(
         'name' => 'getName',
+        'ipFailover' => 'getIpFailover',
         'public' => 'getPublic'
     );
 
@@ -101,6 +104,12 @@ class LanProperties implements ArrayAccess
       * @var string
       */
     protected $name;
+
+    /**
+      * $ipFailover Attributes related to IP failover groups.
+      * @var array
+      */
+    protected $ipFailover;
 
     /**
       * $public Does this LAN faces the public Internet or not
@@ -118,6 +127,7 @@ class LanProperties implements ArrayAccess
 
         if ($data != null) {
             $this->name = $data["name"];
+            $this->ipFailover = $data["ipFailover"];
             $this->public = $data["public"];
         }
     }
@@ -140,6 +150,27 @@ class LanProperties implements ArrayAccess
     {
 
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * Gets ipFailover
+     * @return string
+     */
+    public function getIpFailover()
+    {
+        return $this->ipFailover;
+    }
+
+    /**
+     * Sets ipFailover
+     * @param string $ipFailover Attributes related to IP failover groups.
+     * @return $this
+     */
+    public function setIpFailover($ipFailover)
+    {
+
+        $this->ipFailover = $ipFailover;
         return $this;
     }
 
