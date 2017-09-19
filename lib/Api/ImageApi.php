@@ -434,6 +434,7 @@ class ImageApi
     public function partialUpdate($image_id, $image, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($image_id, $image, $pretty_print_query_parameter, $depth);
+        $response->setRequestId($httpHeader['Location']);
         return $response;
     }
 
@@ -560,6 +561,9 @@ class ImageApi
     public function update($image_id, $image, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($image_id, $image, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

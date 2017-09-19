@@ -8,7 +8,7 @@
  * @package  ProfitBricks\Client
 
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
- 
+
  */
 /**
 
@@ -34,7 +34,7 @@ use \ArrayAccess;
  * LanProperties Class Doc Comment
  *
  * @category    Class
- * @description 
+ * @description
  * @package     ProfitBricks\Client
  * @author      http://github.com/ProfitBricks-api/ProfitBricks-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
@@ -43,27 +43,29 @@ use \ArrayAccess;
 class LanProperties implements ArrayAccess
 {
     /**
-      * Array of property to type mappings. Used for (de)serialization 
+      * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
         'name' => 'string',
+        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
         'public' => 'bool'
     );
-  
+
     static function ProfitBricksTypes() {
         return self::$ProfitBricksTypes;
     }
 
-    /** 
+    /**
       * Array of attributes where the key is the local name, and the value is the original name
-      * @var string[] 
+      * @var string[]
       */
     static $attributeMap = array(
         'name' => 'name',
+        'ipFailover' => 'ipFailover',
         'public' => 'public'
     );
-  
+
     static function attributeMap() {
         return self::$attributeMap;
     }
@@ -74,9 +76,10 @@ class LanProperties implements ArrayAccess
       */
     static $setters = array(
         'name' => 'setName',
+        'ipFailover' => 'setIpFailover',
         'public' => 'setPublic'
     );
-  
+
     static function setters() {
         return self::$setters;
     }
@@ -87,26 +90,33 @@ class LanProperties implements ArrayAccess
       */
     static $getters = array(
         'name' => 'getName',
+        'ipFailover' => 'getIpFailover',
         'public' => 'getPublic'
     );
-  
+
     static function getters() {
         return self::$getters;
     }
 
-    
+
     /**
       * $name A name of that resource
       * @var string
       */
     protected $name;
-    
+
+    /**
+      * $ipFailover Attributes related to IP failover groups.
+      * @var array
+      */
+    protected $ipFailover;
+
     /**
       * $public Does this LAN faces the public Internet or not
       * @var bool
       */
     protected $public = false;
-    
+
 
     /**
      * Constructor
@@ -114,13 +124,14 @@ class LanProperties implements ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        
+
         if ($data != null) {
             $this->name = $data["name"];
+            $this->ipFailover = $data["ipFailover"];
             $this->public = $data["public"];
         }
     }
-    
+
     /**
      * Gets name
      * @return string
@@ -129,7 +140,7 @@ class LanProperties implements ArrayAccess
     {
         return $this->name;
     }
-  
+
     /**
      * Sets name
      * @param string $name A name of that resource
@@ -137,11 +148,32 @@ class LanProperties implements ArrayAccess
      */
     public function setName($name)
     {
-        
+
         $this->name = $name;
         return $this;
     }
-    
+
+    /**
+     * Gets ipFailover
+     * @return string
+     */
+    public function getIpFailover()
+    {
+        return $this->ipFailover;
+    }
+
+    /**
+     * Sets ipFailover
+     * @param string $ipFailover Attributes related to IP failover groups.
+     * @return $this
+     */
+    public function setIpFailover($ipFailover)
+    {
+
+        $this->ipFailover = $ipFailover;
+        return $this;
+    }
+
     /**
      * Gets public
      * @return bool
@@ -150,7 +182,7 @@ class LanProperties implements ArrayAccess
     {
         return $this->public;
     }
-  
+
     /**
      * Sets public
      * @param bool $public Does this LAN faces the public Internet or not
@@ -158,34 +190,34 @@ class LanProperties implements ArrayAccess
      */
     public function setPublic($public)
     {
-        
+
         $this->public = $public;
         return $this;
     }
-    
+
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);
     }
-  
+
     /**
      * Gets offset.
-     * @param  integer $offset Offset 
-     * @return mixed 
+     * @param  integer $offset Offset
+     * @return mixed
      */
     public function offsetGet($offset)
     {
         return $this->$offset;
     }
-  
+
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @param  mixed   $value  Value to be set
      * @return void
      */
@@ -193,17 +225,17 @@ class LanProperties implements ArrayAccess
     {
         $this->$offset = $value;
     }
-  
+
     /**
      * Unsets offset.
-     * @param  integer $offset Offset 
+     * @param  integer $offset Offset
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->$offset);
     }
-  
+
     /**
      * Gets the string presentation of the object
      * @return string

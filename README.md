@@ -1,6 +1,6 @@
 # PHP SDK
 
-Version: profitbricks-sdk-php **3.0.1**
+Version: profitbricks-sdk-php **4.0.0**
 
 ## Table of Contents
 
@@ -38,8 +38,6 @@ Version: profitbricks-sdk-php **3.0.1**
   * [Images](#images)
     * [List Images](#list-images)
     * [Get an Image](#get-an-image)
-    * [Update an Image](#update-an-image)
-    * [Delete an Image](#delete-an-image)
   * [Volumes](#volumes)
     * [List Volumes](#list-volumes)
     * [Get a Volume](#get-a-volume)
@@ -85,6 +83,30 @@ Version: profitbricks-sdk-php **3.0.1**
     * [Get a Load Balanced NIC](#get-a-load-balanced-nic)
     * [Associate NIC to a Load Balancer](#associate-nic-to-a-load-balancer)
     * [Remove a NIC Association](#remove-a-nic-association)
+  * [Contract Resources](#contract-resources)
+    * [List Contract Resources](#list-contract-resources)
+  * [User Management](#user-management)
+    * [List Groups](#list-groups)
+    * [Retrieve Group](#retrieve-group)
+    * [Create Group](#create-group)
+    * [Update Group](#update-group)
+    * [Delete Group](#delete-group)
+    * [List Shares](#list-shares)
+    * [Retrieve Share](#retrieve-share)
+    * [Create Share](#create-share)
+    * [Update Share](#update-share)
+    * [Delete Share](#delete-share)
+    * [List Users](#list-users)
+    * [Retrieve User](#retrieve-user)
+    * [Create User](#create-user)
+    * [Update User](#update-user)
+    * [Delete User](#delete-user)
+    * [List Users In Group](#list-users-in-group)
+    * [Add User To Group](#add-user-to-group)
+    * [Remove User From Group](#remove-user-from-group)
+    * [List Resources](#list-resources)
+    * [List Resources Of Type](#list-resources-of-type)
+    * [Find Resource By Id](#find-resource-by-id)
   * [Requests](#requests)
     * [List Requests](#list-requests)
     * [Get a Request](#get-a-request)
@@ -132,7 +154,7 @@ Add your credentials for connecting to ProfitBricks:
 
 ```php
 $config = (new ProfitBricks\Client\Configuration())
-      ->setHost('https://api.profitbricks.com/cloudapi/v3')
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
       ->setUsername(getenv('PROFITBRICKS_USERNAME'))
       ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
 $api_client = new ProfitBricks\Client\ApiClient($config);
@@ -795,6 +817,7 @@ The following table describes the request arguments:
 | $size | **yes** | int | The size of the volume in GB. |
 | $bus | no | string | The bus type of the volume (VIRTIO or IDE). Default: VIRTIO. |
 | $image | **yes** | string | The image or snapshot ID. |
+| $imageAlias | **yes** | string | An alias to a ProfitBricks public image. Use instead of $image. |
 | $type | **yes** | string | The volume type, HDD or SSD. |
 | $licence_type | **yes** | string | The licence type of the volume. Options: LINUX, WINDOWS, WINDOWS2016, UNKNOWN, OTHER |
 | $image_password | **yes** | string | One-time password is set on the Image for the appropriate root or administrative account. This field may only be set in creation requests. When reading, it always returns *null*. The password has to contain 8-50 characters. Only these characters are allowed: [abcdefghjkmnpqrstuvxABCDEFGHJKLMNPQRSTUVX23456789] |
@@ -1064,7 +1087,7 @@ The following table describes the request arguments:
 
 | Name| Required | Type | Description |
 |---|:-:|---|---|
-| $location | **yes** | string | This must be one of the locations: us/las, de/fra, de/fkb. |
+| $location | **yes** | string | This must be one of the locations: us/las, us/ewr, de/fra, de/fkb. |
 | $size | **yes** | int | The size of the IP block you want. |
 | $name | no | string | A descriptive name for the IP block |
 
@@ -1073,6 +1096,7 @@ The following table outlines the locations currently supported:
 | Value| Country | City |
 |---|---|---|
 | us/las | United States | Las Vegas |
+| us/ewr | United States | Newark |
 | de/fra | Germany | Frankfurt |
 | de/fkb | Germany | Karlsruhe |
 
@@ -1136,6 +1160,7 @@ The following table describes the request arguments:
 |---|:-:|---|---|
 | $datacenter_id | **yes** | string | The ID of the VDC. |
 | $name | no | string | The name of your LAN. |
+| $ipFailover | no | array{ip, nicUuid} | Information about IP Failovers can be found [here](https://devops.profitbricks.com/api/cloud/v4/#ip-failover-groups) |
 | $public | **Yes** | bool | Boolean indicating if the LAN faces the public Internet or not. |
 | $nics | no | object | A collection of NICs associated with the LAN. |
 
@@ -1383,7 +1408,8 @@ The following table describes the request arguments:
 | $depth | no | int | The level of details returned. |
 
 ```
-$rule = $firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);```
+$rule = $firewall_api->findById($datacenter_id, $server_id, $nic_id, $firewall_rule_id);
+```
 
 ---
 
@@ -1672,10 +1698,474 @@ The following table describes the request arguments:
 After retrieving a load balancer, either by getting it by id, or as a create response object, you can call the `delete` method directly.
 
 ```
-$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id); 
+$loadbalancer_nic_api->delete($datacenter_id, $loadbalancer_id, $nic_id);
 ```
 
 ---
+
+### Contract Resources
+
+Checking the amount of available resources under a contract can help you to avoid provisioning errors resulting from the attempt to provision more resources than are available.
+
+Create an instance of the api class:
+
+         $contract_resources_api = new ProfitBricks\Client\Api\ContractResourcesApi($api_client);
+
+#### List Contract Resources
+
+Returns information about the resource limits for a particular contract and the current resource usage.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$contract_resources = $contract_resources_api->findAll();
+```
+
+---
+
+
+### User Management
+
+These operations are designed to allow you to orchestrate users and resources via the Cloud API. Previously this functionality required use of the DCD (Data Center Designer) web application.
+
+Create an instance of the api class:
+
+         $user_management_api = new ProfitBricks\Client\Api\UserManagementApi($api_client);
+
+#### List Groups
+
+This retrieves a full list of all groups.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$groups = $user_management_api->findAllGroups();
+```
+
+---
+
+
+#### Retrieve Group
+
+Retrieves detailed information about a specific group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $depth | no | int | The level of details returned. |
+
+```
+$group = $user_management_api->findGroupById($group_id);
+```
+
+---
+
+#### Create Group
+
+Use this operation to create a new group and set group privileges.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $name | **yes** | string | A name for the group. |
+| $createDataCenter | no | boolean | The group will be allowed to create virtual data centers. |
+| $createSnapshot | no | boolean | The group will be allowed to create snapshots. |
+| $reserveIp | no | boolean | The group will be allowed to reserve IP addresses. |
+| $accessActivityLog | no | boolean | The group will be allowed to access the activity log. |
+
+**NOTES**:
+- The value for `$name` cannot contain the following characters: (@, /, , |, ‘’, ‘).
+
+```    
+$props = new \ProfitBricks\Client\Model\GroupItemProperty();
+$props->setName("test-group");
+$props->setCreateDataCenter(True);
+$props->setCreateSnapshot(True);
+```
+```
+$new_group = $user_management_api->createGroup($props);
+```
+
+---
+
+#### Update Group
+
+Use this operation to update a group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $name | **yes** | string | A name for the group. |
+| $createDataCenter | no | boolean | The group will be allowed to create virtual data centers. |
+| $createSnapshot | no | boolean | The group will be allowed to create snapshots. |
+| $reserveIp | no | boolean | The group will be allowed to reserve IP addresses. |
+| $accessActivityLog | no | boolean | The group will be allowed to access the activity log. |
+
+```    
+$props = new \ProfitBricks\Client\Model\GroupItemProperty();
+$props->setName("test-group");
+$props->setCreateDataCenter(False);
+$props->setCreateSnapshot(False);
+```
+```
+$new_group = $user_management_api->updateGroup($group_id, $props);
+```
+
+---
+
+#### Delete Group
+
+Use this operation to delete a single group. Resources that are assigned to the group are NOT deleted, but are no longer accessible to the group members unless the member is a Contract Owner, Admin, or Resource Owner.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group that you want to delete. |
+
+```
+$user_management_api->deleteGroup($group_id);
+```
+
+---
+
+#### List Shares
+
+Retrieves a full list of all the resources that are shared through this group and lists the permissions granted to the group members for each shared resource.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+
+```
+$shares = $user_management_api->findAllShares($group_id);
+```
+
+---
+
+
+#### Retrieve Share
+
+Retrieves the details of a specific shared resource available to the specified group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $share_id | **yes** | string | The ID of the share. |
+| $depth | no | int | The level of details returned. |
+
+```
+$share = $user_management_api->findShareById($group_id, $share_id);
+```
+
+---
+
+#### Create Share
+
+Adds a specific resource share to a group and optionally allows the setting of permissions for that resource. As an example, you might use this to grant permissions to use an image or snapshot to a specific group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $resource_id | **yes** | string | The ID of the share. |
+| $editPrivilege | no | boolean | The group has permission to edit privileges on this resource. |
+| $sharePrivilege | no | boolean | The group has permission to share this resource. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\ShareProperties();
+$props->setEditPrivilege(True);
+$props->setSharePrivilege(True);
+```
+```
+$new_share = $user_management_api->addShare($group_id, $resource_id, $props);
+```
+
+---
+
+#### Update Share
+
+Use this to update the permissions that a group has for a specific resource share.
+
+The following table describes the available request arguments:
+
+|| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $resource_id | **yes** | string | The ID of the share. |
+| $editPrivilege | no | boolean | The group has permission to edit privileges on this resource. |
+| $sharePrivilege | no | boolean | The group has permission to share this resource. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\ShareProperties();
+$props->setEditPrivilege(False);
+$props->setSharePrivilege(False);
+```
+```
+$updated_share = $user_management_api->updateShare($group_id, $resource_id, $props);
+```
+
+---
+
+#### Delete Share
+
+Removes a resource share from a specified group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $share_id | **yes** | string | The ID of the share. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_share = $user_management_api->deleteShare($group_id, $share_id);
+```
+
+---
+
+#### List Users
+
+Retrieve a list of all the users that have been created under a contract.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$users = $user_management_api->findAllUsers();
+```
+
+---
+
+
+#### Retrieve User
+
+Retrieve details about a specific user including what groups and resources the user is associated with.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | The ID of the user. |
+| $depth | no | int | The level of details returned. |
+
+```
+$user = $user_management_api->findUserById($user_id);
+```
+
+---
+
+#### Create User
+
+Creates a new user under a particular contract.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $firstName | **yes** | string | A name for the user. |
+| $lastName | **yes** | string | A name for the user. |
+| $email | **yes** | string | An e-mail address for the user. |
+| $password | **yes** | string | A password for the user. |
+| $administrator | no | boolean | Assigns the user have administrative rights. |
+| $forceSecAuth | no | boolean | Indicates if secure authentication should be forced for the user. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\UserProperties();
+$props->setFirstName('Bob');
+$props->setLastName('Smith');
+$props->setEmail('bob_smith@example.com');
+$props->setPassword('testPassword123!');
+```
+```
+$new_user = $user_management_api->createUser($props);
+```
+
+---
+
+#### Update User
+
+Update details about a specific user including their privileges.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | ID for the user. |
+| $firstName | **yes** | string | A name for the user. |
+| $lastName | **yes** | string | A name for the user. |
+| $email | **yes** | string | An e-mail address for the user. |
+| $administrator | no | boolean | Assigns the user have administrative rights. |
+| $forceSecAuth | no | boolean | Indicates if secure authentication should be forced for the user. |
+| $depth | no | int | The level of details returned. |
+
+```    
+$props = new \ProfitBricks\Client\Model\UserProperties();
+$props->setFirstName('Bob');
+$props->setLastName('Smith');
+$props->setEmail('bob_smith@example.com');
+$props->setAdministrator(True);
+$props->setForceSecAuth(True);
+```
+```
+$updated_user = $user_management_api->updateUser($user_id, $props);
+```
+
+---
+
+#### Delete User
+
+Blacklists the user, disabling them. The user is not completely purged, therefore if you anticipate needing to create a user with the same name in the future, we suggest renaming the user before you delete it.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $user_id | **yes** | string | The ID of the user. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_user = $user_management_api->deleteUser($user_id);
+```
+
+---
+
+
+#### List Users In Group
+
+Retrieves a full list of all the users that are members of a particular group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $depth | no | int | The level of details returned. |
+
+```
+$users = $user_management_api->findUsersInGroup($group_id);
+```
+
+---
+
+#### Add User To Group
+
+Use this operation to add an existing user to a group.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $user_id | **yes** | string | The ID of the user to add. |
+| $depth | no | int | The level of details returned. |
+
+```
+$new_user = $user_management_api->addUserToGroup($group_id, $user_id);
+```
+
+---
+
+#### Remove User From Group
+
+Use this operation to remove a user from a group.
+
+The following table describes the available request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $group_id | **yes** | string | The ID of the group. |
+| $user_id | **yes** | string | The ID of the user to add. |
+| $depth | no | int | The level of details returned. |
+
+```
+$deleted_user = $user_management_api->removeUserFromGroup($group_id, $user_id);
+```
+
+---
+
+
+#### List Resources
+
+Retrieves a list of all resources and optionally their group associations.
+
+The optional `depth` parameter defines the level, one being the least and five being the most, of information returned with the response.
+
+```
+$resources = $user_management_api->findAllResources();
+```
+
+---
+
+
+#### List Resources Of Type
+
+Lists all shareable resources of a specific type.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $resource_type | **yes** | string | The specific type of resources to retrieve information about. |
+| $depth | no | int | The level of details returned. |
+
+`$resource_type` can be any of the following values:
+
+| Name| Description |
+|---|---|
+| datacenter | A virtual data center. |
+| image | A private image that has been uploaded to ProfitBricks. |
+| snapshot | A snapshot of a storage volume. |
+| ipblock | An IP block that has been reserved. |
+
+```
+$resources = $user_management_api->findAllResourcesByType('datacenter');
+```
+
+---
+
+#### Find Resource By Id
+
+Retrieve a shareable resource by Id.
+
+The following table describes the request arguments:
+
+| Name| Required | Type | Description |
+|---|:-:|---|---|
+| $resource_type | **yes** | string | The specific type of resources to retrieve information about. |
+| $resource_id | **yes** | string | ID of resource. |
+| $depth | no | int | The level of details returned. |
+
+`$resource_type` can be any of the following values:
+
+| Name| Description |
+|---|---|
+| datacenter | A virtual data center. |
+| image | A private image that has been uploaded to ProfitBricks. |
+| snapshot | A snapshot of a storage volume. |
+| ipblock | An IP block that has been reserved. |
+
+```
+$resource = $user_management_api->findResourceById('datacenter', $resource_id);
+```
+
+---
+
 
 ### Requests
 
@@ -1683,7 +2173,7 @@ Each call to the ProfitBricks Cloud API is assigned a request ID. These operatio
 
 Create an instace of the api class:
 
-         RequestApi reqApi = new RequestApi(Configuration);
+         $reqiest_api = new ProfitBricks\Client\Api\RequestApi($api_client);
 
 #### List Requests
 
@@ -1727,134 +2217,56 @@ $request = $reqiest_api->getStatus($request_id);
 
 ## Examples
 
-Here are a few examples on how to use the module.
+### Wait for Resources
 
-
-## How To: Create Data Center
-
-ProfitBricks introduces the concept of Data Centers. These are logically separated from one another and allow you to have a self-contained environment for all servers, volumes, networking, snapshots, and so forth. The goal is to give you the same experience as you would have if you were running your own physical data center.
-
-The following code example shows you how to programmatically create a data center:
+ProfitBricks allows servers to be created with individual, customizable components including NICs and volumes. A wait method is necessary to provision components that depends on each other. Below is an example of a `waitTillProvisioned` method that can be used between dependent requests:
 
 ```php
-$datacenter = new \ProfitBricks\Client\Model\Datacenter();
-
-$props = new \ProfitBricks\Client\Model\DatacenterProperties();
-$props->setName("test-data-center");
-$props->setDescription("example description");
-$props->setLocation('us/lasdev');
-$datacenter->setProperties($props);
-
-$testDatacenter = $datacenter_api->create($datacenter);
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
 ```
 
-## How To: Delete Data Center
-
-You will want to exercise a bit of caution here. Removing a data center will destroy all objects contained within that data center -- servers, volumes, snapshots, and so on.
-
-The code to remove a data center is as follows. This example assumes you want to remove previously data center:
-
+### Component Build
 ```php
-$id = $testDatacenter->getId();
-$datacenter_api->delete($id);
-```
+<?php
 
-## How To: Create Server
+require_once(__DIR__.'/vendor/autoload.php');
 
-The server create method has a list of required parameters followed by a hash of optional parameters. The optional parameters are specified within the "options" hash and the variable names match the [REST API](https://devops.profitbricks.com/api/rest/) parameters.
+$test_location = 'us/las';
 
-The following example shows you how to create a new server in the data center created above:
-
-```php
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("jclouds-node")->setCores(1)->setRam(1024);
-$server->setProperties($props);
-
-$testServer = $server_api->create($testDatacenter->getId(), $server);
-```
-
-## How To: List Available Images
-
-A list of disk and ISO images are available from ProfitBricks for immediate use. These can be easily viewed and selected. The following shows you how to get a list of images. This list represents both CDROM images and HDD images.
-
-```php
-$images = $image_api->findAll();
-```
-
-This will return an [ArrayAccess interface](#ArrayAccess) object
-
-## How To: Create Storage Volume
-
-ProfitBricks allows for the creation of multiple storage volumes that can be attached and detached as needed. It is useful to attach an image when creating a storage volume. The storage size is in gigabytes.
-
-```php
-$volume = new ProfitBricks\Client\Model\Volume();
-$props = new \ProfitBricks\Client\Model\VolumeProperties();
-$props->setName("test-volume")->setSize(3)->setType('HDD')->setImage('image-id')->setImagePassword("testpassword123");
-$volume->setProperties($props);
-
-$testVolume = $volume_api->create($testDatacenter->getId(), $volume);
-```
-
-## How To: Update Cores and Memory
-
-ProfitBricks allows users to dynamically update cores, memory, and disk independently of each other. This removes the restriction of needing to upgrade to the next size available size to receive an increase in memory. You can now simply increase the instances memory keeping your costs in-line with your resource needs.
-
-Note: The memory parameter value must be a multiple of 256, e.g. 256, 512, 768, 1024, and so forth.
-
-The following code illustrates how you can update cores and memory:
-
-```php
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("new-name")->setCores(2)->setRam(2048);
-$server->setProperties($props);
-
-$server_api->partialUpdate($testDatacenter->getId(), $testServer->getId(), $props);
-```
-
-## How To: Attach or Detach Storage Volume
-
-ProfitBricks allows for the creation of multiple storage volumes. You can detach and reattach these on the fly. This allows for various scenarios such as re-attaching a failed OS disk to another server for possible recovery or moving a volume to another location and spinning it up.
-
-The following illustrates how you would attach and detach a volume and CDROM to/from a server:
-
-```php
-$volume = new ProfitBricks\Client\Model\Volume();
-$volume->setId('volume-id');
-$attached_volume_api->attachVolume($testDatacenter->getId(), $testServer->getId(), $volume);
-
-$image = new \ProfitBricks\Client\Model\Image();
-$image->setId('image-id');
-$testCdrom = $attached_cdrom_api->create($testDatacenter->getId(), $testServer->getId(), $image);
-
-$attached_volume_api->delete($testDatacenter->getId(), $testServer->getId(), $testVolume->getId());
-$cdrom_api->delete($testDatacenter->getId(), $testServer->getId(), $testCdrom->getId());
-```
-
-## How To: List Servers, Volumes, and Data Centers
-
-Go SDK provides standard functions for retrieving a list of volumes, servers, and datacenters.
-
-The following code illustrates how to pull these three list types:
-
-```php
-$volumes = $volume_api->findAll($testDatacenter->getId());
-$servers = $server_api->findAll($testDatacenter->getId());
-$datacenters = $datacenter_api->findAll();
-```
-
-## Example
-
-```php
 $config = (new ProfitBricks\Client\Configuration())
-  ->setHost('https://api.profitbricks.com/cloudapi/v3/')
-  ->setUsername('pb_username')
-  ->setPassword('pb_password');
-$api = new ProfitBricks\Client\ApiClient($config);
+    ->setHost('https://api.profitbricks.com/cloudapi/v4/')
+    ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+    ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+$api_client = new ProfitBricks\Client\ApiClient($config);
 
 $datacenter_api = new ProfitBricks\Client\Api\DataCenterApi($api_client);
+$server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
+$volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi($api_client);
+
+echo "Creating DataCenter";
+echo PHP_EOL ;
 
 $datacenter = new \ProfitBricks\Client\Model\Datacenter();
 
@@ -1864,7 +2276,15 @@ $props->setDescription("example description");
 $props->setLocation($test_location);
 $datacenter->setProperties($props);
 
+
 $testDatacenter = $datacenter_api->create($datacenter);
+waitTillProvisioned($testDatacenter->getRequestId());
+
+echo "DataCenter Ready";
+echo PHP_EOL ;
+
+echo "Creating Server";
+echo PHP_EOL ;
 
 $server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
 
@@ -1875,33 +2295,204 @@ $server->setProperties($props);
 
 $testServer = $server_api->create($testDatacenter->getId(), $server);
 
+waitTillProvisioned($testServer->getRequestId());
+
+echo "Server Ready";
+echo PHP_EOL ;
+
+echo "looking for a linux image";
+echo PHP_EOL ;
+
+$image_api = new ProfitBricks\Client\Api\ImageApi($api_client);
+$images=$image_api->findAll(null,5);
+$osImage = null;
+foreach ($images->getItems() as $image) {
+  if ($image->getProperties()->getPublic() == true
+      && $image->getProperties()->getLocation() == "us/las"
+      && $image->getProperties()->getLicenceType() == "LINUX"
+      && $image->getProperties()->getImageType() == "HDD"
+  ) {
+    $osImage = $image;
+  }
+}
+
+echo "image found";
+echo PHP_EOL ;
+
+echo "Creating Volume with the os Image installed";
+echo PHP_EOL ;
 $volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
 
 $volume = new ProfitBricks\Client\Model\Volume();
 $props = new \ProfitBricks\Client\Model\VolumeProperties();
 $props->setName("test-volume")
-  ->setSize(3)
-  ->setType('HDD')
-  ->setImage('image-id')
-  ->setImagePassword("testpassword123")
-  ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
+    ->setSize(3)
+    ->setType('HDD')
+    ->setImage($osImage->getId())
+    ->setImagePassword("testpassword123")
+    ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
 $volume->setProperties($props);
 
 $testVolume = $volume_api->create($testDatacenter->getId(), $volume);
 
-$server = new \ProfitBricks\Client\Model\Server();
-$props = new \ProfitBricks\Client\Model\ServerProperties();
-$props->setName("new-name")->setCores(2)->setRam(1024 * 2);
-$server->setProperties($props);
+waitTillProvisioned($testVolume->getRequestId());
+echo "Volume Ready";
+echo PHP_EOL ;
 
-$server_api->partialUpdate($testDatacenter->getId(), $testServer->getId(), $props);
+echo "Attaching volume to server";
+echo PHP_EOL ;
 
-$servers = $server_api->findAll($testDatacenter->getId());
-$volumes = $volume_api->findAll($testDatacenter->getId());
-$datacenters = $datacenter_api->findAll();
+$attachedVolume=$attached_volume_api->attachVolume($testDatacenter->getId(), $testServer->getId(), $volume);
+waitTillProvisioned($attachedVolume->getRequestId());
 
-$server_api->delete($testDatacenter->getId(), $testServer->getId());
-$datacenter_api->delete($id);
+echo "Volume attached";
+echo PHP_EOL ;
+
+
+echo "Cleaning example";
+echo PHP_EOL ;
+$datacenter_api->delete($testDatacenter->getId());
+
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
+?>
+```
+
+### Composite Build
+
+```php
+<?php
+
+require_once(__DIR__.'/vendor/autoload.php');
+
+$test_location = 'us/las';
+
+$config = (new ProfitBricks\Client\Configuration())
+    ->setHost('https://api.profitbricks.com/cloudapi/v4/')
+    ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+    ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+$api_client = new ProfitBricks\Client\ApiClient($config);
+
+$datacenter_api = new ProfitBricks\Client\Api\DataCenterApi($api_client);
+$server_api = new ProfitBricks\Client\Api\ServerApi($api_client);
+$volume_api = new ProfitBricks\Client\Api\VolumeApi($api_client);
+$attached_volume_api = new ProfitBricks\Client\Api\AttachedVolumesApi($api_client);
+
+echo "looking for a linux image";
+echo PHP_EOL ;
+
+$image_api = new ProfitBricks\Client\Api\ImageApi($api_client);
+$images=$image_api->findAll(null,5);
+$osImage = null;
+foreach ($images->getItems() as $image) {
+  if ($image->getProperties()->getPublic() == true
+      && $image->getProperties()->getLocation() == "us/las"
+      && $image->getProperties()->getLicenceType() == "LINUX"
+      && $image->getProperties()->getImageType() == "HDD"
+  ) {
+    $osImage = $image;
+  }
+}
+
+echo "image found";
+echo PHP_EOL ;
+
+echo "Creating Composite DataCenter";
+echo PHP_EOL ;
+
+$datacenter_composite = new \ProfitBricks\Client\Model\Datacenter();
+
+//Configuring DataCenter properties
+$props = new \ProfitBricks\Client\Model\DatacenterProperties();
+$props->setName("test-data-center-composite");
+$props->setDescription("example description");
+$props->setLocation("us/las");
+
+//Creating an array of servers to be added within the DataCenter
+$servers=new \ProfitBricks\Client\Model\Servers();
+$server_composite = new \ProfitBricks\Client\Model\Server();
+$server_props = new \ProfitBricks\Client\Model\ServerProperties();
+$server_props->setName("composite-node")->setCores(1)->setRam(1024);
+$server_composite->setProperties($server_props);
+
+//Creating an array of volumes to be added within the Server
+$server_entities= new \ProfitBricks\Client\Model\ServerEntities();
+
+$volume = new ProfitBricks\Client\Model\Volume();
+$v_props = new \ProfitBricks\Client\Model\VolumeProperties();
+$v_props->setName("test-volume")
+    ->setSize(3)
+    ->setType('HDD')
+    ->setImage($osImage->getId())
+    ->setImagePassword("testpassword123")
+    ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
+$volume->setProperties($v_props);
+$attachedVolumes= new \ProfitBricks\Client\Model\Volumes();
+$attachedVolumes->setItems(array($volume));
+$server_entities->setVolumes($attachedVolumes);
+$server_composite->setEntities($server_entities);
+
+$servers->setItems(array($server_composite));
+$entities= new \ProfitBricks\Client\Model\DatacenterEntities();
+$entities->setServers($servers);
+
+$datacenter_composite->setProperties($props);
+$datacenter_composite->setEntities($entities);
+$testDatacenterComposite = $datacenter_api->create($datacenter_composite);
+waitTillProvisioned($testDatacenterComposite->getRequestId());
+
+echo "DataCenter Ready";
+echo PHP_EOL ;
+
+
+
+echo "Cleaning example";
+echo PHP_EOL ;
+$datacenter_api->delete($testDatacenterComposite->getId());
+
+function waitTillProvisioned($url)
+{
+  //regex to get the request id
+  preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/', $url, $matches);
+  $config = (new ProfitBricks\Client\Configuration())
+      ->setHost('https://api.profitbricks.com/cloudapi/v4')
+      ->setUsername(getenv('PROFITBRICKS_USERNAME'))
+      ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
+  $api_client = new ProfitBricks\Client\ApiClient($config);
+  $request_api = new ProfitBricks\Client\Api\RequestApi($api_client);
+  $counter = 120;
+  for ($i = 0; $i < $counter; $i++) {
+    $request = $request_api->getStatus($matches[0]);
+    sleep(1);
+    if ($request->getMetadata()->getStatus() == "DONE") {
+      break;
+    }
+    if ($request->getMetadata()->getStatus() == "FAILED") {
+      throw new Exception("The request execution has failed with following message: " + $request->getMetadata()->getMessage());
+    }
+  }
+}
+?>
 ```
 
 ## Support
@@ -1919,4 +2510,3 @@ You can find a full list of tests inside the `tests` folder.You can run tests us
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
-  

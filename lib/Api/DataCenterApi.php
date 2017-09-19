@@ -98,6 +98,9 @@ class DataCenterApi
     public function create($datacenter, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->createWithHttpInfo ($datacenter, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 
@@ -546,6 +549,7 @@ class DataCenterApi
     public function partialUpdate($datacenter_id, $datacenter, $body = null, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->partialUpdateWithHttpInfo ($datacenter_id, $datacenter, $body, $pretty_print_query_parameter, $depth);
+        $response->setRequestId($httpHeader['Location']);
         return $response;
     }
 
@@ -677,6 +681,9 @@ class DataCenterApi
     public function update($datacenter_id, $datacenter, $pretty_print_query_parameter = null, $depth = null)
     {
         list($response, $statusCode, $httpHeader) = $this->updateWithHttpInfo ($datacenter_id, $datacenter, $pretty_print_query_parameter, $depth);
+        if($response!=null) {
+          $response->setRequestId($httpHeader['Location']);
+        }
         return $response;
     }
 

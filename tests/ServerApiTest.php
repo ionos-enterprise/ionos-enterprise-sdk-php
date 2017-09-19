@@ -33,15 +33,10 @@ class ServerApiTest extends BaseTest
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
+  
+    $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $result = self::assertPredicate(function() {
-      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-      if ($server->getMetadata()->getState() == 'AVAILABLE') {
-        return $server;
-      }
-    });
-
-    $this->assertEquals($result->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
   }
   
   public function testCreateComposite() {
@@ -68,15 +63,10 @@ class ServerApiTest extends BaseTest
     $server_composite->setEntities($entities);
     
     self::$testServer_Composite = self::$server_api->create(self::$testDatacenter->getId(), $server_composite);
-    
-    $result = self::assertPredicate(function() {
-      $server_composite = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer_Composite->getId());
-      if ($server_composite->getMetadata()->getState() == 'AVAILABLE') {
-        return $server_composite;
-      }
-    });
   
-    $this->assertEquals(sizeof($result->getEntities()->getVolumes()), 1);
+    $this->waitTillProvisioned(self::$testServer_Composite->getRequestId());
+  
+    $this->assertEquals(sizeof(self::$testServer_Composite->getEntities()->getVolumes()), 1);
   }
 
   public function testGet() {
@@ -147,16 +137,10 @@ class ServerApiTest extends BaseTest
     $volume->setProperties($props);
 
     $testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);
-
-    self::$testVolume = self::assertPredicate(function($testVolume) {
-      $volume = self::$volume_api->findById(self::$testDatacenter->getId(), $testVolume->getId());
-      if ($volume->getMetadata()->getState() == 'AVAILABLE') {
-        return $volume;
-      }
-    }, array($testVolume));
-
+    $this->waitTillProvisioned($testVolume->getRequestId());
+    self::$testVolume = self::$volume_api->findById(self::$testDatacenter->getId(), $testVolume->getId());
+  
     $this->assertEquals(self::$testVolume->getProperties()->getSize(), 3);
-
     $volume = new ProfitBricks\Client\Model\Volume();
     $volume->setId(self::$testVolume->getId());
     self::$attached_volume_api->attachVolume(self::$testDatacenter->getId(), self::$testServer->getId(), $volume);
@@ -192,14 +176,9 @@ class ServerApiTest extends BaseTest
     $image->setId($testImage->getId());
 
     self::$testCdrom = self::$cdrom_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $image);
-
-    $result = self::assertPredicate(function() {
-      $cdrom = self::$cdrom_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testCdrom->getId());
-      if ($cdrom->getMetadata()->getState() == 'AVAILABLE') {
-        return $cdrom;
-      }
-    });
-    $this->assertEquals($result->getProperties()->getName(), $testImage->getProperties()->getName());
+  
+    $this->waitTillProvisioned(self::$testCdrom->getRequestId());
+    $this->assertEquals(self::$testCdrom->getProperties()->getName(), $testImage->getProperties()->getName());
   }
 
   public function testRetrieveAttachedCdrom() {

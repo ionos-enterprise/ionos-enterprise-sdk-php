@@ -26,25 +26,17 @@ class SnapshotApiTest extends BaseTest
     $volume->setProperties($props);
 
     self::$testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);
-
-    $testVolume = self::assertPredicate(function() {
-      $volume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
-      if ($volume->getMetadata()->getState() == 'AVAILABLE') {
-        return $volume;
-      }
-    });
-
+  
+    $this->waitTillProvisioned(self::$testVolume->getRequestId());
+    $testVolume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
     $this->assertEquals($testVolume->getProperties()->getName(), "test-volume");
   }
 
   public function testCreateSnapshot() {
     self::$testSnapshot = self::$volume_api->createSnapshot(self::$testDatacenter->getId(), self::$testVolume->getId());
-    $snapshot = self::assertPredicate(function () { 
-      $snapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
-      if ($snapshot->getMetadata()->getState() == 'AVAILABLE') {
-        return $snapshot;
-      }
-    });
+    $this->waitTillProvisioned(self::$testSnapshot->getRequestId());
+    $snapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
+   
     $this->assertNotEmpty($snapshot);
   }
 
@@ -67,14 +59,9 @@ class SnapshotApiTest extends BaseTest
     $props = new \ProfitBricks\Client\Model\SnapshotProperties();
     $props->setName("new-name");
 
-    self::$snapshot_api->partialUpdate(self::$testSnapshot->getId(), $props);
-
-    self::assertPredicate(function() {
-      $snapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
-      if ($snapshot->getMetadata()->getState() == 'AVAILABLE') {
-        return $snapshot;
-      }
-    });
+    $updateResponse=self::$snapshot_api->partialUpdate(self::$testSnapshot->getId(), $props);
+  
+    $this->waitTillProvisioned($updateResponse->getRequestId());
 
     $updatedSnapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
 
