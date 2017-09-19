@@ -8,7 +8,7 @@
  * @package  ProfitBricks\Client
 
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
- 
+
  */
 /**
 
@@ -51,6 +51,7 @@ class VolumeProperties implements ArrayAccess
         'type' => 'string',
         'size' => 'double',
         'image' => 'string',
+        'imageAlias' => 'string',
         'image_password' => 'string',
         'ssh_keys' => 'string[]',
         'bus' => 'string',
@@ -82,6 +83,7 @@ class VolumeProperties implements ArrayAccess
         'size' => 'size',
         'availability_zone' => 'availabilityZone',
         'image' => 'image',
+        'imageAlias' => 'imageAlias',
         'image_password' => 'imagePassword',
         'ssh_keys' => 'sshKeys',
         'bus' => 'bus',
@@ -113,6 +115,7 @@ class VolumeProperties implements ArrayAccess
         'size' => 'setSize',
         'availability_zone' => 'setAvailabilityZone',
         'image' => 'setImage',
+        'imageAlias' => 'setImageAlias',
         'image_password' => 'setImagePassword',
         'ssh_keys' => 'setSshKeys',
         'bus' => 'setBus',
@@ -144,6 +147,7 @@ class VolumeProperties implements ArrayAccess
         'size' => 'getSize',
         'availability_zone' => 'getAvailabilityZone',
         'image' => 'getImage',
+        'imageAlias' => 'getImageAlias',
         'image_password' => 'getImagePassword',
         'ssh_keys' => 'getSshKeys',
         'bus' => 'getBus',
@@ -189,6 +193,7 @@ class VolumeProperties implements ArrayAccess
       * @var string
       */
     protected $image;
+    protected $imageAlias;
 
     /**
       * $image_password Initial password to be set for installed OS. Works with Profitbricks public images only. Not modifiable, forbidden in update requests
@@ -293,6 +298,7 @@ class VolumeProperties implements ArrayAccess
             $this->type = $data["type"];
             $this->size = $data["size"];
             $this->image = $data["image"];
+            $this->image = $data["imageAlias"];
             $this->image_password = $data["image_password"];
             $this->ssh_keys = $data["ssh_keys"];
             $this->bus = $data["bus"];
@@ -395,6 +401,28 @@ class VolumeProperties implements ArrayAccess
     {
 
         $this->image = $image;
+        return $this;
+    }
+
+
+    /**
+     * Gets image
+     * @return string
+     */
+    public function getImageAlias()
+    {
+        return $this->imageAlias;
+    }
+
+    /**
+     * Sets image
+     * @param string $image Image or snapshot ID to be used as template for this volume
+     * @return $this
+     */
+    public function setImageAlias($imageAlias)
+    {
+
+        $this->imageAlias = $imageAlias;
         return $this;
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * ShareProperties
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * ShareProperties Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ShareProperties implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+      'editPrivilege' => 'bool',
+      'sharePrivilege' => 'bool'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'editPrivilege' => 'editPrivilege',
+        'sharePrivilege' => 'sharePrivilege'
     );
 
     static function attributeMap() {
@@ -75,9 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+        'editPrivilege' => 'setEditPrivilege',
+        'sharePrivilege' => 'setSharePrivilege'
     );
 
     static function setters() {
@@ -89,9 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+        'editPrivilege' => 'getEditPrivilege',
+        'sharePrivilege' => 'getSharePrivilege'
     );
 
     static function getters() {
@@ -100,22 +96,16 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
-      * @var string
+      * $editPrivilege The group has permission to edit privileges on this resource.
+      * @var boolean
       */
-    protected $name;
+    protected $editPrivilege;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $sharePrivilege The group has permission to share this resource.
+      * @var boolean
       */
-    protected $ipFailover;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $sharePrivilege;
 
 
     /**
@@ -126,72 +116,49 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->editPrivilege = $data["editPrivilege"];
+            $this->sharePrivilege = $data["sharePrivilege"];
         }
     }
 
     /**
-     * Gets name
-     * @return string
+     * Gets editPrivilege
+     * @return boolean
      */
-    public function getName()
+    public function getEditPrivilege()
     {
-        return $this->name;
+        return $this->editPrivilege;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets editPrivilege
+     * @param boolean $editPrivilege The group has permission to edit privileges on this resource.
      * @return $this
      */
-    public function setName($name)
+    public function setEditPrivilege($editPrivilege)
     {
 
-        $this->name = $name;
+        $this->editPrivilege = $editPrivilege;
         return $this;
     }
 
     /**
-     * Gets ipFailover
-     * @return string
+     * Gets sharePrivilege
+     * @return boolean
      */
-    public function getIpFailover()
+    public function getSharePrivilege()
     {
-        return $this->ipFailover;
+        return $this->sharePrivilege;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets sharePrivilege
+     * @param boolean $sharePrivilege The group has permission to share this resource.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setSharePrivilege($sharePrivilege)
     {
-
-        $this->ipFailover = $ipFailover;
-        return $this;
-    }
-
-    /**
-     * Gets public
-     * @return bool
-     */
-    public function getPublic()
-    {
-        return $this->public;
-    }
-
-    /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
-     * @return $this
-     */
-    public function setPublic($public)
-    {
-
-        $this->public = $public;
+        $this->sharePrivilege = $sharePrivilege;
         return $this;
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * IpFailover
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * IpFailover Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class IpFailover implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'ip' => 'string',
+        'nicUuid' => 'string'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+      'ip' => 'ip',
+      'nicUuid' => 'nicUuid'
     );
 
     static function attributeMap() {
@@ -75,9 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+      'ip' => 'setIp',
+      'nicUuid' => 'setNicUuid'
     );
 
     static function setters() {
@@ -89,9 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+      'ip' => 'getIp',
+      'nicUuid' => 'getNicUuid'
     );
 
     static function getters() {
@@ -100,22 +96,17 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $ip IP to be added.
       * @var string
       */
-    protected $name;
+    protected $ip;
+
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $nicUuid ID of NIC.
+      * @var string
       */
-    protected $ipFailover;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $nicUuid;
 
 
     /**
@@ -126,72 +117,51 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->ip = $data["ip"];
+            $this->nicUuid = $data["nicUuid"];
         }
     }
 
+
     /**
-     * Gets name
+     * Gets IP
      * @return string
      */
-    public function getName()
+    public function getIp()
     {
-        return $this->name;
+        return $this->ip;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets IP
+     * @param string $ip IP address to be used.
      * @return $this
      */
-    public function setName($name)
+    public function setIp($ip)
     {
-
-        $this->name = $name;
+        $this->ip = $ip;
         return $this;
     }
 
+
     /**
-     * Gets ipFailover
+     * Gets nicUuid
      * @return string
      */
-    public function getIpFailover()
+    public function getNicUuid()
     {
-        return $this->ipFailover;
+        return $this->nicUuid;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets nicUuid
+     * @param string $nicUuid ID of NIC.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setNicUuid($nicUuid)
     {
 
-        $this->ipFailover = $ipFailover;
-        return $this;
-    }
-
-    /**
-     * Gets public
-     * @return bool
-     */
-    public function getPublic()
-    {
-        return $this->public;
-    }
-
-    /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
-     * @return $this
-     */
-    public function setPublic($public)
-    {
-
-        $this->public = $public;
+        $this->nicUuid = $nicUuid;
         return $this;
     }
 

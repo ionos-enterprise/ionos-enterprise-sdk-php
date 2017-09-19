@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * GroupItemProperty
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * GroupItemProperty Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,7 +40,7 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItemProperty implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -48,8 +48,10 @@ class LanProperties implements ArrayAccess
       */
     static $ProfitBricksTypes = array(
         'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'createDataCenter' => 'boolean',
+        'createSnapshot' => 'boolean',
+        'reserveIp' => 'boolean',
+        'accessActivityLog' => 'boolean'
     );
 
     static function ProfitBricksTypes() {
@@ -62,8 +64,10 @@ class LanProperties implements ArrayAccess
       */
     static $attributeMap = array(
         'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'createDataCenter' => 'createDataCenter',
+        'createSnapshot' => 'createSnapshot',
+        'reserveIp' => 'reserveIp',
+        'accessActivityLog' => 'accessActivityLog'
     );
 
     static function attributeMap() {
@@ -76,8 +80,10 @@ class LanProperties implements ArrayAccess
       */
     static $setters = array(
         'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+        'createDataCenter' => 'setCreateDataCenter',
+        'createSnapshot' => 'setCreateSnapshot',
+        'reserveIp' => 'setReserveIp',
+        'accessActivityLog' => 'setAccessActivityLog'
     );
 
     static function setters() {
@@ -90,8 +96,10 @@ class LanProperties implements ArrayAccess
       */
     static $getters = array(
         'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+        'createDataCenter' => 'getCreateDataCenter',
+        'createSnapshot' => 'getCreateSnapshot',
+        'reserveIp' => 'getReserveIp',
+        'accessActivityLog' => 'getAccessActivityLog'
     );
 
     static function getters() {
@@ -100,22 +108,34 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $name Group name.
       * @var string
       */
     protected $name;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $createDataCenter The group has permission to create virtual data centers.
+      * @var boolean
       */
-    protected $ipFailover;
+    protected $createDataCenter;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $createSnapshot The group has permission to create snapshots.
+      * @var boolean
       */
-    protected $public = false;
+    protected $createSnapshot;
+
+    /**
+      * $reserveIp The group has permission to reserve IP addresses.
+      * @var boolean
+      */
+    protected $reserveIp;
+
+    /**
+      * $accessActivityLog The group has permission to access the activity log.
+      * @var boolean
+      */
+    protected $accessActivityLog;
 
 
     /**
@@ -127,8 +147,10 @@ class LanProperties implements ArrayAccess
 
         if ($data != null) {
             $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->createDataCenter = $data["createDataCenter"];
+            $this->createSnapshot = $data["createSnapshot"];
+            $this->reserveIp = $data["reserveIp"];
+            $this->accessActivityLog = $data["accessActivityLog"];
         }
     }
 
@@ -143,7 +165,7 @@ class LanProperties implements ArrayAccess
 
     /**
      * Sets name
-     * @param string $name A name of that resource
+     * @param string $name Group name.
      * @return $this
      */
     public function setName($name)
@@ -153,47 +175,91 @@ class LanProperties implements ArrayAccess
         return $this;
     }
 
+
     /**
-     * Gets ipFailover
-     * @return string
+     * Gets createDataCenter
+     * @return boolean
      */
-    public function getIpFailover()
+    public function getCreateDataCenter()
     {
-        return $this->ipFailover;
+        return $this->createDataCenter;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets createDataCenter
+     * @param boolean $createDataCenter The group has permission to create virtual data centers.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setCreateDataCenter($createDataCenter)
+    {
+        $this->createDataCenter = $createDataCenter;
+        return $this;
+    }
+
+
+    /**
+     * Gets createSnapshot
+     * @return boolean
+     */
+    public function getCreateSnapshot()
+    {
+        return $this->createSnapshot;
+    }
+
+    /**
+     * Sets createSnapshot
+     * @param boolean $createSnapshot The group has permission to create snapshots.
+     * @return $this
+     */
+    public function setCreateSnapshot($createSnapshot)
+    {
+        $this->createSnapshot = $createSnapshot;
+        return $this;
+    }
+
+
+    /**
+     * Gets reserveIp
+     * @return boolean
+     */
+    public function getReserveIp()
+    {
+        return $this->reserveIp;
+    }
+
+    /**
+     * Sets reserveIp
+     * @param boolean $reserveIp The group has permission to reserve IP addresses.
+     * @return $this
+     */
+    public function setReserveIp($reserveIp)
     {
 
-        $this->ipFailover = $ipFailover;
+        $this->reserveIp = $reserveIp;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets accessActivityLog
+     * @return boolean
      */
-    public function getPublic()
+    public function getAccessActivityLog()
     {
-        return $this->public;
+        return $this->accessActivityLog;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets accessActivityLog
+     * @param boolean $accessActivityLog The group has permission to access the activity log.
      * @return $this
      */
-    public function setPublic($public)
+    public function setAccessActivityLog($accessActivityLog)
     {
 
-        $this->public = $public;
+        $this->accessActivityLog = $accessActivityLog;
         return $this;
     }
+
 
     /**
      * Returns true if offset exists. False otherwise.

@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * GroupItemEntity
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * GroupItemEntity Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,15 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItemEntity implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'users' => '\ProfitBricks\Client\Model\GroupItemUser',
+        'resources' => '\ProfitBricks\Client\Model\GroupItemResource'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +60,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'users' => 'users',
+        'resources' => 'resources'
     );
 
     static function attributeMap() {
@@ -75,9 +73,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+      'users' => 'setUsers',
+      'resources' => 'setResources'
     );
 
     static function setters() {
@@ -89,9 +86,8 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+      'users' => 'getUsers',
+      'resources' => 'getResources'
     );
 
     static function getters() {
@@ -100,22 +96,16 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
-      * @var string
+      * $users A collection of users that belong to this group.
+      * @var \ProfitBricks\Client\Model\GroupItemUser
       */
-    protected $name;
+    protected $users;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $resources A collection of resources that are assigned to this group.
+      * @var \ProfitBricks\Client\Model\GroupItemResource
       */
-    protected $ipFailover;
-
-    /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
-      */
-    protected $public = false;
+    protected $resources;
 
 
     /**
@@ -126,72 +116,51 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->users = $data["users"];
+            $this->resources = $data["resources"];
         }
     }
 
     /**
-     * Gets name
-     * @return string
+     * Gets users
+     * @return \ProfitBricks\Client\Model\GroupItemUser
      */
-    public function getName()
+    public function getUsers()
     {
-        return $this->name;
+        return $this->users;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets users
+     * @param \ProfitBricks\Client\Model\GroupItemUser $users A collection of users that belong to this group.
      * @return $this
      */
-    public function setName($name)
+    public function setUsers($users)
     {
 
-        $this->name = $name;
+        $this->users = $users;
         return $this;
     }
 
+
     /**
-     * Gets ipFailover
-     * @return string
+     * Gets resources
+     * @return \ProfitBricks\Client\Model\GroupItemResource
      */
-    public function getIpFailover()
+    public function getResources()
     {
-        return $this->ipFailover;
+        return $this->resources;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets resources
+     * @param \ProfitBricks\Client\Model\GroupItemResource $resources A collection of resources that are assigned to this group.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setResources($resources)
     {
 
-        $this->ipFailover = $ipFailover;
-        return $this;
-    }
-
-    /**
-     * Gets public
-     * @return bool
-     */
-    public function getPublic()
-    {
-        return $this->public;
-    }
-
-    /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
-     * @return $this
-     */
-    public function setPublic($public)
-    {
-
-        $this->public = $public;
+        $this->resources = $resources;
         return $this;
     }
 

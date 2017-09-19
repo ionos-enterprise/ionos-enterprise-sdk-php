@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * GroupItem
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * GroupItem Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,18 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class GroupItem implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'id' => 'string',
+        'type' => 'string',
+        'href' => 'string',
+        'properties' => '\ProfitBricks\Client\Model\GroupItemProperty',
+        'entities' => '\ProfitBricks\Client\Model\GroupItemEntity'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +63,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'id' => 'id',
+        'type' => 'type',
+        'href' => 'href',
+        'properties' => 'properties',
+        'entities' => 'entities'
     );
 
     static function attributeMap() {
@@ -75,9 +79,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+        'id' => 'setId',
+        'type' => 'setType',
+        'href' => 'setHref',
+        'properties' => 'setProperties',
+        'entities' => 'setEntities'
     );
 
     static function setters() {
@@ -89,9 +95,11 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+      'id' => 'getId',
+      'type' => 'getType',
+      'href' => 'getHref',
+      'properties' => 'getProperties',
+      'entities' => 'getEntities'
     );
 
     static function getters() {
@@ -100,22 +108,34 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $id The group's identifier.
       * @var string
       */
-    protected $name;
+    protected $id;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $type The type of response, in this case it will be "group".
+      * @var string
       */
-    protected $ipFailover;
+    protected $type;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $href A URI for accessing the object.
+      * @var string
       */
-    protected $public = false;
+    protected $href;
+
+    /**
+      * $properties A collection containing the group's properties.
+      * @var \ProfitBricks\Client\Model\GroupItemProperty
+      */
+    protected $properties;
+
+    /**
+      * $entities A collection containing users and resources associated with the group.
+      * @var \ProfitBricks\Client\Model\GroupItemEntity
+      */
+    protected $entities;
 
 
     /**
@@ -126,74 +146,120 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->id = $data["id"];
+            $this->type = $data["type"];
+            $this->href = $data["href"];
+            $this->properties = $data["properties"];
+            $this->entities = $data["entities"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setId($id)
     {
 
-        $this->name = $name;
+        $this->id = $id;
         return $this;
     }
 
+
     /**
-     * Gets ipFailover
+     * Gets type
      * @return string
      */
-    public function getIpFailover()
+    public function getType()
     {
-        return $this->ipFailover;
+        return $this->type;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+
+    /**
+     * Gets href
+     * @return string
+     */
+    public function getHref()
+    {
+        return $this->href;
+    }
+
+    /**
+     * Sets href
+     * @param string $href URL to the object\u2019s representation (absolute path)
+     * @return $this
+     */
+    public function setHref($href)
     {
 
-        $this->ipFailover = $ipFailover;
+        $this->href = $href;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets properties
+     * @return \ProfitBricks\Client\Model\GroupItemProperty
      */
-    public function getPublic()
+    public function getProperties()
     {
-        return $this->public;
+        return $this->properties;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets properties
+     * @param \ProfitBricks\Client\Model\GroupItemProperty $properties A collection containing the group's properties.
      * @return $this
      */
-    public function setPublic($public)
+    public function setProperties($properties)
     {
 
-        $this->public = $public;
+        $this->properties = $properties;
         return $this;
     }
+
+    /**
+     * Gets entities
+     * @return \ProfitBricks\Client\Model\GroupItemEntity
+     */
+    public function getEntities()
+    {
+        return $this->entities;
+    }
+
+    /**
+     * Sets entities
+     * @param \ProfitBricks\Client\Model\GroupItemEntity $entities A collection containing users and resources associated with the group.
+     * @return $this
+     */
+    public function setEntities($entities)
+    {
+
+        $this->entities = $entities;
+        return $this;
+    }
+
 
     /**
      * Returns true if offset exists. False otherwise.

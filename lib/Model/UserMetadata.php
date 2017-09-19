@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * UserMetadata
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * UserMetadata Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,16 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class UserMetadata implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'etag' => 'string',
+        'creationDate' => 'string',
+        'lastLogin' => 'string'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +61,9 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+      'etag' => 'etag',
+      'creationDate' => 'creationDate',
+      'lastLogin' => 'lastLogin'
     );
 
     static function attributeMap() {
@@ -75,9 +75,9 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+      'etag' => 'setEtag',
+      'creationDate' => 'setCreationDate',
+      'lastLogin' => 'setLastLogin'
     );
 
     static function setters() {
@@ -89,9 +89,9 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+      'etag' => 'getEtag',
+      'creationDate' => 'getCreationDate',
+      'lastLogin' => 'getLastLogin'
     );
 
     static function getters() {
@@ -100,23 +100,22 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $etag ETag for the user.
       * @var string
       */
-    protected $name;
+    protected $etag;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $creationDate A time and date stamp indicating when the user was created.
+      * @var string
       */
-    protected $ipFailover;
+    protected $creationDate;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $lastLogin A time and date stamp indicating when the user last logged in.
+      * @var string
       */
-    protected $public = false;
-
+    protected $lastLogin;
 
     /**
      * Constructor
@@ -126,72 +125,71 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->etag = $data["etag"];
+            $this->creationDate = $data["creationDate"];
+            $this->lastLogin = $data["lastLogin"];
         }
     }
 
     /**
-     * Gets name
+     * Gets etag
      * @return string
      */
-    public function getName()
+    public function getEtag()
     {
-        return $this->name;
+        return $this->etag;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets etag
+     * @param string $etag ETag for the user.
      * @return $this
      */
-    public function setName($name)
+    public function setEtag($etag)
     {
 
-        $this->name = $name;
+        $this->etag = $etag;
         return $this;
     }
 
     /**
-     * Gets ipFailover
+     * Gets creationDate
      * @return string
      */
-    public function getIpFailover()
+    public function getCreationDate()
     {
-        return $this->ipFailover;
+        return $this->creationDate;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets creationDate
+     * @param string $creationDate A time and date stamp indicating when the user was created.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setCreationDate($creationDate)
     {
-
-        $this->ipFailover = $ipFailover;
+        $this->creationDate = $creationDate;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets lastLogin
+     * @return string
      */
-    public function getPublic()
+    public function getLastLogin()
     {
-        return $this->public;
+        return $this->lastLogin;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets lastLogin
+     * @param string $lastLogin A time and date stamp indicating when the user last logged in.
      * @return $this
      */
-    public function setPublic($public)
+    public function setLastLogin($lastLogin)
     {
 
-        $this->public = $public;
+        $this->lastLogin = $lastLogin;
         return $this;
     }
 

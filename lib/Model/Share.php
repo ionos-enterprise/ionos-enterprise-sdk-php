@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * Share
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * Share Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,17 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class Share implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'id' => 'string',
+        'type' => 'string',
+        'href' => 'string',
+        'properties' => '\ProfitBricks\Client\Model\ShareProperties'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +62,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'id' => 'id',
+        'type' => 'type',
+        'href' => 'href',
+        'properties' => 'properties'
     );
 
     static function attributeMap() {
@@ -75,9 +77,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+        'id' => 'setId',
+        'type' => 'setType',
+        'href' => 'setHref',
+        'properties' => 'setProperties'
     );
 
     static function setters() {
@@ -89,9 +92,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+        'id' => 'getId',
+        'type' => 'getType',
+        'href' => 'getHref',
+        'properties' => 'getProperties'
     );
 
     static function getters() {
@@ -100,23 +104,28 @@ class LanProperties implements ArrayAccess
 
 
     /**
-      * $name A name of that resource
+      * $id The resource's unique identifier
       * @var string
       */
-    protected $name;
+    protected $id;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $type The type of object that has been created
+      * @var string
       */
-    protected $ipFailover;
+    protected $type;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $href URL to the object\u2019s representation (absolute path)
+      * @var string
       */
-    protected $public = false;
+    protected $href;
 
+    /**
+      * $properties A collection of properties.
+      * @var \ProfitBricks\Client\Model\ShareProperties
+      */
+    protected $properties;
 
     /**
      * Constructor
@@ -126,80 +135,101 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->id = $data["id"];
+            $this->type = $data["type"];
+            $this->href = $data["href"];
+            $this->properties = $data["properties"];
         }
     }
 
     /**
-     * Gets name
+     * Gets id
      * @return string
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets id
+     * @param string $id The resource's unique identifier
      * @return $this
      */
-    public function setName($name)
+    public function setId($id)
     {
 
-        $this->name = $name;
+        $this->id = $id;
         return $this;
     }
 
     /**
-     * Gets ipFailover
+     * Gets type
      * @return string
      */
-    public function getIpFailover()
+    public function getType()
     {
-        return $this->ipFailover;
+        return $this->type;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets type
+     * @param string $type The type of object that has been created
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setType($type)
     {
-
-        $this->ipFailover = $ipFailover;
+        $this->type = $type;
         return $this;
     }
 
     /**
-     * Gets public
-     * @return bool
+     * Gets href
+     * @return string
      */
-    public function getPublic()
+    public function getHref()
     {
-        return $this->public;
+        return $this->href;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets href
+     * @param string $href URL to the object\u2019s representation (absolute path)
      * @return $this
      */
-    public function setPublic($public)
+    public function setHref($href)
     {
 
-        $this->public = $public;
+        $this->href = $href;
         return $this;
     }
 
-    /**
-     * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
-     * @return boolean
-     */
+     /**
+      * Gets properties
+      * @return \ProfitBricks\Client\Model\ShareProperties
+      */
+     public function getProperties()
+     {
+         return $this->properties;
+     }
+
+     /**
+      * Sets properties
+      * @param \ProfitBricks\Client\Model\ShareProperties $properties A collection of properties.
+      * @return $this
+      */
+     public function setProperties($properties)
+     {
+
+         $this->properties = $properties;
+         return $this;
+     }
+
+     /**
+      * Returns true if offset exists. False otherwise.
+      * @param  integer $offset Offset
+      * @return boolean
+      */
     public function offsetExists($offset)
     {
         return isset($this->$offset);

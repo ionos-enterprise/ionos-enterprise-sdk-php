@@ -11,7 +11,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
   
   public static function setUpBeforeClass() {
     $config = (new ProfitBricks\Client\Configuration())
-        ->setHost('https://api.profitbricks.com/cloudapi/v3')
+        ->setHost('https://api.profitbricks.com/cloudapi/v4')
         ->setUsername(getenv('PROFITBRICKS_USERNAME'))
         ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
     self::$api_client = new ProfitBricks\Client\ApiClient($config);
@@ -28,7 +28,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
   public function waitTillProvisioned($url)  {
     preg_match('/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/',$url,$matches);
     $config = (new ProfitBricks\Client\Configuration())
-        ->setHost('https://api.profitbricks.com/cloudapi/v3')
+        ->setHost('https://api.profitbricks.com/cloudapi/v4')
         ->setUsername(getenv('PROFITBRICKS_USERNAME'))
         ->setPassword(getenv('PROFITBRICKS_PASSWORD'));
     $request_api = new ProfitBricks\Client\Api\RequestApi(self::$api_client);

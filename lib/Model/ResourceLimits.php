@@ -1,6 +1,6 @@
 <?php
 /**
- * LanProperties
+ * ResourceLimits
  *
  * PHP version 5
  *
@@ -31,7 +31,7 @@ namespace ProfitBricks\Client\Model;
 
 use \ArrayAccess;
 /**
- * LanProperties Class Doc Comment
+ * ResourceLimits Class Doc Comment
  *
  * @category    Class
  * @description
@@ -40,16 +40,17 @@ use \ArrayAccess;
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
  * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
-class LanProperties implements ArrayAccess
+class ResourceLimits implements ArrayAccess
 {
     /**
       * Array of property to type mappings. Used for (de)serialization
       * @var string[]
       */
     static $ProfitBricksTypes = array(
-        'name' => 'string',
-        'ipFailover' => '\ProfitBricks\Client\Model\IpFailover[]',
-        'public' => 'bool'
+        'coresPerContract' => 'int',
+        'ramPerContract' => 'int',
+        'hddLimitPerContract' => 'int',
+        'ssdLimitPerContract' => 'int'
     );
 
     static function ProfitBricksTypes() {
@@ -61,9 +62,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $attributeMap = array(
-        'name' => 'name',
-        'ipFailover' => 'ipFailover',
-        'public' => 'public'
+        'coresPerContract' => 'coresPerContract',
+        'ramPerContract' => 'ramPerContract',
+        'hddLimitPerContract' => 'hddLimitPerContract',
+        'ssdLimitPerContract' => 'ssdLimitPerContract'
     );
 
     static function attributeMap() {
@@ -75,9 +77,10 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $setters = array(
-        'name' => 'setName',
-        'ipFailover' => 'setIpFailover',
-        'public' => 'setPublic'
+        'coresPerContract' => 'setCoresPerContract',
+        'ramPerContract' => 'setRamPerContract',
+        'hddLimitPerContract' => 'setHddLimitPerContract',
+        'ssdLimitPerContract' => 'setSsdLimitPerContract'
     );
 
     static function setters() {
@@ -89,34 +92,39 @@ class LanProperties implements ArrayAccess
       * @var string[]
       */
     static $getters = array(
-        'name' => 'getName',
-        'ipFailover' => 'getIpFailover',
-        'public' => 'getPublic'
+        'coresPerContract' => 'getCoresPerContract',
+        'ramPerContract' => 'getRamPerContract',
+        'hddLimitPerContract' => 'getHddLimitPerContract',
+        'ssdLimitPerContract' => 'getSsdLimitPerContract'
     );
 
     static function getters() {
         return self::$getters;
     }
 
+    /**
+      * $coresPerContract Maximum number of CPU cores per contract.
+      * @var int
+      */
+    protected $coresPerContract;
 
     /**
-      * $name A name of that resource
-      * @var string
+      * ramPerContract Maximum amount of RAM per contract.
+      * @var int
       */
-    protected $name;
+    protected $ramPerContract;
 
     /**
-      * $ipFailover Attributes related to IP failover groups.
-      * @var array
+      * $hddLimitPerContract Maximum number of HDD volumes per contract.
+      * @var int
       */
-    protected $ipFailover;
+    protected $hddLimitPerContract;
 
     /**
-      * $public Does this LAN faces the public Internet or not
-      * @var bool
+      * $ssdLimitPerContract Maximum number of SSD volumes per contract.
+      * @var int
       */
-    protected $public = false;
-
+    protected $ssdLimitPerContract;
 
     /**
      * Constructor
@@ -126,72 +134,97 @@ class LanProperties implements ArrayAccess
     {
 
         if ($data != null) {
-            $this->name = $data["name"];
-            $this->ipFailover = $data["ipFailover"];
-            $this->public = $data["public"];
+            $this->coresPerContract = $data["coresPerContract"];
+            $this->ramPerContract = $data["ramPerContract"];
+            $this->hddLimitPerContract = $data["hddLimitPerContract"];
+            $this->ssdLimitPerContract = $data["ssdLimitPerContract"];
         }
     }
 
+
     /**
-     * Gets name
-     * @return string
+     * Gets coresPerContract
+     * @return int
      */
-    public function getName()
+    public function getCoresPerContract()
     {
-        return $this->name;
+        return $this->coresPerContract;
     }
 
     /**
-     * Sets name
-     * @param string $name A name of that resource
+     * Sets coresPerContract
+     * @param int $type Maximum number of CPU cores per contract.
      * @return $this
      */
-    public function setName($name)
+    public function setCoresPerContract($coresPerContract)
     {
-
-        $this->name = $name;
+        $this->coresPerContract = $coresPerContract;
         return $this;
     }
 
+
     /**
-     * Gets ipFailover
-     * @return string
+     * Gets ramPerContract
+     * @return int
      */
-    public function getIpFailover()
+    public function getRamPerContract()
     {
-        return $this->ipFailover;
+        return $this->ramPerContract;
     }
 
     /**
-     * Sets ipFailover
-     * @param string $ipFailover Attributes related to IP failover groups.
+     * Sets ramPerContract
+     * @param int $ramPerContract Maximum amount of RAM per contract.
      * @return $this
      */
-    public function setIpFailover($ipFailover)
+    public function setRamPerContract($ramPerContract)
     {
 
-        $this->ipFailover = $ipFailover;
+        $this->ramPerContract = $ramPerContract;
         return $this;
     }
 
+
     /**
-     * Gets public
-     * @return bool
+     * Gets hddLimitPerContract
+     * @return int
      */
-    public function getPublic()
+    public function getHddLimitPerContract()
     {
-        return $this->public;
+        return $this->hddLimitPerContract;
     }
 
     /**
-     * Sets public
-     * @param bool $public Does this LAN faces the public Internet or not
+     * Sets hddLimitPerContract
+     * @param int $hddLimitPerContract Maximum number of HDD volumes per contract.
      * @return $this
      */
-    public function setPublic($public)
+    public function setHddLimitPerContract($hddLimitPerContract)
     {
 
-        $this->public = $public;
+        $this->hddLimitPerContract = $hddLimitPerContract;
+        return $this;
+    }
+
+
+    /**
+     * Gets ssdLimitPerContract
+     * @return int
+     */
+    public function getSsdLimitPerContract()
+    {
+        return $this->ssdLimitPerContract;
+    }
+
+    /**
+     * Sets ssdLimitPerContract
+     * @param int $ssdLimitPerContract Maximum number of SSD volumes per contract.
+     * @return $this
+     */
+    public function setSsdLimitPerContract($ssdLimitPerContract)
+    {
+
+        $this->ssdLimitPerContract = $ssdLimitPerContract;
         return $this;
     }
 

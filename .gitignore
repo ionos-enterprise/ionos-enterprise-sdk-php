@@ -1,2 +1,4 @@
 /config.json
 /nbproject/private/
+vendor/*
+baby-driver.php
