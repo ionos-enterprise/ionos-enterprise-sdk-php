@@ -14,8 +14,8 @@ trait CommonTestMethods {
     $datacenter = new \ProfitBricks\Client\Model\Datacenter();
 
     $props = new \ProfitBricks\Client\Model\DatacenterProperties();
-    $props->setName("test-data-center");
-    $props->setDescription("example description");
+    $props->setName("PHP SDK Test");
+    $props->setDescription("PHP SDK test datacenter");
     $props->setLocation(self::$test_location);
     
     $datacenter->setProperties($props);

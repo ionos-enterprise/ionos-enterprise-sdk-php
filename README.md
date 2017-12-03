@@ -2010,6 +2010,7 @@ The following table describes the available request arguments:
 | $firstName | **yes** | string | A name for the user. |
 | $lastName | **yes** | string | A name for the user. |
 | $email | **yes** | string | An e-mail address for the user. |
+| $password | **yes** | string | A password for the user. |
 | $administrator | no | boolean | Assigns the user have administrative rights. |
 | $forceSecAuth | no | boolean | Indicates if secure authentication should be forced for the user. |
 | $depth | no | int | The level of details returned. |
@@ -2019,6 +2020,7 @@ $props = new \ProfitBricks\Client\Model\UserProperties();
 $props->setFirstName('Bob');
 $props->setLastName('Smith');
 $props->setEmail('bob_smith@example.com');
+$props->setPassword("secretpassword123");
 $props->setAdministrator(True);
 $props->setForceSecAuth(True);
 ```

@@ -9,6 +9,7 @@ class RequestApiTest extends BaseTest
 
   private static $reqiest_api;
   private static $testRequest;
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
@@ -25,6 +26,14 @@ class RequestApiTest extends BaseTest
   public function testGet() {
     $request = self::$reqiest_api->findById(self::$testRequest->getId());
     $this->assertEquals($request->getId(), self::$testRequest->getId());
+  }
+
+  public function testGetFailure() {
+    try {
+      $request = self::$reqiest_api->findById(self::$badId);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
   }
 
   public function testGetStatus() {

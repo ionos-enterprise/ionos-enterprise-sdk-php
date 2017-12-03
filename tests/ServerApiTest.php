@@ -16,6 +16,7 @@ class ServerApiTest extends BaseTest
   private static $testVolume;
   private static $testServer;
   private static $testServer_Composite;
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
@@ -29,20 +30,33 @@ class ServerApiTest extends BaseTest
   public function testCreate() {
     $server = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("jclouds-node")->setCores(1)->setRam(1024);
+    $props->setName("PHP SDK Test")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
   
     $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "PHP SDK Test");
   }
   
+  public function testCreateFailure() {
+    $server = new \ProfitBricks\Client\Model\Server();
+    $props = new \ProfitBricks\Client\Model\ServerProperties();
+    $props->setName("PHP SDK Test")->setRam(1024);
+    $server->setProperties($props);
+
+    try {
+      self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
+  }
+
   public function testCreateComposite() {
     $server_composite = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("composite-node")->setCores(1)->setRam(1024)->setCpuFamily('INTEL_XEON');
+    $props->setName("PHP SDK Test")->setCores(1)->setRam(1024)->setCpuFamily('INTEL_XEON');
     $server_composite->setProperties($props);
     
     $entities= new \ProfitBricks\Client\Model\ServerEntities();
@@ -50,7 +64,7 @@ class ServerApiTest extends BaseTest
   
     $volume = new ProfitBricks\Client\Model\Volume();
     $v_props = new \ProfitBricks\Client\Model\VolumeProperties();
-    $v_props->setName("test-volume")
+    $v_props->setName("PHP SDK Test")
         ->setSize(3)
         ->setType('HDD')
         ->setImage($testImage->getId())
@@ -74,6 +88,14 @@ class ServerApiTest extends BaseTest
     $this->assertEquals($server->getId(), self::$testServer->getId());
   }
 
+  public function testGetFailuer() {
+    try {
+      $server = self::$server_api->findById(self::$testDatacenter->getId(), self::$badId);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
+  }
+
   public function testList() {
     $servers = self::$server_api->findAll(self::$testDatacenter->getId());
     $this->assertNotEmpty($servers);
@@ -87,7 +109,7 @@ class ServerApiTest extends BaseTest
   public function testUpdate() {
     $server = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("new-name")->setCores(2)->setRam(1024 * 2);
+    $props->setName("PHP SDK Test RENAME")->setCores(2)->setRam(1024 * 2);
     $server->setProperties($props);
   
     self::$server_api->partialUpdate(self::$testDatacenter->getId(), self::$testServer->getId(), $props);
@@ -101,7 +123,7 @@ class ServerApiTest extends BaseTest
     self::assertServerRunning(self::$testDatacenter->getId(), self::$testServer->getId());
 
     $updatedServer = self::$server_api->findById(self::$testDatacenter->getId(), self::$testServer->getId());
-    $this->assertEquals($updatedServer->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedServer->getProperties()->getName(), "PHP SDK Test RENAME");
   }
 
   public function testStopServer() {
@@ -133,7 +155,7 @@ class ServerApiTest extends BaseTest
   public function testAttachVolume() {
     $volume = new ProfitBricks\Client\Model\Volume();
     $props = new \ProfitBricks\Client\Model\VolumeProperties();
-    $props->setName("test-volume")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
+    $props->setName("PHP SDK Test")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
     $volume->setProperties($props);
 
     $testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);

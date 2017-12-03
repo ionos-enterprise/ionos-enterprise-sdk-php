@@ -38,7 +38,7 @@ use \ArrayAccess;
  * @package     ProfitBricks\Client
  * @author      http://github.com/ProfitBricks-api/ProfitBricks-codegen
  * @license     http://www.apache.org/licenses/LICENSE-2.0 Apache Licene v2
- * @link        https://github.com/ProfitBricks-api/ProfitBricks-codegen
+ * @link         https://github.com/ProfitBricks-api/ProfitBricks-codegen
  */
 class UserProperties implements ArrayAccess
 {
@@ -50,6 +50,7 @@ class UserProperties implements ArrayAccess
         'firstname' => 'string',
         'lastname' => 'string',
         'email' => 'string',
+        'password' => 'string',
         'administrator' => 'boolean',
         'forceSecAuth' => 'boolean',
         'secAuthActive' => 'boolean'
@@ -67,6 +68,7 @@ class UserProperties implements ArrayAccess
       'firstname' => 'firstname',
       'lastname' => 'lastname',
       'email' => 'email',
+      'password' => 'password',
       'administrator' => 'administrator',
       'forceSecAuth' => 'forceSecAuth',
       'secAuthActive' => 'secAuthActive'
@@ -84,6 +86,7 @@ class UserProperties implements ArrayAccess
       'firstname' => 'setFirstname',
       'lastname' => 'setLastname',
       'email' => 'setEmail',
+      'password' => 'setPassword',
       'administrator' => 'setAdministrator',
       'forceSecAuth' => 'setForceSecAuth',
       'secAuthActive' => 'setSecAuthActive'
@@ -101,6 +104,7 @@ class UserProperties implements ArrayAccess
       'firstname' => 'getFirstname',
       'lastname' => 'getLastname',
       'email' => 'getEmail',
+      'password' => 'getPassword',
       'administrator' => 'getAdministrator',
       'forceSecAuth' => 'getForceSecAuth',
       'secAuthActive' => 'getSecAuthActive'
@@ -127,6 +131,12 @@ class UserProperties implements ArrayAccess
       * @var string
       */
     protected $email;
+
+    /**
+      * $password The password of the user.
+      * @var string
+      */
+      protected $password;
 
     /**
       * $administrator Indicates if the user has administrative rights.
@@ -158,6 +168,7 @@ class UserProperties implements ArrayAccess
             $this->firstname = $data["firstname"];
             $this->lastname = $data["lastname"];
             $this->email = $data["email"];
+            $this->password = $data["password"];
             $this->administrator = $data["administrator"];
             $this->forceSecAuth = $data["forceSecAuth"];
             $this->secAuthActive = $data["secAuthActive"];
@@ -224,6 +235,25 @@ class UserProperties implements ArrayAccess
     {
 
         $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Gets password
+     * @return string
+     */
+    public function GetPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Sets password
+     * @return string
+     */
+    public function setPassword($password)
+    {
+        return $this->password = $password;
         return $this;
     }
 
