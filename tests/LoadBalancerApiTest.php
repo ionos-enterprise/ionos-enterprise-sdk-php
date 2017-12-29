@@ -14,7 +14,8 @@ class LoadBalancerApiTest extends BaseTest
   private static $testLoadBalancer;
   private static $testNic;
   private static $testServer;
-
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
+  
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
@@ -27,19 +28,42 @@ class LoadBalancerApiTest extends BaseTest
   public function testCreate() {
     $balancer = new \ProfitBricks\Client\Model\Loadbalancer();
     $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
-    $props->setName("jclouds-balancer")->setDhcp(false);
+    $props->setName("PHP SDK Test")->setDhcp(false);
     $balancer->setProperties($props);
 
     self::$testLoadBalancer = self::$loadbalancer_api->create(self::$testDatacenter->getId(), $balancer);
   
     $this->waitTillProvisioned(self::$testLoadBalancer->getRequestId());
 
-    $this->assertEquals(self::$testLoadBalancer->getProperties()->getName(), "jclouds-balancer");
+    $this->assertEquals(self::$testLoadBalancer->getProperties()->getName(), "PHP SDK Test");
+  }
+
+  public function testCreateFailure() {
+    $balancer = new \ProfitBricks\Client\Model\Loadbalancer();
+    $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
+    $props->setDhcp(false);
+    $balancer->setProperties($props);
+
+    try {
+      self::$testLoadBalancer = self::$loadbalancer_api->create(self::$testDatacenter->getId(), $balancer);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
   }
 
   public function testGet() {
+    //wait for a little bit to make sure it's ready
+    sleep(5);
     $balancer = self::$loadbalancer_api->findById(self::$testDatacenter->getId(), self::$testLoadBalancer->getId());
     $this->assertEquals($balancer->getId(), self::$testLoadBalancer->getId());
+  }
+
+  public function testGetFailure() {
+   try {
+      $balancer = self::$loadbalancer_api->findById(self::$testDatacenter->getId(), self::$testLoadBalancer->getId());
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
   }
 
   public function testList() {
@@ -55,7 +79,7 @@ class LoadBalancerApiTest extends BaseTest
   public function testUpdate() {
     $balancer = new \ProfitBricks\Client\Model\Loadbalancer();
     $props = new \ProfitBricks\Client\Model\LoadbalancerProperties();
-    $props->setName("new-name");
+    $props->setName("PHP SDK Test - RENAME");
     $balancer->setProperties($props);
 
     $updateResponse=self::$loadbalancer_api->partialUpdate(self::$testDatacenter->getId(), self::$testLoadBalancer->getId(), $props);
@@ -64,33 +88,33 @@ class LoadBalancerApiTest extends BaseTest
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 
     $updatedServer = self::$loadbalancer_api->findById(self::$testDatacenter->getId(), self::$testLoadBalancer->getId());
-    $this->assertEquals($updatedServer->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedServer->getProperties()->getName(), "PHP SDK Test - RENAME");
   }
 
   public function testCreateServer() {
     $server = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("jclouds-node")->setCores(1)->setRam(1024);
+    $props->setName("PHP SDK Test")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
   
     $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "PHP SDK Test");
   }
 
   public function testAssociateNic() {
     $nic = new \ProfitBricks\Client\Model\Nic();
     $props = new \ProfitBricks\Client\Model\NicProperties();
-    $props->setName("jclouds-nic")->setLan(1);
+    $props->setName("PHP SDK Test")->setLan(1);
     $nic->setProperties($props);
 
     self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
   
     $this->waitTillProvisioned(self::$testNic->getRequestId());
 
-    $this->assertEquals(self::$testNic->getProperties()->getName(), "jclouds-nic");
+    $this->assertEquals(self::$testNic->getProperties()->getName(), "PHP SDK Test");
 
     $nic = new ProfitBricks\Client\Model\Nic();
     $nic->setId(self::$testNic->getId());

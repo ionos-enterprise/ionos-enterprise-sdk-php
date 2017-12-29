@@ -12,6 +12,8 @@ class SnapshotApiTest extends BaseTest
   static $testVolume;
   static $testSnapshot;
 
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
+
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     self::spawnDatacenter();
@@ -20,16 +22,23 @@ class SnapshotApiTest extends BaseTest
   }
 
   public function testCreateVolume() {
+    $testImage = self::getTestImage('HDD');
+
     $volume = new ProfitBricks\Client\Model\Volume();
     $props = new \ProfitBricks\Client\Model\VolumeProperties();
-    $props->setName("test-volume")->setSize(3)->setType('HDD')->setLicenceType('LINUX');
+    $props->setName("PHP SDK Test")
+      ->setSize(3)
+      ->setType('HDD')
+      ->setImage($testImage->getId())
+      ->setImagePassword("testpassword123")
+      ->setSshKeys(array("hQGOEJeFL91EG3+l9TtRbWNjzhDVHeLuL3NWee6bekA="));
     $volume->setProperties($props);
 
     self::$testVolume = self::$volume_api->create(self::$testDatacenter->getId(), $volume);
   
     $this->waitTillProvisioned(self::$testVolume->getRequestId());
     $testVolume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
-    $this->assertEquals($testVolume->getProperties()->getName(), "test-volume");
+    $this->assertEquals($testVolume->getProperties()->getName(), "PHP SDK Test");
   }
 
   public function testCreateSnapshot() {
@@ -40,9 +49,44 @@ class SnapshotApiTest extends BaseTest
     $this->assertNotEmpty($snapshot);
   }
 
+  public function testRestoreSnapshot() {
+    self::$volume_api->restoreSnapshot(self::$testDatacenter->getId(), self::$testVolume->getId(), self::$testSnapshot->getId());
+    $this->assertTrue(
+      self::assertPredicate(function() {
+        $volume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
+        return $volume->getMetadata()->getState() == 'AVAILABLE';
+      })
+    );
+    $this->assertTrue(
+      self::assertPredicate(function() {
+        $snapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
+        return $snapshot->getMetadata()->getState() == 'AVAILABLE';
+      })
+    );
+  }
+
+  public function testCreateSnapshotFailure() {
+    
+    try {
+      self::$testSnapshot = self::$volume_api->createSnapshot(self::$testDatacenter->getId(), self::$testVolume->getId());
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
+  }
+
   public function testGet() {
+    //wait for a little bit to make sure it's ready
+    sleep(15);
     $snapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
     $this->assertEquals(self::$testSnapshot->getId(), $snapshot->getId());
+  }
+
+  public function testGetFailure() {
+    try {
+      $snapshot = self::$snapshot_api->findById(self::$badId);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
   }
 
   public function testList() {
@@ -57,7 +101,7 @@ class SnapshotApiTest extends BaseTest
 
   public function testUpdate() {
     $props = new \ProfitBricks\Client\Model\SnapshotProperties();
-    $props->setName("new-name");
+    $props->setName("PHP SDK Test - RENAME");
 
     $updateResponse=self::$snapshot_api->partialUpdate(self::$testSnapshot->getId(), $props);
   
@@ -65,7 +109,7 @@ class SnapshotApiTest extends BaseTest
 
     $updatedSnapshot = self::$snapshot_api->findById(self::$testSnapshot->getId());
 
-    $this->assertEquals($updatedSnapshot->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedSnapshot->getProperties()->getName(), "PHP SDK Test - RENAME");
   }
 
   public function testRemove() {
@@ -76,13 +120,6 @@ class SnapshotApiTest extends BaseTest
       )
     );
     self::$testVolume = null;
-    self::$snapshot_api->delete(self::$testSnapshot->getId());
-    $this->assertTrue(
-      self::assertPredicate(
-        function () { self::$snapshot_api->findById(self::$testSnapshot->getId()); }, null, true
-      )
-    );
-    self::$testSnapshot = null;
   }
 
   public static function tearDownAfterClass() {

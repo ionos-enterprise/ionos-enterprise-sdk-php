@@ -19,8 +19,8 @@ class DataCenterApiTest extends BaseTest
     $datacenter = new \ProfitBricks\Client\Model\Datacenter();
     
     $props = new \ProfitBricks\Client\Model\DatacenterProperties();
-    $props->setName("test-data-center");
-    $props->setDescription("example description");
+    $props->setName("PHP SDK Test");
+    $props->setDescription("PHP SDK test datacenter");
     $props->setLocation(self::$test_location);
     
     $datacenter->setProperties($props);
@@ -28,19 +28,34 @@ class DataCenterApiTest extends BaseTest
     self::$testDatacenter = self::$datacenter_api->create($datacenter);
     $this->assertEquals($datacenter->getProperties()->getName(), self::$testDatacenter->getProperties()->getName());
   }
+
+  public function testCreateFailure() {
+    $datacenter = new \ProfitBricks\Client\Model\Datacenter();
+    
+    $props = new \ProfitBricks\Client\Model\DatacenterProperties();
+    $props->setName("PHP SDK Test");
+    
+    $datacenter->setProperties($props);
+
+    try{
+      self::$testDatacenter = self::$datacenter_api->create($datacenter);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
+  }
   
   public function testCreateComposite() {
     $datacenter_composite = new \ProfitBricks\Client\Model\Datacenter();
     
     $props = new \ProfitBricks\Client\Model\DatacenterProperties();
-    $props->setName("test-data-center");
-    $props->setDescription("example description");
+    $props->setName("PHP SDK Test Composite");
+    $props->setDescription("PHP SDK test composite datacenter");
     $props->setLocation(self::$test_location);
   
     $servers=new \ProfitBricks\Client\Model\Servers();
     $server = new \ProfitBricks\Client\Model\Server();
     $server_props = new \ProfitBricks\Client\Model\ServerProperties();
-    $server_props->setName("composite-node")->setCores(1)->setRam(1024);
+    $server_props->setName("PHP SDK Test Composite")->setCores(1)->setRam(1024);
     $server->setProperties($server_props);
     $servers->setItems(array($server));
     
@@ -80,11 +95,11 @@ class DataCenterApiTest extends BaseTest
   public function testUpdate() {
     $datacenter = new \ProfitBricks\Client\Model\Datacenter();
     $props = new \ProfitBricks\Client\Model\DatacenterProperties();
-    $props->setName("new-name");
+    $props->setName("PHP SDK Test - RENAME");
     $datacenter->setProperties($props);
 
     $updatedDatacenter = self::$datacenter_api->update(self::$testDatacenter->getId(), $datacenter);
-    $this->assertEquals($updatedDatacenter->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedDatacenter->getProperties()->getName(), "PHP SDK Test - RENAME");
   }
 
   public function testRemove() {
