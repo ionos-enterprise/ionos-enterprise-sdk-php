@@ -12,6 +12,7 @@ class NicApiTest extends BaseTest
 
   private static $testServer;
   private static $testNic;
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
 
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
@@ -23,32 +24,53 @@ class NicApiTest extends BaseTest
   public function testCreateServer() {
     $server = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("jclouds-node")->setCores(1)->setRam(1024);
+    $props->setName("PHP SDK Test")->setCores(1)->setRam(1024);
     $server->setProperties($props);
 
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
   
     $this->waitTillProvisioned(self::$testServer->getRequestId());
 
-    $this->assertEquals(self::$testServer->getProperties()->getName(), "jclouds-node");
+    $this->assertEquals(self::$testServer->getProperties()->getName(), "PHP SDK Test");
   }
 
   public function testCreateNic() {
     $nic = new \ProfitBricks\Client\Model\Nic();
     $props = new \ProfitBricks\Client\Model\NicProperties();
-    $props->setName("jclouds-nic")->setLan(1);
+    $props->setName("PHP SDK Test")->setLan(1);
     $nic->setProperties($props);
 
     self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
   
     $this->waitTillProvisioned(self::$testNic->getRequestId());
 
-    $this->assertEquals(self::$testNic->getProperties()->getName(), "jclouds-nic");
+    $this->assertEquals(self::$testNic->getProperties()->getName(), "PHP SDK Test");
+  }
+
+  public function testCreateNicFailure() {
+    $nic = new \ProfitBricks\Client\Model\Nic();
+    $props = new \ProfitBricks\Client\Model\NicProperties();
+    $props->setName("PHP SDK Test");
+    $nic->setProperties($props);
+
+    try {
+      self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
   }
 
   public function testGet() {
     $nic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId());
     $this->assertEquals($nic->getId(), self::$testNic->getId());
+  }
+
+  public function testGetFailure() {
+    try {
+      $nic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$badId);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
   }
 
   public function testList() {
@@ -64,7 +86,7 @@ class NicApiTest extends BaseTest
   public function testUpdate() {
     $nic = new \ProfitBricks\Client\Model\Nic();
     $props = new \ProfitBricks\Client\Model\NicProperties();
-    $props->setName("new-name");
+    $props->setName("PHP SDK Test RENAME");
     $nic->setProperties($props);
 
     $updateResponse=self::$nic_api->partialUpdate(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId(), $props);
@@ -73,7 +95,7 @@ class NicApiTest extends BaseTest
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 
     $updatedNic = self::$nic_api->findById(self::$testDatacenter->getId(), self::$testServer->getId(), self::$testNic->getId());
-    $this->assertEquals($updatedNic->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedNic->getProperties()->getName(), "PHP SDK Test RENAME");
   }
 
   public function testRemove() {

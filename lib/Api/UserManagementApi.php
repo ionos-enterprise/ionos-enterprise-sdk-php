@@ -2209,8 +2209,8 @@ class UserManagementApi
 
         // body params
         $_tempBody = null;
-        if (isset($group_id)) {
-            $_tempBody = $group_id;
+        if (isset($user_id)) {
+            $_tempBody = array( "id" => $user_id);
         }
 
         // for model (json/xml)

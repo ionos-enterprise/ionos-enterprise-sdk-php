@@ -15,6 +15,7 @@ class LanApiTest extends BaseTest
   private static $testLan;
   private static $testLanComposite;
   private static $testNic;
+  private static $badId  = '00000000-0000-0000-0000-000000000000';
   
   public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
@@ -27,21 +28,32 @@ class LanApiTest extends BaseTest
   public function testCreate() {
     $lan = new \ProfitBricks\Client\Model\Lan();
     $props = new \ProfitBricks\Client\Model\LanProperties();
-    $props->setName("jclouds-lan");
+    $props->setName("PHP SDK Test ");
     $lan->setProperties($props);
 
     self::$testLan = self::$lan_api->create(self::$testDatacenter->getId(), $lan);
   
     $this->waitTillProvisioned(self::$testLan->getRequestId());
 
-    $this->assertEquals(self::$testLan->getProperties()->getName(), "jclouds-lan");
+    $this->assertEquals(self::$testLan->getProperties()->getName(), "PHP SDK Test ");
+  }
+
+  public function testCreateFailure() {
+    $lan = new \ProfitBricks\Client\Model\Lan();
+    $props = new \ProfitBricks\Client\Model\LanProperties();
+ 
+    try{
+    self::$testLan = self::$lan_api->create(self::$testDatacenter->getId(), $lan);  
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 422);
+    }
   }
   
   public function testCreateComposite() {
     //create server to attach an nic to it.
     $server = new \ProfitBricks\Client\Model\Server();
     $props = new \ProfitBricks\Client\Model\ServerProperties();
-    $props->setName("lan-node")->setCores(1)->setRam(1024);
+    $props->setName("PHP SDK Test ")->setCores(1)->setRam(1024);
     $server->setProperties($props);
   
     self::$testServer = self::$server_api->create(self::$testDatacenter->getId(), $server);
@@ -49,7 +61,7 @@ class LanApiTest extends BaseTest
   
     $nic = new \ProfitBricks\Client\Model\Nic();
     $props = new \ProfitBricks\Client\Model\NicProperties();
-    $props->setName("jclouds-nic")->setLan(1);
+    $props->setName("PHP SDK Test ")->setLan(1);
     $nic->setProperties($props);
   
     self::$testNic = self::$nic_api->create(self::$testDatacenter->getId(), self::$testServer->getId(), $nic);
@@ -64,7 +76,7 @@ class LanApiTest extends BaseTest
     $props = new \ProfitBricks\Client\Model\LanProperties();
     $entities= new \ProfitBricks\Client\Model\LanEntities();
   
-    $props->setName("composite-lan");
+    $props->setName("PHP SDK Test");
     $entities->setNics($lanNics);
     
     $lan_composite->setProperties($props);
@@ -74,13 +86,21 @@ class LanApiTest extends BaseTest
     sleep(10);
     $this->waitTillProvisioned(self::$testLanComposite->getRequestId());
     
-    $this->assertEquals(self::$testLanComposite->getProperties()->getName(), "composite-lan");
+    $this->assertEquals(self::$testLanComposite->getProperties()->getName(), "PHP SDK Test");
     $this->assertEquals(sizeof(self::$testLanComposite->getEntities()->getNics()), 1);
   }
 
   public function testGet() {
     $lan = self::$lan_api->findById(self::$testDatacenter->getId(), self::$testLan->getId());
     $this->assertEquals($lan->getId(), self::$testLan->getId());
+  }
+
+  public function testGetFailure() {
+    try {
+      $lan = self::$lan_api->findById("us", self::$badId);
+    } catch (ProfitBricks\Client\ApiException $e) {
+      $this->assertEquals($e->getCode(), 404);
+    }
   }
 
   public function testList() {
@@ -96,7 +116,7 @@ class LanApiTest extends BaseTest
   public function testUpdate() {
     $lan = new \ProfitBricks\Client\Model\Lan();
     $props = new \ProfitBricks\Client\Model\LanProperties();
-    $props->setName("new-name")->setPublic(false);
+    $props->setName("PHP SDK Test RENAME")->setPublic(false);
     $lan->setProperties($props);
 
     $updateResponse=self::$lan_api->partialUpdate(self::$testDatacenter->getId(), self::$testLan->getId(), $props);
@@ -105,7 +125,7 @@ class LanApiTest extends BaseTest
     self::assertDatacenterAvailable(self::$testDatacenter->getId());
 
     $updatedLan = self::$lan_api->findById(self::$testDatacenter->getId(), self::$testLan->getId());
-    $this->assertEquals($updatedLan->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedLan->getProperties()->getName(), "PHP SDK Test RENAME");
   }
 
   public function testRemove() {

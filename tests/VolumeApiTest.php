@@ -25,7 +25,7 @@ class VolumeApiTest extends BaseTest
 
     $volume = new ProfitBricks\Client\Model\Volume();
     $props = new \ProfitBricks\Client\Model\VolumeProperties();
-    $props->setName("test-volume")
+    $props->setName("PHP SDK Test")
       ->setSize(3)
       ->setType('HDD')
       ->setImage($testImage->getId())
@@ -39,7 +39,7 @@ class VolumeApiTest extends BaseTest
       return self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
     });
 
-    $this->assertEquals($testVolume->getProperties()->getName(), "test-volume");
+    $this->assertEquals($testVolume->getProperties()->getName(), "PHP SDK Test");
   }
   
   public function testCreateFailure()  {
@@ -47,7 +47,7 @@ class VolumeApiTest extends BaseTest
       $testImage = self::getTestImage('HDD');
       $volume = new ProfitBricks\Client\Model\Volume();
       $props = new \ProfitBricks\Client\Model\VolumeProperties();
-      $props->setName("test-volume")
+      $props->setName("PHP SDK Test")
           ->setSize(3)
           ->setType('HDD')
           ->setImagePassword("testpassword123");
@@ -81,7 +81,7 @@ class VolumeApiTest extends BaseTest
 
   public function testUpdate() {
     $props = new \ProfitBricks\Client\Model\VolumeProperties();
-    $props->setName("new-name")->setSize(3);
+    $props->setName("PHP SDK Test RENAME")->setSize(3);
   
     $updateResponse=self::$volume_api->partialUpdate(self::$testDatacenter->getId(), self::$testVolume->getId(), $props);
   
@@ -91,7 +91,7 @@ class VolumeApiTest extends BaseTest
 
     $updatedVolume = self::$volume_api->findById(self::$testDatacenter->getId(), self::$testVolume->getId());
 
-    $this->assertEquals($updatedVolume->getProperties()->getName(), "new-name");
+    $this->assertEquals($updatedVolume->getProperties()->getName(), "PHP SDK Test RENAME");
   }
 
   public function testCreateSnapshot() {
